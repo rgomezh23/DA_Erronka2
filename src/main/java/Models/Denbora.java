@@ -1,6 +1,6 @@
 package Models;
 
-import java.sql.Date;
+
 import java.sql.Time;
 
 import jakarta.persistence.Access;
@@ -11,45 +11,35 @@ import jakarta.persistence.PrePersist;
 @Embeddable
 @Access(AccessType.PROPERTY)  
 public class Denbora {
-	  private Date data;
-	  private Time hasiera_ordua_erreala;
-	  private Time amaiera_ordua_erreala;
+	  private Time hasiera_ordua;
+	  private Time amaiera_ordua;
 	  
 	  @PrePersist
 	    public void prePersist() {
-		  if (hasiera_ordua_erreala == null) {
-	            hasiera_ordua_erreala = new Time(System.currentTimeMillis());  // Hora actual
+		  if (hasiera_ordua == null) {
+	            hasiera_ordua = new Time(System.currentTimeMillis());  // Hora actual
 	        }
 	  }
 
-	public Denbora(Date data, Time hasiera_ordua_erreala, Time amaiera_ordua_erreala) {
+	public Time getHasiera_ordua() {
+		return hasiera_ordua;
+	}
+
+	public void setHasiera_ordua(Time hasiera_ordua) {
+		this.hasiera_ordua = hasiera_ordua;
+	}
+
+	public Time getAmaiera_ordua() {
+		return amaiera_ordua;
+	}
+
+	public void setAmaiera_ordua(Time amaiera_ordua) {
+		this.amaiera_ordua = amaiera_ordua;
+	}
+
+	public Denbora(Time hasiera_ordua, Time amaiera_ordua) {
 		super();
-		this.data = data;
-		this.hasiera_ordua_erreala = hasiera_ordua_erreala;
-		this.amaiera_ordua_erreala = amaiera_ordua_erreala;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
-	public Time getHasiera_ordua_erreala() {
-		return hasiera_ordua_erreala;
-	}
-
-	public void setHasiera_ordua_erreala(Time hasiera_ordua_erreala) {
-		this.hasiera_ordua_erreala = hasiera_ordua_erreala;
-	}
-
-	public Time getAmaiera_ordua_erreala() {
-		return amaiera_ordua_erreala;
-	}
-
-	public void setAmaiera_ordua_erreala(Time amaiera_ordua_erreala) {
-		this.amaiera_ordua_erreala = amaiera_ordua_erreala;
+		this.hasiera_ordua = hasiera_ordua;
+		this.amaiera_ordua = amaiera_ordua;
 	}
 }

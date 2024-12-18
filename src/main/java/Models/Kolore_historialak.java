@@ -29,7 +29,6 @@ public class Kolore_historialak {
     @Embedded
     private Data dataSimple;
 
-    // Constructor vacío
     public Kolore_historialak() {}
 
     // Constructor lleno
