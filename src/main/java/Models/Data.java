@@ -24,7 +24,6 @@ public class Data {
     // Constructor vacío
     public Data() {}
 
-    // Métodos getter y setter
     public Date getSortze_data() {
         return sortze_data;
     }
