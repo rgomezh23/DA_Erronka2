@@ -1,6 +1,6 @@
 package Models;
 
-import java.sql.Time;
+import java.sql.Date;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -10,8 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ordugetiak")
-public class Ordugetiak {
+@Table(name = "ordutegiak")
+public class Ordutegiak {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +19,8 @@ public class Ordugetiak {
     
     private String kodea;
     private int eguna;
-    private Time hasiera_ordua;
-    private Time amaiera_ordua;
+    private Date hasiera_data;
+    private Date amaiera_data;
     
 
     @Embedded
@@ -31,5 +31,5 @@ public class Ordugetiak {
     
 
 
-	public Ordugetiak() {}
+	public Ordutegiak() {}
 }
