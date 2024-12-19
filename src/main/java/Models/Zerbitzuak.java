@@ -1,28 +1,21 @@
-package e2;
+package Models;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
+@Table(name="zerbitzuak")
 public class Zerbitzuak {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     private String izena;
-    private String deskribapena;
-    private double prezioa;
+    private double etxeko_prezioa;
+    private double kanpoko_prezioa;
     
-    @Column(name = "sortze_data", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime sortzeData;
+    @Embedded
+    Data data;
     
-    @Column(name = "eguneratze_data", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private LocalDateTime eguneratzeData;
-    
-    @Column(name = "ezabatze_data")
-    private LocalDateTime ezabatzeData;
-
-    // Getters and setters
     public int getId() {
         return id;
     }
@@ -35,34 +28,35 @@ public class Zerbitzuak {
     public void setIzena(String izena) {
         this.izena = izena;
     }
-    public String getDeskribapena() {
-        return deskribapena;
-    }
-    public void setDeskribapena(String deskribapena) {
-        this.deskribapena = deskribapena;
-    }
-    public double getPrezioa() {
-        return prezioa;
-    }
-    public void setPrezioa(double prezioa) {
-        this.prezioa = prezioa;
-    }
-    public LocalDateTime getSortzeData() {
-        return sortzeData;
-    }
-    public void setSortzeData(LocalDateTime sortzeData) {
-        this.sortzeData = sortzeData;
-    }
-    public LocalDateTime getEguneratzeData() {
-        return eguneratzeData;
-    }
-    public void setEguneratzeData(LocalDateTime eguneratzeData) {
-        this.eguneratzeData = eguneratzeData;
-    }
-    public LocalDateTime getEzabatzeData() {
-        return ezabatzeData;
-    }
-    public void setEzabatzeData(LocalDateTime ezabatzeData) {
-        this.ezabatzeData = ezabatzeData;
-    }
+ 
+	public double getEtxeko_prezioa() {
+		return etxeko_prezioa;
+	}
+	public void setEtxeko_prezioa(double etxeko_prezioa) {
+		this.etxeko_prezioa = etxeko_prezioa;
+	}
+	public double getKanpoko_prezioa() {
+		return kanpoko_prezioa;
+	}
+	public void setKanpoko_prezioa(double kanpoko_prezioa) {
+		this.kanpoko_prezioa = kanpoko_prezioa;
+	}
+	public Data getData() {
+		return data;
+	}
+	public void setData(Data data) {
+		this.data = data;
+	}
+	
+	public Zerbitzuak(int id, String izena,double etxeko_prezioa, double kanpoko_prezioa,Data data) {
+		super();
+		this.id = id;
+		this.izena = izena;
+		this.etxeko_prezioa = etxeko_prezioa;
+		this.kanpoko_prezioa = kanpoko_prezioa;
+		this.data = data;
+	}
+	
+	public Zerbitzuak() {}
+    
 }
