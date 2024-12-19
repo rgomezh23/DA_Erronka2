@@ -15,8 +15,24 @@ public class Langileak {
     
     @Embedded
     Data data;
-
-    public int getId() {
+    
+    @OneToMany(mappedBy = "hitzorduak", cascade = CascadeType.ALL) 
+    Hitzorduak hitzorduak;
+    
+    
+    public Langileak(int id, String izena, String kodea, String abizenak, Data data, Hitzorduak hitzorduak) {
+		super();
+		this.id = id;
+		this.izena = izena;
+		this.kodea = kodea;
+		this.abizenak = abizenak;
+		this.data = data;
+		this.hitzorduak = hitzorduak;
+	}
+    
+    public Langileak() {}
+    
+	public int getId() {
         return id;
     }
     public void setId(int id) {
@@ -46,5 +62,12 @@ public class Langileak {
 	public void setData(Data data) {
 		this.data = data;
 	}
-   
+	
+	public Hitzorduak getHitzorduak() {
+		return hitzorduak;
+	}
+	public void setHitzorduak(Hitzorduak hitzorduak) {
+		this.hitzorduak = hitzorduak;
+	}
+	
 }

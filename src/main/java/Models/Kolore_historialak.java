@@ -1,13 +1,15 @@
 package Models;
-
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.sql.Date;
+
 
 @Entity
 @Table(name = "kolore_historialak")
@@ -16,9 +18,16 @@ public class Kolore_historialak {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    private int id_bezeroa;
-    private int id_produktua;
+    
+    @OneToMany
+    @JoinColumn(name = "id_bezeroa", nullable = false)
+    private BezeroFitxa bezero;
+    
+    @OneToMany
+    @JoinColumn(name = "id_produktua", nullable = false)
+    private Produktuak produktu;
+    
+    
     private String izena;
     private Date data;
     private String abizena;
@@ -29,25 +38,26 @@ public class Kolore_historialak {
     @Embedded
     private Data dataSimple;
 
-    public Kolore_historialak() {}
+	public Kolore_historialak(int id, BezeroFitxa bezero, Produktuak produktu, String izena, Date data, String abizena,
+			int kantitatea, String bolumena, String oharrak, Data dataSimple) {
+		super();
+		this.id = id;
+		this.bezero = bezero;
+		this.produktu = produktu;
+		this.izena = izena;
+		this.data = data;
+		this.abizena = abizena;
+		this.kantitatea = kantitatea;
+		this.bolumena = bolumena;
+		this.oharrak = oharrak;
+		this.dataSimple = dataSimple;
+	}
 
-    // Constructor lleno
-    public Kolore_historialak(int id, int id_bezeroa, int id_produktua, String izena, Date data, String abizena,
-                              int kantitatea, String bolumena, String oharrak, Data dataSimple) {
-        this.id = id;
-        this.id_bezeroa = id_bezeroa;
-        this.id_produktua = id_produktua;
-        this.izena = izena;
-        this.data = data;
-        this.abizena = abizena;
-        this.kantitatea = kantitatea;
-        this.bolumena = bolumena;
-        this.oharrak = oharrak;
-        this.dataSimple = dataSimple;
-    }
 
-    // Getters y setters
-    public int getId() {
+	public Kolore_historialak() {}
+
+
+	public int getId() {
         return id;
     }
 
@@ -55,23 +65,26 @@ public class Kolore_historialak {
         this.id = id;
     }
 
-    public int getId_bezeroa() {
-        return id_bezeroa;
-    }
+  
+    public BezeroFitxa getBezero() {
+		return bezero;
+	}
 
-    public void setId_bezeroa(int id_bezeroa) {
-        this.id_bezeroa = id_bezeroa;
-    }
+	public void setBezero(BezeroFitxa bezero) {
+		this.bezero = bezero;
+	}
 
-    public int getId_produktua() {
-        return id_produktua;
-    }
+    public Produktuak getProduktu() {
+		return produktu;
+	}
 
-    public void setId_produktua(int id_produktua) {
-        this.id_produktua = id_produktua;
-    }
 
-    public String getIzena() {
+	public void setProduktu(Produktuak produktu) {
+		this.produktu = produktu;
+	}
+
+
+	public String getIzena() {
         return izena;
     }
 
@@ -79,7 +92,7 @@ public class Kolore_historialak {
         this.izena = izena;
     }
 
-    public Date getData() {
+	public Date getData() {
         return data;
     }
 

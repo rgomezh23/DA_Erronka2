@@ -1,14 +1,16 @@
 package Models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "erabiltzaileak")
+@Table(name = "BezeroFitxak")
 public class BezeroFitxa {
 
 	 @Id
@@ -21,22 +23,12 @@ public class BezeroFitxa {
     private String telefonoa;
     private boolean azal_sentikorra;
     
+    @OneToMany(mappedBy = "kolore_historialak", cascade = CascadeType.ALL)
+    private Kolore_historialak historiala;
+   
     @Embedded
     private Data data;
  
-
-	public BezeroFitxa(int id, String pasahitza, String izena, String abizena, String telefonoa,
-			boolean azal_sentikorra, Data data) {
-		super();
-		this.id = id;
-		this.pasahitza = pasahitza;
-		this.izena = izena;
-		this.abizena = abizena;
-		this.telefonoa = telefonoa;
-		this.azal_sentikorra = azal_sentikorra;
-		this.data = data;
-	}
-
 
 	public int getId() {
 		return id;
@@ -107,9 +99,31 @@ public class BezeroFitxa {
 		this.data = data;
 	}
 
+	
 
-	public BezeroFitxa() {
-		
+	public Kolore_historialak getHistoriala() {
+		return historiala;
 	}
+
+
+	public void setHistoriala(Kolore_historialak historiala) {
+		this.historiala = historiala;
+	}
+
+
+	public BezeroFitxa(int id, String pasahitza, String izena, String abizena, String telefonoa,
+			boolean azal_sentikorra, Kolore_historialak historiala, Data data) {
+		super();
+		this.id = id;
+		this.pasahitza = pasahitza;
+		this.izena = izena;
+		this.abizena = abizena;
+		this.telefonoa = telefonoa;
+		this.azal_sentikorra = azal_sentikorra;
+		this.historiala = historiala;
+		this.data = data;
+	}
+
+	public BezeroFitxa() {}
 
 }

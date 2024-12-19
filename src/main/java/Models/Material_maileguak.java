@@ -15,8 +15,8 @@ public class Material_maileguak {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    private int id_materiala;
-    private int id_langilea;
+    private Materialak materiala;
+    private Langileak langilea;
   
     @Embedded
     private Data data;
@@ -24,14 +24,6 @@ public class Material_maileguak {
     @Embedded
     private DenboraErreala denbora;
 
-    public Material_maileguak(int id, int id_materiala, int id_langilea, Data data, DenboraErreala denbora) {
-		super();
-		this.id = id;
-		this.id_materiala = id_materiala;
-		this.id_langilea = id_langilea;
-		this.data = data;
-		this.denbora = denbora;
-	}
 
 
 	public int getId() {
@@ -41,26 +33,6 @@ public class Material_maileguak {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-
-	public int getId_materiala() {
-		return id_materiala;
-	}
-
-
-	public void setId_materiala(int id_materiala) {
-		this.id_materiala = id_materiala;
-	}
-
-
-	public int getId_langilea() {
-		return id_langilea;
-	}
-
-
-	public void setId_langilea(int id_langilea) {
-		this.id_langilea = id_langilea;
 	}
 
 

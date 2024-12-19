@@ -1,10 +1,12 @@
 package Models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,11 +18,31 @@ public class Kategoriak {
     private int id;
 
     private String izena;
-    private String abizena;
-
+    
+    @OneToMany(mappedBy = "kategoriak", cascade = CascadeType.ALL)
+    private Produktuak produktuak;
 
     @Embedded
     private Data data;
+
+	public Kategoriak() {}
+
+	public Kategoriak(int id, String izena, Produktuak produktuak, Data data) {
+		super();
+		this.id = id;
+		this.izena = izena;
+		this.produktuak = produktuak;
+		this.data = data;
+	}
+
+	public Produktuak getProduktuak() {
+		return produktuak;
+	}
+
+
+	public void setProduktuak(Produktuak produktuak) {
+		this.produktuak = produktuak;
+	}
 
 
 	public int getId() {
@@ -42,17 +64,6 @@ public class Kategoriak {
 		this.izena = izena;
 	}
 
-
-	public String getAbizena() {
-		return abizena;
-	}
-
-
-	public void setAbizena(String abizena) {
-		this.abizena = abizena;
-	}
-
-
 	public Data getData() {
 		return data;
 	}
@@ -61,14 +72,4 @@ public class Kategoriak {
 	public void setData(Data data) {
 		this.data = data;
 	}
-
-
-	public Kategoriak(int id, String izena, String abizena, Data data) {
-		super();
-		this.id = id;
-		this.izena = izena;
-		this.abizena = abizena;
-		this.data = data;
-	}
-
 }

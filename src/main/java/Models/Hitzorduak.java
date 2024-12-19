@@ -1,12 +1,15 @@
 package Models;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,7 +29,11 @@ public class Hitzorduak {
     private Date data;
     private char etxekoa;
     private double prezio_totala;
-    private int id_langilea;
+    
+    @OneToMany
+    @JoinColumn(name = "langile_id")
+    private List<Langileak>  langileak;
+    
     private boolean azal_sentikorra;
 
     @Embedded
@@ -35,30 +42,9 @@ public class Hitzorduak {
     @Embedded
     private Data dataSimple;
 
-    
-    public Hitzorduak(int id, String pasahitza, String izena, String abizena, int eserlekua, String telefonoa,
-			String deskribapena, Date data, char etxekoa, double prezio_totala, int id_langilea,
-			boolean azal_sentikorra, DenboraErreala denbora, Data dataSimple) {
-		super();
-		this.id = id;
-		this.pasahitza = pasahitza;
-		this.izena = izena;
-		this.abizena = abizena;
-		this.eserlekua = eserlekua;
-		this.telefonoa = telefonoa;
-		this.deskribapena = deskribapena;
-		this.data = data;
-		this.etxekoa = etxekoa;
-		this.prezio_totala = prezio_totala;
-		this.id_langilea = id_langilea;
-		this.azal_sentikorra = azal_sentikorra;
-		this.denbora = denbora;
-		this.dataSimple = dataSimple;
-	}
-
-
+	
+	
 	public Hitzorduak() {}
-
 
 	public int getId() {
 		return id;
@@ -160,15 +146,13 @@ public class Hitzorduak {
 	}
 
 
-	public int getId_langilea() {
-		return id_langilea;
+	public List<Langileak> getLangileak() {
+		return langileak;
 	}
 
-
-	public void setId_langilea(int id_langilea) {
-		this.id_langilea = id_langilea;
+	public void setLangileak(List<Langileak> langileak) {
+		this.langileak = langileak;
 	}
-
 
 	public boolean isAzal_sentikorra() {
 		return azal_sentikorra;
@@ -198,6 +182,4 @@ public class Hitzorduak {
 	public void setDataSimple(Data dataSimple) {
 		this.dataSimple = dataSimple;
 	}
-
-    
 }

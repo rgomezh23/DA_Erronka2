@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -44,10 +46,30 @@ public class Produktuak {
     @JoinColumn(name = "id_kategoria", nullable = false)
     private Kategoriak kategoriak;
     
+	 @OneToMany(mappedBy = "Kolore_historialak", cascade = CascadeType.ALL) 
+	 List<Kolore_historialak>  Kolore_historialak;
+	
    @Embedded
    Data data;
-    // Getters and setters
-    public int getId() {
+   
+   public Produktuak() {}
+   
+  
+    public Produktuak(int id, String izena, double prezioa, String deskribapena, String marka, int stock, int stock_alerta,
+		Kategoriak kategoriak, List<Models.Kolore_historialak> kolore_historialak, Data data) {
+	super();
+	this.id = id;
+	this.izena = izena;
+	this.prezioa = prezioa;
+	this.deskribapena = deskribapena;
+	this.marka = marka;
+	this.stock = stock;
+	this.stock_alerta = stock_alerta;
+	this.kategoriak = kategoriak;
+	Kolore_historialak = kolore_historialak;
+	this.data = data;}
+    
+	public int getId() {
         return id;
     }
     public void setId(int id) {
@@ -68,7 +90,14 @@ public class Produktuak {
     public Kategoriak getKategoriak() {
         return kategoriak;
     }
-    public void setKategoriak(Kategoriak kategoriak) {
+    
+    public List<Kolore_historialak> getKolore_historialak() {
+		return Kolore_historialak;
+	}
+	public void setKolore_historialak(List<Kolore_historialak> kolore_historialak) {
+		Kolore_historialak = kolore_historialak;
+	}
+	public void setKategoriak(Kategoriak kategoriak) {
         this.kategoriak = kategoriak;
     }
 	public Data getData() {
@@ -76,23 +105,6 @@ public class Produktuak {
 	}
 	public void setData(Data data) {
 		this.data = data;
-	}
-	
-	public Produktuak(int id, String izena, double prezioa, String deskribapena, String marka, int stock,
-			int stock_alerta, Kategoriak kategoriak, Data data) {
-		super();
-		this.id = id;
-		this.izena = izena;
-		this.prezioa = prezioa;
-		this.deskribapena = deskribapena;
-		this.marka = marka;
-		this.stock = stock;
-		this.stock_alerta = stock_alerta;
-		this.kategoriak = kategoriak;
-		this.data = data;
-	}
-	public Produktuak() {
-		
 	}
 }
 
