@@ -1,4 +1,4 @@
-package models;
+package eus.fpsanturtzilh.models;
 
 import jakarta.persistence.*;
 import java.util.Date;

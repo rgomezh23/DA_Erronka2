@@ -1,4 +1,4 @@
-package controllers;
+package eus.fpsanturtzilh.controllers;
 
 import java.util.Optional;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import Services.ErabiltzaileService;
-import models.Erabiltzaile;
+import eus.fpsanturtzilh.models.Erabiltzaile;
+import eus.fpsanturtzilh.services.ErabiltzaileService;
 
 @RestController
 @RequestMapping("/erabiltzaileak")

@@ -1,4 +1,4 @@
-package models;
+package eus.fpsanturtzilh.models;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "BezeroFitxak")
-public class BezeroFitxa {
+@Table(name = "bezero_fitxak")
+public class Bezero_fitxak {
 
 	 @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class BezeroFitxa {
     private String telefonoa;
     private boolean azal_sentikorra;
     
-    @OneToMany(mappedBy = "kolore_historialak", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bezero", cascade = CascadeType.ALL)
     private List<Kolore_historialak>  historiala;
    
     @Embedded
@@ -101,6 +101,6 @@ public class BezeroFitxa {
 		this.data = data;
 	}
 
-	public BezeroFitxa() {}
+	public Bezero_fitxak() {}
 
 }

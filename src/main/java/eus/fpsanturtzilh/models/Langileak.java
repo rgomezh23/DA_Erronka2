@@ -1,4 +1,4 @@
-package models;
+package eus.fpsanturtzilh.models;
 
 import java.util.List;
 
@@ -18,8 +18,9 @@ public class Langileak {
     @Embedded
     Data data;
     
-    @OneToMany(mappedBy = "hitzorduak", cascade = CascadeType.ALL) 
-    List<Hitzorduak>  hitzorduak;
+    @OneToMany(mappedBy = "langileak", cascade = CascadeType.ALL)
+    private List<Hitzorduak> hitzorduak;
+
     
     @OneToMany(mappedBy = "produktu_Mugimenduak", cascade = CascadeType.ALL) 
     List<Produktu_Mugimenduak>  produktu_Mugimenduak;

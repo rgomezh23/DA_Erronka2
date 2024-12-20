@@ -1,4 +1,4 @@
-package models;
+package eus.fpsanturtzilh.models;
 
 
 import java.sql.Time;

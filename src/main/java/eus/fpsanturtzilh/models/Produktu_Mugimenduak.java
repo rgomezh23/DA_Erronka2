@@ -1,4 +1,4 @@
-package models;
+package eus.fpsanturtzilh.models;
 
 import jakarta.persistence.*;
 
@@ -19,11 +19,11 @@ public class Produktu_Mugimenduak {
     @Embedded
     Data data;
     
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_produktua")
     private Produktuak produktua;
     
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_langilea")
     private Langileak langilea;
 

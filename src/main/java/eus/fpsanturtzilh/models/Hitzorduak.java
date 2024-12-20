@@ -1,4 +1,4 @@
-package models;
+package eus.fpsanturtzilh.models;
 
 import java.sql.Date;
 import java.util.List;
@@ -36,7 +36,7 @@ public class Hitzorduak {
     @JoinColumn(name = "langile_id")
     private Langileak langileak;
     
-    @OneToMany(mappedBy = "ticket_lerroak", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hitzorduak", cascade = CascadeType.ALL)
     private List<Ticket_lerroak> ticket_lerroak;
     
     private boolean azal_sentikorra;
@@ -47,8 +47,6 @@ public class Hitzorduak {
     @Embedded
     private Data dataSimple;
 
-	
-	
 	public Hitzorduak() {}
 
 	public int getId() {

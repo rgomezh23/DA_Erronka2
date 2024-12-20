@@ -1,12 +1,12 @@
-package Services;
+package eus.fpsanturtzilh.services;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import models.Erabiltzaile;
-import repositories.ErabiltzaileRepository;
+import eus.fpsanturtzilh.models.Erabiltzaile;
+import eus.fpsanturtzilh.repositories.ErabiltzaileRepository;
 
 @Service
 public class ErabiltzaileService {

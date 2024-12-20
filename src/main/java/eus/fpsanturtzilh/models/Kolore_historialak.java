@@ -1,11 +1,11 @@
-package models;
+package eus.fpsanturtzilh.models;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import java.sql.Date;
@@ -19,11 +19,12 @@ public class Kolore_historialak {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_bezeroa", nullable = false)
-    private BezeroFitxa bezero;
+    private Bezero_fitxak bezero;
+
     
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_produktua", nullable = false)
     private Produktuak produktu;
     
@@ -38,7 +39,7 @@ public class Kolore_historialak {
     @Embedded
     private Data dataSimple;
 
-	public Kolore_historialak(int id, BezeroFitxa bezero, Produktuak produktu, String izena, Date data, String abizena,
+	public Kolore_historialak(int id, Bezero_fitxak bezero, Produktuak produktu, String izena, Date data, String abizena,
 			int kantitatea, String bolumena, String oharrak, Data dataSimple) {
 		super();
 		this.id = id;
@@ -66,11 +67,11 @@ public class Kolore_historialak {
     }
 
   
-    public BezeroFitxa getBezero() {
+    public Bezero_fitxak getBezero() {
 		return bezero;
 	}
 
-	public void setBezero(BezeroFitxa bezero) {
+	public void setBezero(Bezero_fitxak bezero) {
 		this.bezero = bezero;
 	}
 
