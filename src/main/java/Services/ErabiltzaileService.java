@@ -1,10 +1,12 @@
 package Services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import Models.Erabiltzaile;
-import Repositoty.ErabiltzaileRepository;
+import models.Erabiltzaile;
+import repositories.ErabiltzaileRepository;
 
 @Service
 public class ErabiltzaileService {
@@ -12,13 +14,7 @@ public class ErabiltzaileService {
     @Autowired
     private ErabiltzaileRepository erabiltzaileRepository;
 
-    public boolean autentifikatu(String nombre, String password) {
-        Erabiltzaile usuario = erabiltzaileRepository.findByIzena(nombre);
-        
-        if (usuario != null && usuario.getPasahitza().equals(password)) {
-            return true;
-        } else {
-            return false;
-        }
+    public Optional<Erabiltzaile> getErabiltzaileByUsername(String username) {
+        return erabiltzaileRepository.findByUsername(username);
     }
 }

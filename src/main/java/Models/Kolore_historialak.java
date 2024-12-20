@@ -1,4 +1,4 @@
-package Models;
+package models;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

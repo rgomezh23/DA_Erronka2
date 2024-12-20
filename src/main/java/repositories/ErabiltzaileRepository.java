@@ -1,10 +1,12 @@
-package Repositoty;
+package repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import Models.Erabiltzaile;
+import models.Erabiltzaile;
+
+import java.util.Optional;
 
 public interface ErabiltzaileRepository extends JpaRepository<Erabiltzaile, String> {
-	Erabiltzaile findByIzena(String izena);
-	Erabiltzaile findByPasahitza(String pasahitza);
+    Optional<Erabiltzaile> findByUsername(String username);
 }
+
