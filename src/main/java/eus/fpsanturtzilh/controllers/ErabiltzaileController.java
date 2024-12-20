@@ -18,10 +18,11 @@ public class ErabiltzaileController {
     @Autowired
     private ErabiltzaileService erabiltzaileService;
 
-    @GetMapping("/ikasle")
+    @GetMapping("/{username}")
     public Optional<Erabiltzaile> getErabiltzaile(@PathVariable String username) {
         return erabiltzaileService.getErabiltzaileByUsername(username);
     }
+
     @GetMapping("/a")
     public String a() {
         return "Funciona!!!!!";
