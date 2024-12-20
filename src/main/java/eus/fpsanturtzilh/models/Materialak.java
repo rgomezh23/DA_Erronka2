@@ -22,7 +22,7 @@ public class Materialak {
     private String etiketa;
     private String izena;
     
-    @OneToMany(mappedBy = "materialak", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "materiala", cascade = CascadeType.ALL)
     private List<Material_maileguak>  maileguak;
   
 

@@ -20,7 +20,7 @@ public class Produktuak {
     @JoinColumn(name = "id_kategoria", nullable = false)
     private Kategoriak kategoriak;
     
-    @OneToMany(mappedBy = "produktuak", cascade = CascadeType.ALL) 
+    @OneToMany(mappedBy = "produktu", cascade = CascadeType.ALL) 
     private List<Kolore_historialak> Kolore_historialak;
      
     @OneToMany(mappedBy = "produktuak", cascade = CascadeType.ALL) 

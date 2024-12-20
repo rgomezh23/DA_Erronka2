@@ -22,19 +22,32 @@ public class Langileak {
     private List<Hitzorduak> hitzorduak;
 
     
-    @OneToMany(mappedBy = "produktu_Mugimenduak", cascade = CascadeType.ALL) 
-    List<Produktu_Mugimenduak>  produktu_Mugimenduak;
-     
-    @OneToMany(mappedBy = "ticket_lerroak", cascade = CascadeType.ALL) 
-    List<Ticket_lerroak> ticket_lerroak;
+    @OneToMany(mappedBy = "langilea", cascade = CascadeType.ALL)
+    private List<Produktu_Mugimenduak> produktu_Mugimenduak;
+
     
-    
-    @OneToMany(mappedBy = "txandak", cascade = CascadeType.ALL) 
-    List<Txandak> txandak;
+    @OneToMany(mappedBy = "langileak", cascade = CascadeType.ALL)
+    private List<Txandak> txandak;
+
      
      
 	public Langileak() {}
-    
+	
+	public Langileak(int id, String izena, String kodea, String abizenak, Data data, List<Hitzorduak> hitzorduak,
+			List<Produktu_Mugimenduak> produktu_Mugimenduak, List<Txandak> txandak) {
+		super();
+		this.id = id;
+		this.izena = izena;
+		this.kodea = kodea;
+		this.abizenak = abizenak;
+		this.data = data;
+		this.hitzorduak = hitzorduak;
+		this.produktu_Mugimenduak = produktu_Mugimenduak;
+		this.txandak = txandak;
+	}
+
+
+
 	public int getId() {
         return id;
     }
@@ -82,13 +95,6 @@ public class Langileak {
 		this.produktu_Mugimenduak = produktu_Mugimenduak;
 	}
 
-	public List<Ticket_lerroak> getTicket_lerroak() {
-		return ticket_lerroak;
-	}
-
-	public void setTicket_lerroak(List<Ticket_lerroak> ticket_lerroak) {
-		this.ticket_lerroak = ticket_lerroak;
-	}
 
 	public List<Txandak> getTxandak() {
 		return txandak;

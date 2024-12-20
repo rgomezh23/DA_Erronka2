@@ -16,7 +16,7 @@ public class Txandak {
     @ManyToOne
     @JoinColumn(name = "id_langilea", nullable = false)
     private Langileak langileak;
-    
+
     @Embedded
     Data dataSimple;
 

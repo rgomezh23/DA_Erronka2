@@ -18,7 +18,7 @@ public class Zerbitzuak {
     @Embedded
     Data data;
     
-    @OneToMany(mappedBy = "ticket_lerroak", cascade = CascadeType.ALL) 
+    @OneToMany(mappedBy = "zerbitzuak", cascade = CascadeType.ALL) 
 	 List<Ticket_lerroak>  ticket_lerroak;
 
     public int getId() {
