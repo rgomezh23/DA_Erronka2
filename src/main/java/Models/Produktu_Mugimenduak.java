@@ -18,6 +18,14 @@ public class Produktu_Mugimenduak {
     
     @Embedded
     Data data;
+    
+    @OneToMany
+    @JoinColumn(name = "id_produktua")
+    private Produktuak produktua;
+    
+    @OneToMany
+    @JoinColumn(name = "id_langilea")
+    private Langileak langilea;
 
 	public int getId() {
 		return id;
@@ -58,16 +66,23 @@ public class Produktu_Mugimenduak {
 	public void setData(Data data) {
 		this.data = data;
 	}
-
-	public Produktu_Mugimenduak(int id, Produktuak produktuak, String mota, double kantitatea, Data data) {
-		super();
-		this.id = id;
-		this.produktuak = produktuak;
-		this.mota = mota;
-		this.kantitatea = kantitatea;
-		this.data = data;
-	}
 	
+	public Produktuak getProduktua() {
+		return produktua;
+	}
+
+	public void setProduktua(Produktuak produktua) {
+		this.produktua = produktua;
+	}
+
+	public Langileak getLangilea() {
+		return langilea;
+	}
+
+	public void setLangilea(Langileak langilea) {
+		this.langilea = langilea;
+	}
+
 	public Produktu_Mugimenduak() {}
 	
 }

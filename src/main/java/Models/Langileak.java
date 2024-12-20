@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -17,20 +19,20 @@ public class Langileak {
     Data data;
     
     @OneToMany(mappedBy = "hitzorduak", cascade = CascadeType.ALL) 
-    Hitzorduak hitzorduak;
+    List<Hitzorduak>  hitzorduak;
+    
+    @OneToMany(mappedBy = "produktu_Mugimenduak", cascade = CascadeType.ALL) 
+    List<Produktu_Mugimenduak>  produktu_Mugimenduak;
+     
+    @OneToMany(mappedBy = "ticket_lerroak", cascade = CascadeType.ALL) 
+    List<Ticket_lerroak> ticket_lerroak;
     
     
-    public Langileak(int id, String izena, String kodea, String abizenak, Data data, Hitzorduak hitzorduak) {
-		super();
-		this.id = id;
-		this.izena = izena;
-		this.kodea = kodea;
-		this.abizenak = abizenak;
-		this.data = data;
-		this.hitzorduak = hitzorduak;
-	}
-    
-    public Langileak() {}
+    @OneToMany(mappedBy = "txandak", cascade = CascadeType.ALL) 
+    List<Txandak> txandak;
+     
+     
+	public Langileak() {}
     
 	public int getId() {
         return id;
@@ -63,11 +65,36 @@ public class Langileak {
 		this.data = data;
 	}
 	
-	public Hitzorduak getHitzorduak() {
+	public void setHitzorduak(List<Hitzorduak> hitzorduak) {
+		this.hitzorduak = hitzorduak;
+	}
+
+	public List<Hitzorduak> getHitzorduak() {
 		return hitzorduak;
 	}
-	public void setHitzorduak(Hitzorduak hitzorduak) {
-		this.hitzorduak = hitzorduak;
+
+	public List<Produktu_Mugimenduak> getProduktu_Mugimenduak() {
+		return produktu_Mugimenduak;
+	}
+
+	public void setProduktu_Mugimenduak(List<Produktu_Mugimenduak> produktu_Mugimenduak) {
+		this.produktu_Mugimenduak = produktu_Mugimenduak;
+	}
+
+	public List<Ticket_lerroak> getTicket_lerroak() {
+		return ticket_lerroak;
+	}
+
+	public void setTicket_lerroak(List<Ticket_lerroak> ticket_lerroak) {
+		this.ticket_lerroak = ticket_lerroak;
+	}
+
+	public List<Txandak> getTxandak() {
+		return txandak;
+	}
+
+	public void setTxandak(List<Txandak> txandak) {
+		this.txandak = txandak;
 	}
 	
 }

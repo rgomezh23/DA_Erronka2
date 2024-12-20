@@ -3,12 +3,14 @@ package Models;
 import java.sql.Date;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -30,9 +32,12 @@ public class Hitzorduak {
     private char etxekoa;
     private double prezio_totala;
     
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "langile_id")
-    private List<Langileak>  langileak;
+    private Langileak langileak;
+    
+    @OneToMany(mappedBy = "ticket_lerroak", cascade = CascadeType.ALL)
+    private List<Ticket_lerroak> ticket_lerroak;
     
     private boolean azal_sentikorra;
 
@@ -146,11 +151,11 @@ public class Hitzorduak {
 	}
 
 
-	public List<Langileak> getLangileak() {
+	public Langileak getLangileak() {
 		return langileak;
 	}
 
-	public void setLangileak(List<Langileak> langileak) {
+	public void setLangileak(Langileak langileak) {
 		this.langileak = langileak;
 	}
 

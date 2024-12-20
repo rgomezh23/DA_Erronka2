@@ -1,10 +1,14 @@
 package Models;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +21,9 @@ public class Materialak {
     
     private String etiketa;
     private String izena;
+    
+    @OneToMany(mappedBy = "materialak", cascade = CascadeType.ALL)
+    private List<Material_maileguak>  maileguak;
   
 
 	public Materialak(int id, String etiketa, String izena, Data data) {

@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +18,9 @@ public class Zerbitzuak {
     @Embedded
     Data data;
     
+    @OneToMany(mappedBy = "ticket_lerroak", cascade = CascadeType.ALL) 
+	 List<Ticket_lerroak>  ticket_lerroak;
+
     public int getId() {
         return id;
     }
@@ -48,14 +53,6 @@ public class Zerbitzuak {
 		this.data = data;
 	}
 	
-	public Zerbitzuak(int id, String izena,double etxeko_prezioa, double kanpoko_prezioa,Data data) {
-		super();
-		this.id = id;
-		this.izena = izena;
-		this.etxeko_prezioa = etxeko_prezioa;
-		this.kanpoko_prezioa = kanpoko_prezioa;
-		this.data = data;
-	}
 	
 	public Zerbitzuak() {}
     

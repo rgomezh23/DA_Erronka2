@@ -48,27 +48,15 @@ public class Produktuak {
     
 	 @OneToMany(mappedBy = "Kolore_historialak", cascade = CascadeType.ALL) 
 	 List<Kolore_historialak>  Kolore_historialak;
+	 
+	 @OneToMany(mappedBy = "produktu_Mugimenduak", cascade = CascadeType.ALL) 
+	 List<Produktu_Mugimenduak>  produktu_Mugimenduak;
 	
    @Embedded
    Data data;
    
    public Produktuak() {}
    
-  
-    public Produktuak(int id, String izena, double prezioa, String deskribapena, String marka, int stock, int stock_alerta,
-		Kategoriak kategoriak, List<Models.Kolore_historialak> kolore_historialak, Data data) {
-	super();
-	this.id = id;
-	this.izena = izena;
-	this.prezioa = prezioa;
-	this.deskribapena = deskribapena;
-	this.marka = marka;
-	this.stock = stock;
-	this.stock_alerta = stock_alerta;
-	this.kategoriak = kategoriak;
-	Kolore_historialak = kolore_historialak;
-	this.data = data;}
-    
 	public int getId() {
         return id;
     }

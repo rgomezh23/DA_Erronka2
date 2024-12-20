@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,7 +17,11 @@ public class Material_maileguak {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @ManyToOne
+    @JoinColumn(name="id_materiala")
     private Materialak materiala;
+    @ManyToOne
+    @JoinColumn(name="id_langilea")
     private Langileak langilea;
   
     @Embedded

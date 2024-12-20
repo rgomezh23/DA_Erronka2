@@ -16,8 +16,8 @@ public class Ticket_lerroak {
     private Zerbitzuak zerbitzuak;
     
     @ManyToOne
-    @JoinColumn(name = "id_langilea", nullable = false)
-    private Langileak langileak;
+    @JoinColumn(name = "id_hitzordua", nullable = false)
+    private Hitzorduak hitzorduak;
     
     @Embedded
     Data data;
@@ -40,28 +40,19 @@ public class Ticket_lerroak {
     public void setZerbitzuak(Zerbitzuak zerbitzuak) {
         this.zerbitzuak = zerbitzuak;
     }
-    public Langileak getLangileak() {
-        return langileak;
-    }
-    public void setLangileak(Langileak langileak) {
-        this.langileak = langileak;
-    }
+    
+	public Hitzorduak getHitzorduak() {
+		return hitzorduak;
+	}
+	public void setHitzorduak(Hitzorduak hitzorduak) {
+		this.hitzorduak = hitzorduak;
+	}
 	public Data getData() {
 		return data;
 	}
 	public void setData(Data data) {
 		this.data = data;
 	}
-	
-	public Ticket_lerroak(int id, String izena, Zerbitzuak zerbitzuak, Langileak langileak, Data data) {
-		super();
-		this.id = id;
-		this.izena = izena;
-		this.zerbitzuak = zerbitzuak;
-		this.langileak = langileak;
-		this.data = data;
-	}
-	
 	public Ticket_lerroak() {}
     
 }

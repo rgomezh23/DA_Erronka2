@@ -59,7 +59,6 @@ public class Txandak {
 		this.langileak = langileak;
 		this.dataSimple = dataSimple;
 	}
-	
 	public Txandak() {}
     
     

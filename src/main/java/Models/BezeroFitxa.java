@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -24,7 +26,7 @@ public class BezeroFitxa {
     private boolean azal_sentikorra;
     
     @OneToMany(mappedBy = "kolore_historialak", cascade = CascadeType.ALL)
-    private Kolore_historialak historiala;
+    private List<Kolore_historialak>  historiala;
    
     @Embedded
     private Data data;
@@ -96,31 +98,6 @@ public class BezeroFitxa {
 
 
 	public void setData(Data data) {
-		this.data = data;
-	}
-
-	
-
-	public Kolore_historialak getHistoriala() {
-		return historiala;
-	}
-
-
-	public void setHistoriala(Kolore_historialak historiala) {
-		this.historiala = historiala;
-	}
-
-
-	public BezeroFitxa(int id, String pasahitza, String izena, String abizena, String telefonoa,
-			boolean azal_sentikorra, Kolore_historialak historiala, Data data) {
-		super();
-		this.id = id;
-		this.pasahitza = pasahitza;
-		this.izena = izena;
-		this.abizena = abizena;
-		this.telefonoa = telefonoa;
-		this.azal_sentikorra = azal_sentikorra;
-		this.historiala = historiala;
 		this.data = data;
 	}
 
