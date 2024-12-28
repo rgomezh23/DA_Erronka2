@@ -15,18 +15,16 @@ import eus.fpsanturtzilh.services.ErabiltzaileService;
 @RequestMapping("/erabiltzaileak")
 public class ErabiltzaileController {
 
-    @Autowired
-    private ErabiltzaileService erabiltzaileService;
+	@Autowired
+	private ErabiltzaileService erabiltzaileService;
 
-    @GetMapping("/{username}")
-    public Optional<Erabiltzaile> getErabiltzaile(@PathVariable String username) {
-        return erabiltzaileService.getErabiltzaileByUsername(username);
-    }
+	@GetMapping("/{username}")
+	public Optional<Erabiltzaile> getErabiltzaile(@PathVariable String username) {
+		return erabiltzaileService.getErabiltzaileByUsername(username);
+	}
 
-    @GetMapping("/a")
-    public String a() {
-        return "Funciona!!!!!";
-    }
+	@GetMapping("/a")
+	public String a() {
+		return "Funciona!!!!!";
+	}
 }
-
-

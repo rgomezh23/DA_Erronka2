@@ -9,48 +9,48 @@ import jakarta.persistence.Table;
 @Table(name = "erabiltzaileak")
 public class Erabiltzaile {
 
-    @Id 
-    private String username;
-    
-    private String pasahitza;
-    private String rola;
-    
-    @Embedded
-    private Data data;
+	@Id
+	private String username;
 
-    public Erabiltzaile() {
-    }
+	private String pasahitza;
+	private String rola;
 
-    // Getters y setters
-    public String getUsername() {
-        return username;
-    }
+	@Embedded
+	private Data data;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public Erabiltzaile() {
+	}
 
-    public String getPasahitza() {
-        return pasahitza;
-    }
+	// Getters y setters
+	public String getUsername() {
+		return username;
+	}
 
-    public void setPasahitza(String pasahitza) {
-        this.pasahitza = pasahitza;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getRola() {
-        return rola;
-    }
+	public String getPasahitza() {
+		return pasahitza;
+	}
 
-    public void setRola(String rola) {
-        this.rola = rola;
-    }
+	public void setPasahitza(String pasahitza) {
+		this.pasahitza = pasahitza;
+	}
 
-    public Data getData() {
-        return data;
-    }
+	public String getRola() {
+		return rola;
+	}
 
-    public void setData(Data data) {
-        this.data = data;
-    }
+	public void setRola(String rola) {
+		this.rola = rola;
+	}
+
+	public Data getData() {
+		return data;
+	}
+
+	public void setData(Data data) {
+		this.data = data;
+	}
 }

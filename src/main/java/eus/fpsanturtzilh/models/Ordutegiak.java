@@ -13,22 +13,20 @@ import jakarta.persistence.Table;
 @Table(name = "ordutegiak")
 public class Ordutegiak {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
-    private String kodea;
-    private int eguna;
-    private Date hasiera_data;
-    private Date amaiera_data;
-    
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private String kodea;
+	private int eguna;
+	private Date hasiera_data;
+	private Date amaiera_data;
 
-    @Embedded
-    private Data data;
-    
-    @Embedded
-    private Denbora denbora;
-    
+	@Embedded
+	private Data data;
+
+	@Embedded
+	private Denbora denbora;
+
 	public int getId() {
 		return id;
 	}
@@ -85,7 +83,6 @@ public class Ordutegiak {
 		this.denbora = denbora;
 	}
 
-	
 	public Ordutegiak(int id, String kodea, int eguna, Date hasiera_data, Date amaiera_data, Data data,
 			Denbora denbora) {
 		super();
@@ -98,5 +95,6 @@ public class Ordutegiak {
 		this.denbora = denbora;
 	}
 
-	public Ordutegiak() {}
+	public Ordutegiak() {
+	}
 }
