@@ -3,6 +3,9 @@ package eus.fpsanturtzilh.models;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Produktuak {
     @Id
@@ -10,7 +13,6 @@ public class Produktuak {
     private int id;
     
     private String izena;
-    private double prezioa;
     private String deskribapena;
     private String marka;
     private int stock;
@@ -18,12 +20,15 @@ public class Produktuak {
     
     @ManyToOne
     @JoinColumn(name = "id_kategoria", nullable = false)
+    @JsonBackReference
     private Kategoriak kategoriak;
     
-    @OneToMany(mappedBy = "produktu", cascade = CascadeType.ALL) 
+    @OneToMany(mappedBy = "produktu", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Kolore_historialak> Kolore_historialak;
      
-    @OneToMany(mappedBy = "produktuak", cascade = CascadeType.ALL) 
+    @OneToMany(mappedBy = "produktuak", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Produktu_Mugimenduak> produktu_Mugimenduak;
     
     @Embedded
@@ -31,14 +36,13 @@ public class Produktuak {
     
     public Produktuak() {}
     
-    public Produktuak(int id, String izena, double prezioa, String deskribapena, String marka, int stock,
+    public Produktuak(int id, String izena,String deskribapena, String marka, int stock,
 			int stock_alerta, Kategoriak kategoriak,
 			List<eus.fpsanturtzilh.models.Kolore_historialak> kolore_historialak,
 			List<Produktu_Mugimenduak> produktu_Mugimenduak, Data data) {
 		super();
 		this.id = id;
 		this.izena = izena;
-		this.prezioa = prezioa;
 		this.deskribapena = deskribapena;
 		this.marka = marka;
 		this.stock = stock;
@@ -67,13 +71,6 @@ public class Produktuak {
         this.izena = izena;
     }
 
-    public double getPrezioa() {
-        return prezioa;
-    }
-
-    public void setPrezioa(double prezioa) {
-        this.prezioa = prezioa;
-    }
 
     public Kategoriak getKategoriak() {
         return kategoriak;

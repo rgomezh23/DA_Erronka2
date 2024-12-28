@@ -13,8 +13,7 @@ public class Produktu_Mugimenduak {
     @JoinColumn(name = "id_produktua", nullable = false)
     private Produktuak produktuak;
     
-    private String mota;
-    private double kantitatea;
+    private double kopurua;
     
     @Embedded
     Data data;
@@ -41,20 +40,13 @@ public class Produktu_Mugimenduak {
 		this.produktuak = produktuak;
 	}
 
-	public String getMota() {
-		return mota;
-	}
-
-	public void setMota(String mota) {
-		this.mota = mota;
-	}
 
 	public double getKantitatea() {
-		return kantitatea;
+		return kopurua;
 	}
 
-	public void setKantitatea(double kantitatea) {
-		this.kantitatea = kantitatea;
+	public void setKantitatea(double kopurua) {
+		this.kopurua = kopurua;
 	}
 
 	public Data getData() {
@@ -81,8 +73,7 @@ public class Produktu_Mugimenduak {
 		super();
 		this.id = id;
 		this.produktuak = produktuak;
-		this.mota = mota;
-		this.kantitatea = kantitatea;
+		this.kopurua = kantitatea;
 		this.data = data;
 		this.langilea = langilea;
 	}

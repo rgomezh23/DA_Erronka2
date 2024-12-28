@@ -10,6 +10,8 @@ import jakarta.persistence.Table;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name = "kolore_historialak")
@@ -21,17 +23,17 @@ public class Kolore_historialak {
     
     @ManyToOne
     @JoinColumn(name = "id_bezeroa", nullable = false)
+    @JsonBackReference
     private Bezero_fitxak bezero;
 
     
     @ManyToOne
     @JoinColumn(name = "id_produktua", nullable = false)
+    @JsonBackReference
     private Produktuak produktu;
     
     
-    private String izena;
     private Date data;
-    private String abizena;
     private int kantitatea;
     private String bolumena;
     private String oharrak;
@@ -39,15 +41,13 @@ public class Kolore_historialak {
     @Embedded
     private Data dataSimple;
 
-	public Kolore_historialak(int id, Bezero_fitxak bezero, Produktuak produktu, String izena, Date data, String abizena,
+	public Kolore_historialak(int id, Bezero_fitxak bezero, Produktuak produktu, Date data,
 			int kantitatea, String bolumena, String oharrak, Data dataSimple) {
 		super();
 		this.id = id;
 		this.bezero = bezero;
 		this.produktu = produktu;
-		this.izena = izena;
 		this.data = data;
-		this.abizena = abizena;
 		this.kantitatea = kantitatea;
 		this.bolumena = bolumena;
 		this.oharrak = oharrak;
@@ -84,15 +84,6 @@ public class Kolore_historialak {
 		this.produktu = produktu;
 	}
 
-
-	public String getIzena() {
-        return izena;
-    }
-
-    public void setIzena(String izena) {
-        this.izena = izena;
-    }
-
 	public Date getData() {
         return data;
     }
@@ -100,15 +91,7 @@ public class Kolore_historialak {
     public void setData(Date data) {
         this.data = data;
     }
-
-    public String getAbizena() {
-        return abizena;
-    }
-
-    public void setAbizena(String abizena) {
-        this.abizena = abizena;
-    }
-
+    
     public int getKantitatea() {
         return kantitatea;
     }

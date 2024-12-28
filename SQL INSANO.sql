@@ -5,3 +5,41 @@ VALUES
 INSERT INTO erabiltzaileak (username, pasahitza, rola, sortze_data, eguneratze_data, ezabatze_data)
 VALUES 
 ('Irakasle', 'irakasle', 'IR', NOW(), NULL, NULL);
+
+INSERT INTO kategoriak (id, izena) 
+VALUES
+(1, 'Cuidado del cabello'),
+(2, 'Herramientas de estilismo'),
+(3, 'Equipos eléctricos'),
+(4, 'Productos de peinado'),
+(5, 'Coloración');
+
+INSERT INTO produktuak (izena, deskribapena, id_kategoria, marka, stock, stock_alerta, sortze_data, eguneratze_data, ezabatze_data) 
+VALUES
+('Champú Hidratante', 'Champú para cabello seco con aloe vera.', 1, 'Loreal', 50, 10, NOW(), NOW(), NULL),
+('Acondicionador Reparador', 'Acondicionador para cabello dañado.', 1, 'Kerastase', 40, 8, NOW(), NOW(), NULL),
+('Tijeras de Corte Profesional', 'Tijeras de acero inoxidable para estilistas.', 2, 'Wahl', 20, 5, NOW(), NOW(), NULL),
+('Secador de Pelo', 'Secador con tecnología iónica para evitar el encrespamiento.', 3, 'Dyson', 15, 3, NOW(), NOW(), NULL),
+('Laca de Fijación', 'Laca extra fuerte para peinados duraderos.', 4, 'Tresemme', 60, 15, NOW(), NOW(), NULL),
+('Plancha de Pelo', 'Plancha de cerámica con ajuste de temperatura.', 3, 'Remington', 10, 2, NOW(), NOW(), NULL),
+('Aceite Capilar', 'Aceite de argán para nutrir el cabello.', 1, 'Moroccanoil', 30, 6, NOW(), NOW(), NULL),
+('Cepillo Desenredante', 'Cepillo con cerdas flexibles para todo tipo de cabello.', 2, 'Tangle Teezer', 25, 5, NOW(), NOW(), NULL),
+('Espuma Voluminizadora', 'Espuma para dar volumen al cabello.', 4, 'Schwarzkopf', 35, 7, NOW(), NOW(), NULL),
+('Coloración Permanente', 'Tinte para el cabello con cobertura total de canas.', 5, 'Garnier', 50, 10, NOW(), NOW(), NULL);
+
+INSERT INTO kolore_historialak (id_bezeroa, id_produktua, data, kantitatea, bolumena, oharrak, sortze_data, eguneratze_data, ezabatze_data)
+VALUES 
+(1, 1, '2024-01-01', 10, '500ml', 'Pedido de inicio de año', '2024-01-01 10:00:00', NULL, NULL),
+(2, 2, '2024-02-15', 5, '1L', 'Pedido regular', '2024-02-15 14:30:00', NULL, NULL),
+(3, 3, '2024-03-20', 20, '750ml', 'Pedido especial', '2024-03-20 08:45:00', NULL, NULL),
+(4, 1, '2024-04-10', 8, '300ml', 'Pedido urgente', '2024-04-10 11:15:00', NULL, NULL),
+(5, 2, '2024-05-05', 15, '2L', 'Promoción', '2024-05-05 16:00:00', NULL, NULL);
+
+
+INSERT INTO produktu_mugimenduak (id_produktua, id_langilea, data, kopurua, sortze_data, eguneratze_data, ezabatze_data)
+VALUES 
+(1, 1, '2024-01-05 09:30:00', 5, '2024-01-05 09:30:00', NULL, NULL),
+(2, 2, '2024-02-10 12:15:00', 10, '2024-02-10 12:15:00', NULL, NULL),
+(3, 3, '2024-03-18 15:45:00', 20, '2024-03-18 15:45:00', NULL, NULL),
+(4, 1, '2024-04-01 08:00:00', 7, '2024-04-01 08:00:00', NULL, NULL),
+(5, 2, '2024-05-15 14:00:00', 25, '2024-05-15 14:00:00', NULL, NULL);

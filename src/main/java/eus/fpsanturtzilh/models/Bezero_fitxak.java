@@ -19,7 +19,6 @@ public class Bezero_fitxak {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String pasahitza;
     private String izena;
     private String abizena;
     private String telefonoa;
@@ -40,17 +39,6 @@ public class Bezero_fitxak {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
-	public String getPasahitza() {
-		return pasahitza;
-	}
-
-
-	public void setPasahitza(String pasahitza) {
-		this.pasahitza = pasahitza;
-	}
-
 
 	public String getIzena() {
 		return izena;
