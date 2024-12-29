@@ -1,16 +1,8 @@
 package eus.fpsanturtzilh.models;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "kategoriak")
@@ -22,8 +14,8 @@ public class Kategoriak {
 
     private String izena;
     
-    @OneToMany(mappedBy = "kategoriak", cascade = CascadeType.ALL)
     @JsonManagedReference
+    @OneToMany(mappedBy = "kategoriak", cascade = CascadeType.ALL)
     private List<Produktuak> produktuak;
 
     @Embedded
@@ -38,6 +30,7 @@ public class Kategoriak {
         this.data = data;
     }
 
+    // Getters and setters
     public List<Produktuak> getProduktuak() {
         return produktuak;
     }

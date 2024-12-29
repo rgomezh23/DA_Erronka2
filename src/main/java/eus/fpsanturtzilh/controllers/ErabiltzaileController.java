@@ -23,11 +23,6 @@ public class ErabiltzaileController {
     public Optional<Erabiltzaile> getErabiltzaile(@PathVariable String username) {
         return erabiltzaileService.getErabiltzaileByUsername(username);
     }
-    
-    @GetMapping("/a")
-    public String a() {
-        return "Funciona!!!!!";
-    }
 }
 
 
