@@ -1,6 +1,8 @@
 package eus.fpsanturtzilh.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class Produktuak {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     
     private String izena;
     private String deskribapena;
@@ -33,7 +35,7 @@ public class Produktuak {
     
     public Produktuak() {}
 
-    public Produktuak(int id, String izena, String deskribapena, String marka, int stock, int stock_alerta,
+    public Produktuak(Long id, String izena, String deskribapena, String marka, int stock, int stock_alerta,
                       Kategoriak kategoriak, List<Kolore_historialak> kolore_historialak,
                       List<Produktu_Mugimenduak> produktu_Mugimenduak, Data data) {
         this.id = id;
@@ -47,13 +49,18 @@ public class Produktuak {
         this.produktu_Mugimenduak = produktu_Mugimenduak;
         this.data = data;
     }
+    
+    @JsonProperty("id_kategoria")  //kategoria agertzeko
+    public int getKategoriaId() {
+        return kategoriak != null ? kategoriak.getId() : 0;  
+    }
 
     // Getters and setters
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -64,7 +71,7 @@ public class Produktuak {
     public void setIzena(String izena) {
         this.izena = izena;
     }
-
+    
     public Kategoriak getKategoriak() {
         return kategoriak;
     }

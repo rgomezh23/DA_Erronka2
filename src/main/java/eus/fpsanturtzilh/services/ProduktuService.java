@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import eus.fpsanturtzilh.models.*;
+import eus.fpsanturtzilh.models.Produktuak;
 import eus.fpsanturtzilh.repositories.ProduktuRepository;
 
 @Service
@@ -35,7 +35,7 @@ public class ProduktuService {
             existingProduct.setStock(produktuak.getStock());
             existingProduct.setStock_alerta(produktuak.getStock_alerta());
             
-            // Relacionar la categoría del producto
+            // Relacionar la categoría del producto si existe
             if (produktuak.getKategoriak() != null) {
                 existingProduct.setKategoriak(produktuak.getKategoriak());
             }
