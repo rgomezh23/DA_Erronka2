@@ -15,16 +15,15 @@ import jakarta.persistence.Table;
 @Table(name = "materialak")
 public class Materialak {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
-    private String etiketa;
-    private String izena;
-    
-    @OneToMany(mappedBy = "materiala", cascade = CascadeType.ALL)
-    private List<Material_maileguak>  maileguak;
-  
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+	private String etiketa;
+	private String izena;
+
+	@OneToMany(mappedBy = "materiala", cascade = CascadeType.ALL)
+	private List<Material_maileguak> maileguak;
 
 	public Materialak(int id, String etiketa, String izena, Data data) {
 		super();
@@ -67,7 +66,8 @@ public class Materialak {
 	}
 
 	@Embedded
-    private Data data;
+	private Data data;
 
-	public Materialak() {}
+	public Materialak() {
+	}
 }

@@ -1,31 +1,54 @@
 package eus.fpsanturtzilh.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 import java.sql.Date;
 
 @Entity
 @Table(name = "kolore_historialak")
 public class Kolore_historialak {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
-    @ManyToOne
-    @JoinColumn(name = "id_bezeroa", nullable = false)
-    private Bezero_fitxak bezero;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_produktua", nullable = false)
-    private Produktuak produktu;
-    
-    private Date data;
-    private int kantitatea;
-    private String bolumena;
-    private String oharrak;
+	@ManyToOne
+	@JoinColumn(name = "id_bezeroa", nullable = false)
+	private Bezero_fitxak bezero;
 
-    @Embedded
-    private Data dataSimple;
+	@ManyToOne
+	@JoinColumn(name = "id_produktua", nullable = false)
+	private Produktuak produktu;
+	private Date data;
+	private int kantitatea;
+	private String bolumena;
+	private String oharrak;
+
+	@Embedded
+	private Data dataSimple;
+
+	public Kolore_historialak(int id, Bezero_fitxak bezero, Produktuak produktu, String izena, Date data,
+			String abizena, int kantitatea, String bolumena, String oharrak, Data dataSimple) {
+		super();
+		this.id = id;
+		this.bezero = bezero;
+		this.produktu = produktu;
+		this.data = data;
+		this.kantitatea = kantitatea;
+		this.bolumena = bolumena;
+		this.oharrak = oharrak;
+		this.dataSimple = dataSimple;
+	}
+
+	public Kolore_historialak() {
+	}
 
 	public int getId() {
 		return id;
@@ -91,3 +114,5 @@ public class Kolore_historialak {
 		this.dataSimple = dataSimple;
 	}
 }
+
+// Eliminado: izena / abizena.

@@ -1,6 +1,5 @@
 package eus.fpsanturtzilh.models;
 
-
 import java.sql.Time;
 
 import jakarta.persistence.Access;
@@ -9,17 +8,20 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.PrePersist;
 
 @Embeddable
-@Access(AccessType.PROPERTY)  
+@Access(AccessType.PROPERTY)
 public class Denbora {
-	  private Time hasiera_ordua;
-	  private Time amaiera_ordua;
-	  
-	  @PrePersist
-	    public void prePersist() {
-		  if (hasiera_ordua == null) {
-	            hasiera_ordua = new Time(System.currentTimeMillis());  // Hora actual
-	        }
-	  }
+	private Time hasiera_ordua;
+	private Time amaiera_ordua;
+
+	public Denbora() {
+	}
+
+	@PrePersist
+	public void prePersist() {
+		if (hasiera_ordua == null) {
+			hasiera_ordua = new Time(System.currentTimeMillis());
+		}
+	}
 
 	public Time getHasiera_ordua() {
 		return hasiera_ordua;

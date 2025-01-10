@@ -3,7 +3,6 @@ package eus.fpsanturtzilh.controllers;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +15,16 @@ import eus.fpsanturtzilh.services.ErabiltzaileService;
 @RequestMapping("/erabiltzaileak")
 public class ErabiltzaileController {
 
-    @Autowired
-    private ErabiltzaileService erabiltzaileService;
-    @CrossOrigin(origins = "http://localhost:8100") 
-    @GetMapping("/{username}")
-    public Optional<Erabiltzaile> getErabiltzaile(@PathVariable String username) {
-        return erabiltzaileService.getErabiltzaileByUsername(username);
-    }
+	@Autowired
+	private ErabiltzaileService erabiltzaileService;
+
+	@GetMapping("/{username}")
+	public Optional<Erabiltzaile> getErabiltzaile(@PathVariable String username) {
+		return erabiltzaileService.getErabiltzaileByUsername(username);
+	}
+
+	@GetMapping("/a")
+	public String a() {
+		return "Funciona!!!!!";
+	}
 }
-
-

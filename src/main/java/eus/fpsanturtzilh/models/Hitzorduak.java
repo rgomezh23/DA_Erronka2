@@ -1,153 +1,171 @@
 package eus.fpsanturtzilh.models;
 
+import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Date;
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import java.sql.Time;
 
 @Entity
 @Table(name = "hitzorduak")
 public class Hitzorduak {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    private String pasahitza;
-    private String izena;
-    private String abizena;
-    private int eserlekua;
-    private String telefonoa;
-    private String deskribapena;
-    private Date data;
-    private char etxekoa;
-    private double prezio_totala;
-    
-    @ManyToOne
-    @JoinColumn(name = "langile_id")
-    private Langileak langileak;
-    
-    @OneToMany(mappedBy = "hitzorduak", cascade = CascadeType.ALL)
-    private List<Ticket_lerroak> ticket_lerroak;
-    
-    private boolean azal_sentikorra;
+	private int eserlekua;
 
-    @Embedded
-    private DenboraErreala denbora;
+	@Column(nullable = false)
+	private Date data;
 
-    @Embedded
-    private Data dataSimple;
+	@Column(name = "hasiera_ordua", nullable = false)
+	private Time hasiera_ordua;
 
-	public Hitzorduak() {}
+	@Column(name = "amaiera_ordua", nullable = false)
+	private Time amaiera_ordua;
+
+	@Column(name = "hasiera_ordua_erreala")
+	private Time hasiera_ordua_erreala;
+
+	@Column(name = "amaiera_ordua_erreala")
+	private Time amaiera_ordua_erreala;
+
+	@Column(nullable = false, length = 100)
+	private String izena;
+
+	@Column(length = 9)
+	private String telefonoa;
+
+	@Column(length = 250)
+	private String deskribapena;
+
+	@Column(nullable = false)
+	private char etxekoa;
+
+	@Column(precision = 10, scale = 2)
+	private BigDecimal prezio_totala;
+
+	@ManyToOne
+	@JoinColumn(name = "id_langilea")
+	private Langileak langileak;
+
+	@Embedded
+	private Data dataSimple;
+
+	public Hitzorduak() {
+	}
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
-	public String getPasahitza() {
-		return pasahitza;
-	}
-
-
-	public void setPasahitza(String pasahitza) {
-		this.pasahitza = pasahitza;
-	}
-
-
-	public String getIzena() {
-		return izena;
-	}
-
-
-	public void setIzena(String izena) {
-		this.izena = izena;
-	}
-
-
-	public String getAbizena() {
-		return abizena;
-	}
-
-
-	public void setAbizena(String abizena) {
-		this.abizena = abizena;
-	}
-
 
 	public int getEserlekua() {
 		return eserlekua;
 	}
 
-
 	public void setEserlekua(int eserlekua) {
 		this.eserlekua = eserlekua;
 	}
-
-
-	public String getTelefonoa() {
-		return telefonoa;
-	}
-
-
-	public void setTelefonoa(String telefonoa) {
-		this.telefonoa = telefonoa;
-	}
-
-
-	public String getDeskribapena() {
-		return deskribapena;
-	}
-
-
-	public void setDeskribapena(String deskribapena) {
-		this.deskribapena = deskribapena;
-	}
-
 
 	public Date getData() {
 		return data;
 	}
 
-
 	public void setData(Date data) {
 		this.data = data;
 	}
 
+	public Time getHasiera_ordua() {
+		return hasiera_ordua;
+	}
+
+	public void setHasiera_ordua(Time hasiera_ordua) {
+		this.hasiera_ordua = hasiera_ordua;
+	}
+
+	public Time getAmaiera_ordua() {
+		return amaiera_ordua;
+	}
+
+	public void setAmaiera_ordua(Time amaiera_ordua) {
+		this.amaiera_ordua = amaiera_ordua;
+	}
+
+	public Time getHasiera_ordua_erreala() {
+		return hasiera_ordua_erreala;
+	}
+
+	public void setHasiera_ordua_erreala(Time hasiera_ordua_erreala) {
+		this.hasiera_ordua_erreala = hasiera_ordua_erreala;
+	}
+
+	public Time getAmaiera_ordua_erreala() {
+		return amaiera_ordua_erreala;
+	}
+
+	public void setAmaiera_ordua_erreala(Time amaiera_ordua_erreala) {
+		this.amaiera_ordua_erreala = amaiera_ordua_erreala;
+	}
+
+	public String getIzena() {
+		return izena;
+	}
+
+	public void setIzena(String izena) {
+		if (izena != null && izena.length() <= 100) {
+			this.izena = izena;
+		} else {
+			throw new IllegalArgumentException("Izena must be non-null and up to 100 characters.");
+		}
+	}
+
+	public String getTelefonoa() {
+		return telefonoa;
+	}
+
+	public void setTelefonoa(String telefonoa) {
+		if (telefonoa == null || telefonoa.length() == 9) {
+			this.telefonoa = telefonoa;
+		} else {
+			throw new IllegalArgumentException("Telefonoa must be exactly 9 characters or null.");
+		}
+	}
+
+	public String getDeskribapena() {
+		return deskribapena;
+	}
+
+	public void setDeskribapena(String deskribapena) {
+		if (deskribapena == null || deskribapena.length() <= 250) {
+			this.deskribapena = deskribapena;
+		} else {
+			throw new IllegalArgumentException("Deskribapena must be null or up to 250 characters.");
+		}
+	}
 
 	public char getEtxekoa() {
 		return etxekoa;
 	}
 
-
 	public void setEtxekoa(char etxekoa) {
-		this.etxekoa = etxekoa;
+		if (etxekoa == 'E' || etxekoa == 'K') {
+			this.etxekoa = etxekoa;
+		} else {
+			throw new IllegalArgumentException("Etxekoa must be 'E' or 'K'.");
+		}
 	}
 
-
-	public double getPrezio_totala() {
+	public BigDecimal getPrezio_totala() {
 		return prezio_totala;
 	}
 
-
-	public void setPrezio_totala(double prezio_totala) {
+	public void setPrezio_totala(BigDecimal prezio_totala) {
 		this.prezio_totala = prezio_totala;
 	}
-
 
 	public Langileak getLangileak() {
 		return langileak;
@@ -157,32 +175,213 @@ public class Hitzorduak {
 		this.langileak = langileak;
 	}
 
-	public boolean isAzal_sentikorra() {
-		return azal_sentikorra;
-	}
-
-
-	public void setAzal_sentikorra(boolean azal_sentikorra) {
-		this.azal_sentikorra = azal_sentikorra;
-	}
-
-
-	public DenboraErreala getDenbora() {
-		return denbora;
-	}
-
-
-	public void setDenbora(DenboraErreala denbora) {
-		this.denbora = denbora;
-	}
-
-
 	public Data getDataSimple() {
 		return dataSimple;
 	}
-
 
 	public void setDataSimple(Data dataSimple) {
 		this.dataSimple = dataSimple;
 	}
 }
+
+// Eliminado: abizena / azal sentikorra / pasahitza
+// Más cambios, hechos por chat GPT porque no entendía nada.
+
+/**
+Antigua clase:
+package eus.fpsanturtzilh.models;
+
+import java.sql.Date;
+import java.sql.Time;
+
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+
+@Entity
+@Table(name = "hitzorduak")
+public class Hitzorduak {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private int eserlekua;
+
+    @Column(nullable = false)
+    private Date data;
+
+    @Column(name = "hasiera_ordua", nullable = false)
+    private Time hasiera_ordua;
+
+    @Column(name = "amaiera_ordua", nullable = false)
+    private Time amaiera_ordua;
+
+    @Column(name = "hasiera_ordua_erreala")
+    private Time hasiera_ordua_erreala;
+
+    @Column(name = "amaiera_ordua_erreala")
+    private Time amaiera_ordua_erreala;
+
+    @Column(nullable = false, length = 100)
+    private String izena;
+
+    @Column(length = 9)
+    private String telefonoa;
+
+    @Column(length = 250)
+    private String deskribapena;
+
+    @Column(nullable = false)
+    private char etxekoa;
+
+    @Column(precision = 10, scale = 2)
+    private double prezio_totala;
+
+    @ManyToOne
+    @JoinColumn(name = "id_langilea")
+    private Langileak langileak;
+
+    @Embedded
+    private Data dataSimple;
+
+    // Constructor vacío
+    public Hitzorduak() {}
+
+    // Getters y Setters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getEserlekua() {
+        return eserlekua;
+    }
+
+    public void setEserlekua(int eserlekua) {
+        this.eserlekua = eserlekua;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public Time getHasiera_ordua() {
+        return hasiera_ordua;
+    }
+
+    public void setHasiera_ordua(Time hasiera_ordua) {
+        this.hasiera_ordua = hasiera_ordua;
+    }
+
+    public Time getAmaiera_ordua() {
+        return amaiera_ordua;
+    }
+
+    public void setAmaiera_ordua(Time amaiera_ordua) {
+        this.amaiera_ordua = amaiera_ordua;
+    }
+
+    public Time getHasiera_ordua_erreala() {
+        return hasiera_ordua_erreala;
+    }
+
+    public void setHasiera_ordua_erreala(Time hasiera_ordua_erreala) {
+        this.hasiera_ordua_erreala = hasiera_ordua_erreala;
+    }
+
+    public Time getAmaiera_ordua_erreala() {
+        return amaiera_ordua_erreala;
+    }
+
+    public void setAmaiera_ordua_erreala(Time amaiera_ordua_erreala) {
+        this.amaiera_ordua_erreala = amaiera_ordua_erreala;
+    }
+
+    public String getIzena() {
+        return izena;
+    }
+
+    public void setIzena(String izena) {
+        if (izena != null && izena.length() <= 100) {
+            this.izena = izena;
+        } else {
+            throw new IllegalArgumentException("Izena must be non-null and up to 100 characters.");
+        }
+    }
+
+    public String getTelefonoa() {
+        return telefonoa;
+    }
+
+    public void setTelefonoa(String telefonoa) {
+        if (telefonoa == null || telefonoa.length() == 9) {
+            this.telefonoa = telefonoa;
+        } else {
+            throw new IllegalArgumentException("Telefonoa must be exactly 9 characters or null.");
+        }
+    }
+
+    public String getDeskribapena() {
+        return deskribapena;
+    }
+
+    public void setDeskribapena(String deskribapena) {
+        if (deskribapena == null || deskribapena.length() <= 250) {
+            this.deskribapena = deskribapena;
+        } else {
+            throw new IllegalArgumentException("Deskribapena must be null or up to 250 characters.");
+        }
+    }
+
+    public char getEtxekoa() {
+        return etxekoa;
+    }
+
+    public void setEtxekoa(char etxekoa) {
+        if (etxekoa == 'E' || etxekoa == 'K') {
+            this.etxekoa = etxekoa;
+        } else {
+            throw new IllegalArgumentException("Etxekoa must be 'E' or 'K'.");
+        }
+    }
+
+    public double getPrezio_totala() {
+        return prezio_totala;
+    }
+
+    public void setPrezio_totala(double prezio_totala) {
+        this.prezio_totala = prezio_totala;
+    }
+
+    public Langileak getLangileak() {
+        return langileak;
+    }
+
+    public void setLangileak(Langileak langileak) {
+        this.langileak = langileak;
+    }
+
+    public Data getDataSimple() {
+        return dataSimple;
+    }
+
+    public void setDataSimple(Data dataSimple) {
+        this.dataSimple = dataSimple;
+    }
+}
+
+
+
+
+// Eliminado: abizena / azal sentikorra / pasahitza
+// Más cambios, hechos por chat GPT porque no entendía nada.
+
+ */

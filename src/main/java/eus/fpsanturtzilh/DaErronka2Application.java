@@ -10,5 +10,6 @@ public class DaErronka2Application {
 
     public static void main(String[] args) {
         SpringApplication.run(DaErronka2Application.class, args);
+        System.out.println("Corriendo.");
     }
 }
