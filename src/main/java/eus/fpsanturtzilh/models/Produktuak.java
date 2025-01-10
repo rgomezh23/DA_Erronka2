@@ -3,6 +3,7 @@ package eus.fpsanturtzilh.models;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,9 +25,11 @@ public class Produktuak {
 	private Kategoriak kategoriak;
 
 	@OneToMany(mappedBy = "produktu", cascade = CascadeType.ALL)
+	@JsonBackReference
 	private List<Kolore_historialak> Kolore_historialak;
 
 	@OneToMany(mappedBy = "produktuak", cascade = CascadeType.ALL)
+	@JsonBackReference
 	private List<Produktu_Mugimenduak> produktu_Mugimenduak;
 
 	@Embedded

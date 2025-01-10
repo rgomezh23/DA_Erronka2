@@ -11,6 +11,8 @@ import jakarta.persistence.Table;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "kolore_historialak")
 public class Kolore_historialak {
@@ -20,10 +22,12 @@ public class Kolore_historialak {
 	private int id;
 
 	@ManyToOne
+	@JsonManagedReference
 	@JoinColumn(name = "id_bezeroa", nullable = false)
 	private Bezero_fitxak bezero;
 
 	@ManyToOne
+	@JsonManagedReference
 	@JoinColumn(name = "id_produktua", nullable = false)
 	private Produktuak produktu;
 	private Date data;

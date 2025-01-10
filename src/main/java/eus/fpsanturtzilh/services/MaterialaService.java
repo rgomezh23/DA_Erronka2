@@ -21,12 +21,11 @@ public class MaterialaService {
     }
 
     public Materialak updateMateriala(Materialak materialak) {
-        Optional<Materialak> existingProductOpt = materialaRepository.findById(materialak.getId());
+        Optional<Materialak> materialZaharra = materialaRepository.findById(materialak.getId());
         
-        if (existingProductOpt.isPresent()) {
-            Materialak materiala = existingProductOpt.get();
+        if (materialZaharra.isPresent()) {
+            Materialak materiala = materialZaharra.get();
             
-
             materiala.setIzena(materialak.getIzena());
             materiala.setEtiketa(materialak.getEtiketa());
        

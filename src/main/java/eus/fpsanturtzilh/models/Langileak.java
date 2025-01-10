@@ -2,6 +2,8 @@ package eus.fpsanturtzilh.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -22,8 +24,14 @@ public class Langileak {
 	private List<Hitzorduak> hitzorduak;
 
 	@OneToMany(mappedBy = "langilea", cascade = CascadeType.ALL)
+	
 	private List<Produktu_Mugimenduak> produktu_Mugimenduak;
+	
+	@JsonBackReference
+	@OneToMany(mappedBy = "langilea", cascade = CascadeType.ALL)
+	private List<Material_maileguak> material_Maileguak;
 
+	
 	@OneToMany(mappedBy = "langileak", cascade = CascadeType.ALL)
 	private List<Txandak> txandak;
 
@@ -106,5 +114,12 @@ public class Langileak {
 	public void setTxandak(List<Txandak> txandak) {
 		this.txandak = txandak;
 	}
+	
+	public List<Material_maileguak> getMaterial_Maileguak() {
+		return material_Maileguak;
+	}
 
+	public void setMaterial_Maileguak(List<Material_maileguak> material_Maileguak) {
+		this.material_Maileguak = material_Maileguak;
+	}
 }
