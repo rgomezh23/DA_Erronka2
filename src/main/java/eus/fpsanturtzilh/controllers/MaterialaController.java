@@ -12,29 +12,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import eus.fpsanturtzilh.models.Produktuak;
-import eus.fpsanturtzilh.services.ProduktuService;
+import eus.fpsanturtzilh.models.Materialak;
+import eus.fpsanturtzilh.services.MaterialaService;
+
 
 @RestController
-@RequestMapping("/produktuak")
-public class ProduktuController {
+@RequestMapping("/materialak")
+public class MaterialaController {
 
     @Autowired
-    private ProduktuService produktuService;
+    private MaterialaService materialaService;
 
-    //CORS ONDO JOATEKO
     @CrossOrigin(origins = "http://localhost:8100") 
-    @GetMapping("/produktuGuztiak")
-    public List<Produktuak> getProduktuak() {
-        return produktuService.getAllProduktuak();
+    @GetMapping("/materialGuztiak")
+    public List<Materialak> getMaterialak() {
+        return materialaService.getAllMaterialak();
     }
 
-    @CrossOrigin(origins = "http://localhost:8100") //CORS ONDO JOATEKO  
+    @CrossOrigin(origins = "http://localhost:8100")  
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Produktuak> updateProduktu(@RequestBody Produktuak produktu) {
+    public ResponseEntity<Materialak> updateProduktu(@RequestBody Materialak materiala) {
         try {
-            Produktuak updatedProduct = produktuService.updateProduktu(produktu);
-            return ResponseEntity.ok(updatedProduct);
+            Materialak eguneratuMateriala = materialaService.updateMateriala(materiala);
+            return ResponseEntity.ok(eguneratuMateriala);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }

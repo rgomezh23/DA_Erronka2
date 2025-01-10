@@ -4,19 +4,23 @@ import java.sql.Time;
 
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.PrePersist;
 
 @Embeddable
 @Access(AccessType.PROPERTY)  
 public class DenboraErreala {
+	
+	  @Column(name = "hasiera_data") //ez dute izen berdina
 	  private Time hasiera_ordua_erreala;
+	  @Column(name = "amaiera_data") //ez dute izen berdina
 	  private Time amaiera_ordua_erreala;
 	  
 	  @PrePersist
 	    public void prePersist() {
 		  if (hasiera_ordua_erreala == null) {
-	            hasiera_ordua_erreala = new Time(System.currentTimeMillis());  // Hora actual
+	            hasiera_ordua_erreala = new Time(System.currentTimeMillis()); 
 	        }
 	  }
 

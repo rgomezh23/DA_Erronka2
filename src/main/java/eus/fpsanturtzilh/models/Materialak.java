@@ -2,6 +2,8 @@ package eus.fpsanturtzilh.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -17,11 +19,12 @@ public class Materialak {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     
     private String etiketa;
     private String izena;
     
+    @JsonBackReference
     @OneToMany(mappedBy = "materiala", cascade = CascadeType.ALL)
     private List<Material_maileguak>  maileguak;
   
@@ -34,8 +37,21 @@ public class Materialak {
 		this.data = data;
 	}
 
-	public int getId() {
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public long getId() {
 		return id;
+	}
+	
+	public List<Material_maileguak> getMaileguak() {
+		return maileguak;
+	}
+
+	public void setMaileguak(List<Material_maileguak> maileguak) {
+		this.maileguak = maileguak;
 	}
 
 	public void setId(int id) {

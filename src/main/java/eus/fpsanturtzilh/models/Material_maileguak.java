@@ -1,5 +1,7 @@
 package eus.fpsanturtzilh.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,9 +19,12 @@ public class Material_maileguak {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="id_materiala")
     private Materialak materiala;
+    
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="id_langilea")
     private Langileak langilea;
@@ -29,7 +34,6 @@ public class Material_maileguak {
     
     @Embedded
     private DenboraErreala denbora;
-
 
 
 	public int getId() {
@@ -61,9 +65,26 @@ public class Material_maileguak {
 		this.denbora = denbora;
 	}
 
-
-	
-
     
+	public Materialak getMateriala() {
+		return materiala;
+	}
+
+
+	public void setMateriala(Materialak materiala) {
+		this.materiala = materiala;
+	}
+
+
+	public Langileak getLangilea() {
+		return langilea;
+	}
+
+
+	public void setLangilea(Langileak langilea) {
+		this.langilea = langilea;
+	}
+
+
 	public Material_maileguak() {}
 }

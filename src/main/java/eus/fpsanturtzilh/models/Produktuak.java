@@ -50,12 +50,17 @@ public class Produktuak {
         this.data = data;
     }
     
-    @JsonProperty("id_kategoria")  //kategoria agertzeko
+    @JsonProperty("id_kategoria")  //kategoria id agertzeko
     public int getKategoriaId() {
         return kategoriak != null ? kategoriak.getId() : 0;  
     }
-
-    // Getters and setters
+    
+    
+    @JsonProperty("kategoria_izena")  //kategoria izena agertzeko
+    public String getKategoriaIzena() {
+        return kategoriak != null ? kategoriak.getIzena() : null;  
+    }
+    
     public Long getId() {
         return id;
     }

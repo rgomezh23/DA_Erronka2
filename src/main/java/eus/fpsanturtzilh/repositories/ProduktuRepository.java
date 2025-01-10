@@ -12,7 +12,7 @@ import eus.fpsanturtzilh.models.Produktuak;
 
 public interface ProduktuRepository extends JpaRepository<Produktuak, Long> {
 
-    @EntityGraph(attributePaths = {"kategoriak"})
+    @EntityGraph(attributePaths = {"kategoriak"})//atributuaren izena modeloaren aldagaia
     List<Produktuak> findAll();
 }
 
