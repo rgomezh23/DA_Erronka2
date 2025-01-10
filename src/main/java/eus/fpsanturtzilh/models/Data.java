@@ -3,8 +3,6 @@ package eus.fpsanturtzilh.models;
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import java.sql.Date;
 
 @Embeddable
