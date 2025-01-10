@@ -28,8 +28,12 @@ public class HitzorduakController {
     // Permitir CORS desde el cliente Ionic (localhost:8100)
     @CrossOrigin(origins = "http://localhost:8100")
     @GetMapping("/hitzorduakGuztiak")
-    public List<Hitzorduak> getHitzorduak() {
-        return hitzorduakService.getAllHitzorduak();
+    public ResponseEntity<List<Hitzorduak>> getHitzorduak() {
+        List<Hitzorduak> hitzorduakList = hitzorduakService.getAllHitzorduak();
+        if (hitzorduakList.isEmpty()) {
+            return ResponseEntity.noContent().build();  // Retorna 204 si no hay citas
+        }
+        return ResponseEntity.ok(hitzorduakList);  // Retorna la lista si está disponible
     }
 
     @CrossOrigin(origins = "http://localhost:8100")
@@ -47,26 +51,28 @@ public class HitzorduakController {
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> createHitzorduak(@RequestBody Hitzorduak hitzorduak) {
         try {
-            // Llamamos al servicio para guardar la cita
             Hitzorduak createdHitzorduak = hitzorduakService.saveHitzorduak(hitzorduak);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdHitzorduak);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error de validación: " + e.getMessage());
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error de integridad de datos: " + e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
-            // Captura la excepción y devuelve el mensaje de error
-            String errorMessage = e.getMessage();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al insertar la cita: " + errorMessage);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al insertar la cita: " + e.getMessage());
         }
     }
 
-
     // Endpoint adicional para obtener citas activas
     @GetMapping("/activeAppointments")
-    public List<Hitzorduak> getActiveAppointments() {
-        return hitzorduakService.getActiveAppointments();
+    public ResponseEntity<List<Hitzorduak>> getActiveAppointments() {
+        List<Hitzorduak> activeAppointments = hitzorduakService.getActiveAppointments();
+        return ResponseEntity.ok(activeAppointments);
     }
 
     // Endpoint adicional para buscar citas por fecha
     @GetMapping("/appointmentsByDate")
-    public List<Hitzorduak> getAppointmentsByDate(@RequestParam Date date) {
-        return hitzorduakService.getAppointmentsByDate(date);
+    public ResponseEntity<List<Hitzorduak>> getAppointmentsByDate(@RequestParam Date date) {
+        List<Hitzorduak> appointments = hitzorduakService.getAppointmentsByDate(date);
+        return ResponseEntity.ok(appointments);
     }
 }

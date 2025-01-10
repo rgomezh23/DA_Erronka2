@@ -1,6 +1,7 @@
 package eus.fpsanturtzilh.models;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
@@ -9,48 +10,53 @@ import java.sql.Time;
 @Table(name = "hitzorduak")
 public class Hitzorduak {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	private int eserlekua;
+    private int eserlekua;
 
-	@Column(nullable = false)
-	private Date data;
+    @Column(nullable = false)
+    private Date data;
 
-	@Column(name = "hasiera_ordua", nullable = false)
-	private Time hasiera_ordua;
+    @Column(name = "hasiera_ordua", nullable = false)
+    private Time hasiera_ordua;
 
-	@Column(name = "amaiera_ordua", nullable = false)
-	private Time amaiera_ordua;
+    @Column(name = "amaiera_ordua", nullable = false)
+    private Time amaiera_ordua;
 
-	@Column(name = "hasiera_ordua_erreala")
-	private Time hasiera_ordua_erreala;
+    @Column(name = "hasiera_ordua_erreala")
+    private Time hasiera_ordua_erreala;
 
-	@Column(name = "amaiera_ordua_erreala")
-	private Time amaiera_ordua_erreala;
+    @Column(name = "amaiera_ordua_erreala")
+    private Time amaiera_ordua_erreala;
 
-	@Column(nullable = false, length = 100)
-	private String izena;
+    @Column(nullable = false, length = 100)
+    private String izena;
 
-	@Column(length = 9)
-	private String telefonoa;
+    @Column(length = 9)
+    private String telefonoa;
 
-	@Column(length = 250)
-	private String deskribapena;
+    @Column(length = 250)
+    private String deskribapena;
 
-	@Column(nullable = false)
-	private char etxekoa;
+    @Column(nullable = false)
+    private char etxekoa;
 
-	@Column(precision = 10, scale = 2)
-	private BigDecimal prezio_totala;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal prezio_totala;
 
-	@ManyToOne
-	@JoinColumn(name = "id_langilea")
-	private Langileak langileak;
+    @ManyToOne
+    @JoinColumn(name = "id_langilea")
+    @JsonIgnore  // Ignorar la serialización de la propiedad langileak
+    private Langileak langileak;
 
-	@Embedded
-	private Data dataSimple;
+    @Embedded
+    private Data dataSimple;
+
+    // Resto de la clase...
+
+
 
 	public Hitzorduak() {
 	}
