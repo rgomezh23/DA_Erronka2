@@ -31,24 +31,30 @@ public class Produktuak {
 	public Produktuak() {
 	}
 
-	public Produktuak(int id, String izena, String deskribapena, String marka, int stock, int stock_alerta,
-			Kategoriak kategoriak, List<Kolore_historialak> kolore_historialak,
-			List<Produktu_Mugimenduak> produktu_Mugimenduak, Data data) {
-		this.id = id;
-		this.izena = izena;
-		this.deskribapena = deskribapena;
-		this.marka = marka;
-		this.stock = stock;
-		this.stock_alerta = stock_alerta;
-		this.kategoriak = kategoriak;
-		this.Kolore_historialak = kolore_historialak;
-		this.produktu_Mugimenduak = produktu_Mugimenduak;
-		this.data = data;
-	}
+    public Produktuak(Long id, String izena, String deskribapena, String marka, int stock, int stock_alerta,
+                      Kategoriak kategoriak, List<Kolore_historialak> kolore_historialak,
+                      List<Produktu_Mugimenduak> produktu_Mugimenduak, Data data) {
+        this.id = id;
+        this.izena = izena;
+        this.deskribapena = deskribapena;
+        this.marka = marka;
+        this.stock = stock;
+        this.stock_alerta = stock_alerta;
+        this.kategoriak = kategoriak;
+        this.Kolore_historialak = kolore_historialak;
+        this.produktu_Mugimenduak = produktu_Mugimenduak;
+        this.data = data;
+    }
+    
+    @JsonProperty("id_kategoria")  //kategoria agertzeko
+    public int getKategoriaId() {
+        return kategoriak != null ? kategoriak.getId() : 0;  
+    }
 
-	public int getId() {
-		return id;
-	}
+    // Getters and setters
+    public Long getId() {
+        return id;
+    }
 
 	public void setId(int id) {
 		this.id = id;

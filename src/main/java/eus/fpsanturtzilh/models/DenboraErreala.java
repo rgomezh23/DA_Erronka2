@@ -2,7 +2,6 @@ package eus.fpsanturtzilh.models;
 
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.PrePersist;
 
@@ -11,13 +10,19 @@ import java.sql.Time;
 @Embeddable
 @Access(AccessType.PROPERTY)
 public class DenboraErreala {
-	
-	  @Column(name = "hasiera_data") //ez dute izen berdina
 	  private Time hasiera_ordua_erreala;
-	  @Column(name = "amaiera_data") //ez dute izen berdina
 	  private Time amaiera_ordua_erreala;
+	  
+	  @PrePersist
+	    public void prePersist() {
+		  if (hasiera_ordua_erreala == null) {
+	            hasiera_ordua_erreala = new Time(System.currentTimeMillis());  // Hora actual
+	        }
+	  }
 
-	public DenboraErreala(Time hasiera_ordua_erreala) {
+	public DenboraErreala(Time hasiera_ordua_erreala, Time amaiera_ordua_erreala) {
+		super();
+		
 		this.hasiera_ordua_erreala = hasiera_ordua_erreala;
 	}
 

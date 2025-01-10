@@ -22,14 +22,14 @@ public class ProduktuController {
     @Autowired
     private ProduktuService produktuService;
 
-    //CORS ONDO JOATEKO
+    // Permitir CORS desde el cliente Ionic (localhost:8100)
     @CrossOrigin(origins = "http://localhost:8100") 
     @GetMapping("/produktuGuztiak")
     public List<Produktuak> getProduktuak() {
         return produktuService.getAllProduktuak();
     }
 
-    @CrossOrigin(origins = "http://localhost:8100") //CORS ONDO JOATEKO  
+    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Produktuak> updateProduktu(@RequestBody Produktuak produktu) {
         try {
