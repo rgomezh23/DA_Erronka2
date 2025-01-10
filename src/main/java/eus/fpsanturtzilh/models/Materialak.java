@@ -2,6 +2,8 @@ package eus.fpsanturtzilh.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -33,8 +35,21 @@ public class Materialak {
 		this.data = data;
 	}
 
-	public int getId() {
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public long getId() {
 		return id;
+	}
+	
+	public List<Material_maileguak> getMaileguak() {
+		return maileguak;
+	}
+
+	public void setMaileguak(List<Material_maileguak> maileguak) {
+		this.maileguak = maileguak;
 	}
 
 	public void setId(int id) {
