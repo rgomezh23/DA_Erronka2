@@ -7,7 +7,7 @@ import java.util.List;
 public class Produktuak {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
 	private String izena;
 	private String deskribapena;

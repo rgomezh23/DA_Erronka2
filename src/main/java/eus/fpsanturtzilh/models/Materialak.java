@@ -17,7 +17,7 @@ public class Materialak {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 
 	private String etiketa;
 	private String izena;
@@ -33,7 +33,7 @@ public class Materialak {
 		this.data = data;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

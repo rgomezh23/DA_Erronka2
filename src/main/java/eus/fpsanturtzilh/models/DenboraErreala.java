@@ -13,13 +13,6 @@ public class DenboraErreala {
 	  private Time hasiera_ordua_erreala;
 	  private Time amaiera_ordua_erreala;
 	  
-	  @PrePersist
-	    public void prePersist() {
-		  if (hasiera_ordua_erreala == null) {
-	            hasiera_ordua_erreala = new Time(System.currentTimeMillis());  // Hora actual
-	        }
-	  }
-
 	public DenboraErreala(Time hasiera_ordua_erreala, Time amaiera_ordua_erreala) {
 		super();
 		

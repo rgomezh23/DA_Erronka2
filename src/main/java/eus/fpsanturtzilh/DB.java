@@ -63,7 +63,7 @@ public class DB {
 	private final KoloreHistorialakRepository koloreHistorialakRepository;
 	private final ProduktuMugimenduakRepository produktuMugimenduakRepository;
 
-	@Autowired // Cosas.
+	// Cosas.
 	public DB(ErabiltzaileRepository repository, TaldeakRepository taldeakRepository,
 			MaterialakRepository materialakRepository, ZerbitzuakRepository zerbitzuakRepository,
 			KategoriakRepository kategoriakRepository, BezeroFitxakRepository bezeroFitxakRepository,
@@ -240,7 +240,7 @@ public class DB {
 	}
 
 	public void materialak_Delete(int id) {
-		Optional<Materialak> aa = materialakRepository.findById(id);
+		Optional<Materialak> aa = materialakRepository.findById((long) id);
 
 		if (aa.isPresent()) {
 			Materialak materiala = aa.get();
@@ -252,7 +252,7 @@ public class DB {
 	}
 
 	public Materialak materialak_Select(int id) {
-		Optional<Materialak> aa = materialakRepository.findById(id);
+		Optional<Materialak> aa = materialakRepository.findById((long) id);
 
 		if (aa.isPresent()) {
 			Materialak material = aa.get();
