@@ -3,13 +3,14 @@ package eus.fpsanturtzilh.models;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Produktuak {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 
 	private String izena;
 	private String deskribapena;
@@ -18,6 +19,7 @@ public class Produktuak {
 	private int stock_alerta;
 
 	@ManyToOne
+	@JsonManagedReference
 	@JoinColumn(name = "id_kategoria", nullable = false)
 	private Kategoriak kategoriak;
 
@@ -29,9 +31,6 @@ public class Produktuak {
 
 	@Embedded
 	private Data data;
-
-	public Produktuak() {
-	}
 
     public Produktuak(Long id, String izena, String deskribapena, String marka, int stock, int stock_alerta,
                       Kategoriak kategoriak, List<Kolore_historialak> kolore_historialak,
@@ -52,8 +51,10 @@ public class Produktuak {
     public int getKategoriaId() {
         return kategoriak != null ? kategoriak.getId() : 0;  
     }
+    
+    public Produktuak() {
+    }
 
-    // Getters and setters
     public Long getId() {
         return id;
     }

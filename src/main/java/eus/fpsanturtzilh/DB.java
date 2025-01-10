@@ -59,7 +59,7 @@ public class DB {
 	private final MaterialMaileguakRepository materialMaileguakRepository;
 	private final HitzorduakRepository hitzorduakRepository;
 	private final TicketLerroakRepository ticketLerroakRepository;
-	private final ProduktuakRepository produktuakRepository;
+	//private final ProduktuakRepository produktuakReposiry;to
 	private final KoloreHistorialakRepository koloreHistorialakRepository;
 	private final ProduktuMugimenduakRepository produktuMugimenduakRepository;
 
@@ -84,7 +84,7 @@ public class DB {
 		this.materialMaileguakRepository = materialMaileguakRepository;
 		this.hitzorduakRepository = hitzorduakRepository;
 		this.ticketLerroakRepository = ticketLerroakRepository;
-		this.produktuakRepository = produktuakRepository;
+		//this.produktuakRepository = produktuakRepository;
 		this.koloreHistorialakRepository = koloreHistorialakRepository;
 		this.produktuMugimenduakRepository = produktuMugimenduakRepository;
 	}
@@ -222,6 +222,7 @@ public class DB {
 		System.out.println("Materiala sortu da: " + materiala.getEtiketa());
 	}
 
+	/**
 	public void materialak_Update(Materialak materialBerria) {
 		Optional<Materialak> aa = materialakRepository.findById(materialBerria.getId());
 
@@ -238,7 +239,7 @@ public class DB {
 			System.out.println("Ez da materiala aurkitu: " + materialBerria.getId());
 		}
 	}
-
+*
 	public void materialak_Delete(int id) {
 		Optional<Materialak> aa = materialakRepository.findById((long) id);
 
@@ -262,7 +263,7 @@ public class DB {
 			return null;
 		}
 	}
-
+*/
 	// ZERBITZUAK:
 	public void zerbitzuak_Insert(String izena, double etxekoPrezioa, double kanpokoPrezioa) {
 		Date fecha = new Date(System.currentTimeMillis());
@@ -817,7 +818,8 @@ public class DB {
 			return null;
 		}
 	}
-
+	
+	/**
 	// PRODUKTUAK:
 	public void produktuak_Insert(String izena, String deskribapena, String marka, int stock, int stock_alerta,
 			Kategoriak kategoriak) {
@@ -839,7 +841,7 @@ public class DB {
 		produktuakRepository.save(produktua);
 		System.out.println("Produktua sortuta: " + produktua.getId());
 	}
-	/**
+	
 	public void produktuak_Update(Produktuak produktua) {
 		Optional<Produktuak> aa = produktuakRepository.findAll(produktua.getId());
 		if (aa.isPresent()) {
@@ -860,7 +862,7 @@ public class DB {
 			System.out.println("Ez da produktua aurkitu: " + produktua.getId());
 		}
 	}
-	*/
+	
 
 	public void produktuak_Delete(int id) {
 		Optional<Produktuak> aa = produktuakRepository.findById(id);
@@ -883,6 +885,7 @@ public class DB {
 			return null;
 		}
 	}
+	*/
 
 	// KOLORE_HISTORIALAK:
 	public void kolore_historialak_Insert(Bezero_fitxak bezero, Produktuak produktu, Date data, int kantitatea,
