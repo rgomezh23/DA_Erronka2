@@ -3,6 +3,8 @@ package eus.fpsanturtzilh.models;
 import jakarta.persistence.*;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "material_maileguak")
 public class Material_maileguak {
@@ -12,10 +14,12 @@ public class Material_maileguak {
 	private int id;
 
 	@ManyToOne
+	@JsonManagedReference
 	@JoinColumn(name = "id_materiala", nullable = false)
 	private Materialak materiala;
 
 	@ManyToOne
+	@JsonManagedReference
 	@JoinColumn(name = "id_langilea", nullable = false)
 	private Langileak langilea;
 

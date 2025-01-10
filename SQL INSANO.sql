@@ -43,3 +43,34 @@ VALUES
 (3, 3, '2024-03-18 15:45:00', 20, '2024-03-18 15:45:00', NULL, NULL),
 (4, 1, '2024-04-01 08:00:00', 7, '2024-04-01 08:00:00', NULL, NULL),
 (5, 2, '2024-05-15 14:00:00', 25, '2024-05-15 14:00:00', NULL, NULL);
+
+
+INSERT INTO materialak (etiketa, izena, sortze_data, eguneratze_data)
+VALUES
+('Pelu', 'Tijeras de corte', NOW(), NOW()),
+('Pelu', 'Secador de pelo', NOW(), NOW()),
+('Pelu', 'Peine de acero', NOW(), NOW()),
+('Pelu', 'Plancha de pelo', NOW(), NOW()),
+('Pelu', 'Corte de pelo para niños', NOW(), NOW());
+
+INSERT INTO taldeak (kodea, izena) VALUES
+('1', 'Equipo 1'),
+('2', 'Equipo 2'),
+('3', 'Equipo 3'),
+('4', 'Equipo 4');
+
+
+INSERT INTO langileak (id, izena, kodea, abizenak, sortze_data, eguneratze_data, ezabatze_data) VALUES
+(1, 'Oier', '2', 'Garcia', NOW(), NOW(), NULL),
+(2, 'Nora', '2', 'Elyadri', NOW(), NOW(), NULL),
+(3, 'Alba', '2', 'Gonzalez', NOW(), NOW(), NULL),
+(4, 'Raúl', '2', 'Gómez', NOW(), NOW(), NULL);
+
+
+INSERT INTO material_maileguak (id_materiala, id_langilea, hasiera_data, amaiera_data, sortze_data, eguneratze_data)
+VALUES
+(1, 1, NOW(), NULL, NOW(), NOW()),  -- Tijeras de corte prestadas al empleado 1
+(2, 2, NOW(), NULL, NOW(), NOW()),  -- Secador de pelo prestado al empleado 2
+(3, 3, NOW(), NULL, NOW(), NOW()),  -- Peine de acero prestado al empleado 3
+(4, 1, NOW(), NULL, NOW(), NOW()),  -- Plancha de pelo prestada al empleado 1
+(5, 2, NOW(), NULL, NOW(), NOW());  -- Corte de pelo para niños prestado al empleado 2
