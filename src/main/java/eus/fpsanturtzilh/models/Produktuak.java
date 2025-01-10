@@ -3,6 +3,8 @@ package eus.fpsanturtzilh.models;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Produktuak {
 	@Id
@@ -57,7 +59,7 @@ public class Produktuak {
     }
 
 	public void setId(int id) {
-		this.id = id;
+		this.id = (long) id;
 	}
 
 	public String getIzena() {

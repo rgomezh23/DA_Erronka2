@@ -30,15 +30,12 @@ public class HitzorduakService {
 
 			// Actualizar los campos de la cita
 			existingAppointment.setIzena(hitzorduak.getIzena());
-			existingAppointment.setAbizena(hitzorduak.getAbizena());
 			existingAppointment.setEserlekua(hitzorduak.getEserlekua());
 			existingAppointment.setTelefonoa(hitzorduak.getTelefonoa());
 			existingAppointment.setDeskribapena(hitzorduak.getDeskribapena());
 			existingAppointment.setData(hitzorduak.getData());
 			existingAppointment.setEtxekoa(hitzorduak.getEtxekoa());
 			existingAppointment.setPrezio_totala(hitzorduak.getPrezio_totala());
-			existingAppointment.setAzal_sentikorra(hitzorduak.isAzal_sentikorra());
-			existingAppointment.setDenbora(hitzorduak.getDenbora());
 			existingAppointment.setDataSimple(hitzorduak.getDataSimple());
 
 			// Relacionar el trabajador (Langileak) si es necesario

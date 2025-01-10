@@ -630,6 +630,7 @@ public class DB {
 	}
 
 	// MATERIAL_MAILEGUAK:
+	/**
 	public void material_mailegua_Insert(int idMateriala, int idLangilea, Date hasieraData, Date amaieraData) {
 		Date dataa = new Date(System.currentTimeMillis());
 		Data data = new Data();
@@ -641,7 +642,7 @@ public class DB {
 		materialMailegua.setHasieraData(hasieraData);
 		materialMailegua.setAmaieraData(amaieraData);
 
-		Materialak material = materialakRepository.findById(idMateriala)
+		Materialak material = materialakRepository.findById((long) idMateriala)
 				.orElseThrow(() -> new RuntimeException("Material no encontrado"));
 		Langileak langilea = langileakRepository.findById(idLangilea)
 				.orElseThrow(() -> new RuntimeException("Langilea no encontrado"));
@@ -653,6 +654,7 @@ public class DB {
 		materialMaileguakRepository.save(materialMailegua);
 		System.out.println("Material mailegua sortu da: " + materialMailegua.getId());
 	}
+	*/
 
 	public void material_mailegua_Update(Material_maileguak materialMailegua) {
 		Material_maileguak updateatzeko = materialMaileguakRepository.findById(materialMailegua.getId()).orElseThrow(
@@ -837,9 +839,9 @@ public class DB {
 		produktuakRepository.save(produktua);
 		System.out.println("Produktua sortuta: " + produktua.getId());
 	}
-
+	/**
 	public void produktuak_Update(Produktuak produktua) {
-		Optional<Produktuak> aa = produktuakRepository.findById(produktua.getId());
+		Optional<Produktuak> aa = produktuakRepository.findAll(produktua.getId());
 		if (aa.isPresent()) {
 			Produktuak updateatzeko = aa.get();
 
@@ -858,6 +860,7 @@ public class DB {
 			System.out.println("Ez da produktua aurkitu: " + produktua.getId());
 		}
 	}
+	*/
 
 	public void produktuak_Delete(int id) {
 		Optional<Produktuak> aa = produktuakRepository.findById(id);
