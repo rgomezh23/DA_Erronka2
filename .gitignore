@@ -34,3 +34,4 @@ build/
 
 ### project Settings ###
 resources/
+application.properties
