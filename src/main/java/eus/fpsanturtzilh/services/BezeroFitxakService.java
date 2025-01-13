@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import eus.fpsanturtzilh.models.Bezero_fitxak;
-import eus.fpsanturtzilh.models.Produktuak;
 import eus.fpsanturtzilh.repositories.BezeroFitxakRepository;
-import eus.fpsanturtzilh.repositories.ProduktuRepository;
 
 @Service
 public class BezeroFitxakService {
@@ -22,7 +20,7 @@ public class BezeroFitxakService {
     }
 
     public Bezero_fitxak updateBezero(Bezero_fitxak bezero) {
-        // Verificar si el producto existe
+    	
         Optional<Bezero_fitxak> bezeroZaharra = bezeroRepository.findById(bezero.getId());
         
         if (bezeroZaharra.isPresent()) {

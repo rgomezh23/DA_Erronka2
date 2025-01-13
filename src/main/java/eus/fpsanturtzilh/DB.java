@@ -1,35 +1,9 @@
 package eus.fpsanturtzilh;
 
-import eus.fpsanturtzilh.models.Erabiltzaile;
-import eus.fpsanturtzilh.models.Hitzorduak;
-import eus.fpsanturtzilh.models.Kategoriak;
-import eus.fpsanturtzilh.models.Kolore_historialak;
-import eus.fpsanturtzilh.models.Langileak;
-import eus.fpsanturtzilh.models.Material_maileguak;
-import eus.fpsanturtzilh.models.Materialak;
-import eus.fpsanturtzilh.models.Ordutegiak;
-import eus.fpsanturtzilh.models.Produktu_Mugimenduak;
-import eus.fpsanturtzilh.models.Produktuak;
-import eus.fpsanturtzilh.models.Taldeak;
-import eus.fpsanturtzilh.models.Ticket_lerroak;
-import eus.fpsanturtzilh.models.Txandak;
-import eus.fpsanturtzilh.models.Zerbitzuak;
-import eus.fpsanturtzilh.models.Bezero_fitxak;
-import eus.fpsanturtzilh.models.Data;
-import eus.fpsanturtzilh.models.Denbora;
-import eus.fpsanturtzilh.repositories.BezeroFitxakRepository;
-import eus.fpsanturtzilh.repositories.ErabiltzaileRepository;
-import eus.fpsanturtzilh.repositories.HitzorduakRepository;
-import eus.fpsanturtzilh.repositories.KategoriakRepository;
-import eus.fpsanturtzilh.repositories.KoloreHistorialakRepository;
-import eus.fpsanturtzilh.repositories.LangileakRepository;
-import eus.fpsanturtzilh.repositories.MaterialMaileguakRepository;
-import eus.fpsanturtzilh.repositories.MaterialakRepository;
-import eus.fpsanturtzilh.repositories.TaldeakRepository;
-import eus.fpsanturtzilh.repositories.TicketLerroakRepository;
-import eus.fpsanturtzilh.repositories.TxandakRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import eus.fpsanturtzilh.models.*;
+import eus.fpsanturtzilh.repositories.*;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
@@ -37,10 +11,6 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Optional;
-import eus.fpsanturtzilh.repositories.OrdutegiakRepository;
-import eus.fpsanturtzilh.repositories.ProduktuMugimenduakRepository;
-import eus.fpsanturtzilh.repositories.ProduktuakRepository;
-import eus.fpsanturtzilh.repositories.ZerbitzuakRepository;
 import jakarta.transaction.Transactional;
 
 @Component
