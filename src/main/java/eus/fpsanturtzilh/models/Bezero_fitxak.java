@@ -9,7 +9,7 @@ public class Bezero_fitxak {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 
 	private String izena;
 	private String abizena;
@@ -22,9 +22,7 @@ public class Bezero_fitxak {
 	@OneToMany(mappedBy = "bezero", cascade = CascadeType.ALL)
 	private List<Kolore_historialak> historiala;
 
-	// Getters y Setters
-
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

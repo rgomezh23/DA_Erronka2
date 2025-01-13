@@ -416,7 +416,7 @@ public class DB {
 		}
 	}
 
-	public void bezero_fitxak_Delete(int id) {
+	public void bezero_fitxak_Delete(long id) {
 		Optional<Bezero_fitxak> bezeroOpt = bezeroFitxakRepository.findById(id);
 		if (bezeroOpt.isPresent()) {
 			Bezero_fitxak bezero = bezeroOpt.get();
@@ -427,7 +427,7 @@ public class DB {
 		}
 	}
 
-	public Bezero_fitxak bezero_fitxak_Select(int id) {
+	public Bezero_fitxak bezero_fitxak_Select(long id) {
 		Optional<Bezero_fitxak> aa = bezeroFitxakRepository.findById(id);
 		if (aa.isPresent()) {
 			Bezero_fitxak bezero = aa.get();

@@ -74,3 +74,12 @@ VALUES
 (3, 3, NOW(), NULL, NOW(), NOW()),  -- Peine de acero prestado al empleado 3
 (4, 1, NOW(), NULL, NOW(), NOW()),  -- Plancha de pelo prestada al empleado 1
 (5, 2, NOW(), NULL, NOW(), NOW());  -- Corte de pelo para niños prestado al empleado 2
+
+INSERT INTO bezero_fitxak (izena, abizena, telefonoa, azal_sentikorra, sortze_data, eguneratze_data, ezabatze_data)
+VALUES
+('Ane', 'Etxebarria', '600123456', 'E', '2025-01-10 10:00:00', '2025-01-10 10:30:00', NULL),
+('Iker', 'Aranburu', '601234567', 'B', '2025-01-11 11:00:00', '2025-01-11 11:30:00', NULL),
+('Maite', 'Mendia', '602345678', 'E', '2025-01-12 12:00:00', '2025-01-12 12:30:00', NULL),
+('Jon', 'Elizalde', '603456789', 'B', '2025-01-13 13:00:00', NULL, NULL),
+('Irati', 'Zabala', '604567890', 'E', '2025-01-14 14:00:00', '2025-01-14 14:30:00', '2025-01-15 15:00:00');
+
