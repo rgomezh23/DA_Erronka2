@@ -1,6 +1,7 @@
 package eus.fpsanturtzilh.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,11 +24,22 @@ public class Bezero_fitxaController {
     @Autowired
     private BezeroFitxakService bezeroService;
 
-    // Permitir CORS desde el cliente Ionic (localhost:8100)
-    @CrossOrigin(origins = "http://localhost:8100") 
+    @GetMapping("/fitxakEzabatuta")
+    public List<Bezero_fitxak> getFitxakEzabatuta() {
+        // Filtrar las entradas donde ezabatze_data no sea null
+        List<Bezero_fitxak> allBezeroFitxak = bezeroService.getAllBezeroFitxak();
+        return allBezeroFitxak.stream()
+                .filter(bezero -> bezero.getData().getEzabatze_data() != null)  // Filtrar por la condición
+                .collect(Collectors.toList());
+    }
+    
     @GetMapping("/fitxakGuztiak")
     public List<Bezero_fitxak> getFitxak() {
-        return bezeroService.getAllBezeroFitxak();
+        // Filtrar las entradas donde ezabatze_data no sea null
+        List<Bezero_fitxak> allBezeroFitxak = bezeroService.getAllBezeroFitxak();
+        return allBezeroFitxak.stream()
+                .filter(bezero -> bezero.getData().getEzabatze_data() == null)  
+                .collect(Collectors.toList());
     }
 
     @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
