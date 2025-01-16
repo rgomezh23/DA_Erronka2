@@ -3,6 +3,8 @@ package eus.fpsanturtzilh.models;
 import jakarta.persistence.*;
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "produktu_mugimenduak")
 public class Produktu_Mugimenduak {
@@ -11,6 +13,7 @@ public class Produktu_Mugimenduak {
 	private int id;
 
 	@ManyToOne
+	@JsonManagedReference
 	@JoinColumn(name = "id_produktua", nullable = false)
 	private Produktuak produktuak;
 
