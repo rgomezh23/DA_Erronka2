@@ -23,7 +23,7 @@ public class Kategoriak {
 	private String izena;
 
 	@OneToMany(mappedBy = "kategoriak", cascade = CascadeType.ALL)
-	@JsonBackReference
+	@JsonBackReference(value="kategoriak-produktu")
 	private List<Produktuak> produktuak;
 
 	@Embedded

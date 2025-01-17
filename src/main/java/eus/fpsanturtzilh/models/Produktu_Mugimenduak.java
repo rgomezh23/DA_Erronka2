@@ -13,7 +13,7 @@ public class Produktu_Mugimenduak {
 	private int id;
 
 	@ManyToOne
-	@JsonManagedReference
+	@JsonManagedReference(value="Produktu_Mugimenduak-produktu")
 	@JoinColumn(name = "id_produktua", nullable = false)
 	private Produktuak produktuak;
 

@@ -27,7 +27,7 @@ public class Kolore_historialak {
 	private Bezero_fitxak bezero;
 
 	@ManyToOne
-	@JsonManagedReference
+	@JsonManagedReference(value="Kolore_historialak-produktu")
 	@JoinColumn(name = "id_produktua", nullable = false)
 	private Produktuak produktu;
 	private Date data;
