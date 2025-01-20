@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Produktuak {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private int id;
 
 	private String izena;
 	private String deskribapena;
@@ -34,7 +34,7 @@ public class Produktuak {
 	@Embedded
 	private Data data;
 
-    public Produktuak(Long id, String izena, String deskribapena, String marka, int stock, int stock_alerta,
+    public Produktuak(int id, String izena, String deskribapena, String marka, int stock, int stock_alerta,
                       Kategoriak kategoriak, List<Kolore_historialak> kolore_historialak,
                       List<Produktu_Mugimenduak> produktu_Mugimenduak, Data data) {
         this.id = id;
@@ -53,7 +53,7 @@ public class Produktuak {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

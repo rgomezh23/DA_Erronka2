@@ -11,7 +11,7 @@ import eus.fpsanturtzilh.models.Produktuak;
 
 
 
-public interface ProduktuRepository extends JpaRepository<Produktuak, Long> {
+public interface ProduktuRepository extends JpaRepository<Produktuak, Integer> {
 
     @EntityGraph(attributePaths = {"kategoriak"})
     List<Produktuak> findAll();
