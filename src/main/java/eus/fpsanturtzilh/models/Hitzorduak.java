@@ -1,6 +1,8 @@
 package eus.fpsanturtzilh.models;
 
 import jakarta.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -16,19 +18,24 @@ public class Hitzorduak {
 
     private int eserlekua;
 
-    @Column(nullable = false)
+    @Column(name = "data", nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date data;
 
     @Column(name = "hasiera_ordua", nullable = false)
+    @JsonFormat(pattern = "HH:mm:ss")
     private Time hasiera_ordua;
 
     @Column(name = "amaiera_ordua", nullable = false)
+    @JsonFormat(pattern = "HH:mm:ss")
     private Time amaiera_ordua;
 
     @Column(name = "hasiera_ordua_erreala")
+    @JsonFormat(pattern = "HH:mm:ss")
     private Time hasiera_ordua_erreala;
 
     @Column(name = "amaiera_ordua_erreala")
+    @JsonFormat(pattern = "HH:mm:ss")
     private Time amaiera_ordua_erreala;
 
     @Column(nullable = false, length = 100)

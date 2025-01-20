@@ -50,28 +50,37 @@ public class HitzorduakController {
     @CrossOrigin(origins = "http://localhost:8100")
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> createHitzorduak(@RequestBody Hitzorduak hitzorduak) {
+        System.out.println("Datos recibidos: " + hitzorduak);
         try {
             Hitzorduak createdHitzorduak = hitzorduakService.saveHitzorduak(hitzorduak);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdHitzorduak);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error de validación: " + e.getMessage());
-        } catch (org.springframework.dao.DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error de integridad de datos: " + e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al insertar la cita: " + e.getMessage());
+            e.printStackTrace();  // Imprime el error en los logs
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
     }
+    
+    // NUEVO:
+    @PostMapping("/create")  // Asegúrate de que la ruta esté definida como "/create"
+    public ResponseEntity<?> crearHitzordua(@RequestBody Hitzorduak hitzordua) {
+        // Aquí va la lógica para insertar el objeto en la base de datos
+        return ResponseEntity.ok("Hitzordua creado con éxito");
+    }
+ // NUEVO:
+    
+    
+    
 
-    // Endpoint adicional para obtener citas activas
+    // Esto no siempre funciona., y no sirve para nada.
     @GetMapping("/activeAppointments")
     public ResponseEntity<List<Hitzorduak>> getActiveAppointments() {
         List<Hitzorduak> activeAppointments = hitzorduakService.getActiveAppointments();
         return ResponseEntity.ok(activeAppointments);
     }
 
-    // Endpoint adicional para buscar citas por fecha
+    // Esto busca las citas por fechas.
     @GetMapping("/appointmentsByDate")
-    public ResponseEntity<List<Hitzorduak>> getAppointmentsByDate(@RequestParam Date date) {
+    public ResponseEntity<List<Hitzorduak>> getAppointmentsByDate(@RequestParam Date date) { // O String.
         List<Hitzorduak> appointments = hitzorduakService.getAppointmentsByDate(date);
         return ResponseEntity.ok(appointments);
     }

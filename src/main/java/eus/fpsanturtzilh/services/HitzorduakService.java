@@ -54,11 +54,6 @@ public class HitzorduakService {
 		return hitzorduakRepository.findActiveAppointments();
 	}
 
-	// Obtener citas por fecha de inicio
-	public List<Hitzorduak> getAppointmentsByDate(Date date) {
-		return hitzorduakRepository.findBySortzeData(date);
-	}
-
 	// Obtener citas dentro de un rango de fechas
 	public List<Hitzorduak> getAppointmentsBetweenDates(Date startDate, Date endDate) {
 		return hitzorduakRepository.findBySortzeDataBetween(startDate, endDate);
@@ -67,5 +62,22 @@ public class HitzorduakService {
 	public Hitzorduak saveHitzorduak(Hitzorduak hitzorduak) {
 	    return hitzorduakRepository.save(hitzorduak);
 	}
+	
+	// ESTA_1:
+	public List<Hitzorduak> getAppointmentsByDate(Date date) {
+		return hitzorduakRepository.findBySortzeData(date);
+	}
+	
+	// ESTA_2:
+    public List<Hitzorduak> getAppointmentsByDate(String date) {
+        try {
+            Date parsedDate = Date.valueOf(date);
+            System.out.println("Fecha pasada al repositorio: " + parsedDate);
 
+            return hitzorduakRepository.findBySortzeData(parsedDate);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Formato de fecha inválido: " + date);
+            throw new RuntimeException("Formato de fecha inválido: " + date);
+        }
+    }
 }
