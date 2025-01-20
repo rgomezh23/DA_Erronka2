@@ -934,7 +934,7 @@ public class DB {
 			mugimendua.setProduktuak(produktua);
 			mugimendua.setLangilea(langilea);
 			mugimendua.setKantitatea(kopurua);
-			mugimendua.setdata_Zutabea(data);
+			mugimendua.setData_Zutabea(data);
 
 			mugimendua.setData(dataa);
 			produktuMugimenduakRepository.save(mugimendua);
@@ -954,7 +954,7 @@ public class DB {
 			updateatzeko.setProduktuak(mugimenduBerria.getProduktuak());
 			updateatzeko.setLangilea(mugimenduBerria.getLangilea());
 			updateatzeko.setKantitatea(mugimenduBerria.getKantitatea());
-			updateatzeko.setdata_Zutabea(mugimenduBerria.getdata_Zutabea());
+			updateatzeko.setData_Zutabea(mugimenduBerria.getData_Zutabea());
 
 			updateatzeko.getData().setEguneratze_data(new Date(System.currentTimeMillis()));
 			produktuMugimenduakRepository.save(updateatzeko);

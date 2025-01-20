@@ -46,5 +46,3 @@ public class Produktu_Mugimenduak {
 		}
 	}
 }
-
-// Agregado: data_Zutabea para el SQL.

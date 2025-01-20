@@ -1,10 +1,20 @@
 package eus.fpsanturtzilh.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "txandak")
+
 public class Txandak {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,57 +29,5 @@ public class Txandak {
 
 	@Embedded
 	Data dataSimple;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public char getMota() {
-		return mota;
-	}
-
-	public void setMota(char mota) {
-		this.mota = mota;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
-	public Langileak getLangileak() {
-		return langileak;
-	}
-
-	public void setLangileak(Langileak langileak) {
-		this.langileak = langileak;
-	}
-
-	public Data getDataSimple() {
-		return dataSimple;
-	}
-
-	public void setDataSimple(Data dataSimple) {
-		this.dataSimple = dataSimple;
-	}
-
-	public Txandak(int id, char mota, Date data, Langileak langileak, Data dataSimple) {
-		super();
-		this.id = id;
-		this.mota = mota;
-		this.data = data;
-		this.langileak = langileak;
-		this.dataSimple = dataSimple;
-	}
-
-	public Txandak() {
-	}
 
 }

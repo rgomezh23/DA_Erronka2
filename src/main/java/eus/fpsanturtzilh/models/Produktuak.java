@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Getter
@@ -25,12 +24,9 @@ public class Produktuak {
 	private int stock_alerta;
 
 	@ManyToOne
-	@JsonManagedReference(value="kategoriak-produktu")
 	@JoinColumn(name = "id_kategoria", nullable = false)
 	private Kategoriak kategoriak;
 
 	@Embedded
 	private Data data;
 }
-
-// Eliminado: Prezioa.
