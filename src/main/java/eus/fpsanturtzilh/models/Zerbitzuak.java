@@ -1,9 +1,15 @@
 package eus.fpsanturtzilh.models;
 
-import java.util.List;
-
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "zerbitzuak")
 public class Zerbitzuak {
@@ -17,59 +23,4 @@ public class Zerbitzuak {
 
 	@Embedded
 	Data data;
-
-	@OneToMany(mappedBy = "zerbitzuak", cascade = CascadeType.ALL)
-	List<Ticket_lerroak> ticket_lerroak;
-
-	public List<Ticket_lerroak> getTicket_lerroak() {
-		return ticket_lerroak;
-	}
-
-	public void setTicket_lerroak(List<Ticket_lerroak> ticket_lerroak) {
-		this.ticket_lerroak = ticket_lerroak;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getIzena() {
-		return izena;
-	}
-
-	public void setIzena(String izena) {
-		this.izena = izena;
-	}
-
-	public double getEtxeko_prezioa() {
-		return etxeko_prezioa;
-	}
-
-	public void setEtxeko_prezioa(double etxeko_prezioa) {
-		this.etxeko_prezioa = etxeko_prezioa;
-	}
-
-	public double getKanpoko_prezioa() {
-		return kanpoko_prezioa;
-	}
-
-	public void setKanpoko_prezioa(double kanpoko_prezioa) {
-		this.kanpoko_prezioa = kanpoko_prezioa;
-	}
-
-	public Data getData() {
-		return data;
-	}
-
-	public void setData(Data data) {
-		this.data = data;
-	}
-
-	public Zerbitzuak() {
-	}
-
 }

@@ -28,11 +28,6 @@ public class ZerbitzuakService {
             zerbitzuzaharra.setIzena(zerbitzuak.getIzena());
             zerbitzuzaharra.setEtxeko_prezioa(zerbitzuak.getEtxeko_prezioa());;
             zerbitzuzaharra.setEtxeko_prezioa(zerbitzuak.getEtxeko_prezioa());
-           
-            
-            if (zerbitzuak.getTicket_lerroak() != null) {
-                zerbitzuzaharra.setTicket_lerroak(zerbitzuak.getTicket_lerroak());
-            }
 
             if (zerbitzuak.getData() != null) {
                 zerbitzuzaharra.setData(zerbitzuak.getData());

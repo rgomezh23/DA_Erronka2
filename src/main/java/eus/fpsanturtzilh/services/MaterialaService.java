@@ -29,14 +29,6 @@ public class MaterialaService {
             materiala.setIzena(materialak.getIzena());
             materiala.setEtiketa(materialak.getEtiketa());
        
-            if (materialak.getMaileguak() != null) {
-                materiala.setMaileguak(materialak.getMaileguak());
-            }
-
-            if (materialak.getData() != null) {
-                materiala.setData(materialak.getData());
-            }
-
             return materialaRepository.save(materiala);
         } else {
             throw new RuntimeException("Materiala ez da aurkitu: " + materialak.getId());
