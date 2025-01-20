@@ -3,14 +3,14 @@ package eus.fpsanturtzilh.models;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Produktuak {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private int id;
 
 	private String izena;
 	private String deskribapena;
@@ -19,20 +19,22 @@ public class Produktuak {
 	private int stock_alerta;
 
 	@ManyToOne
-	@JsonManagedReference
+	@JsonManagedReference(value="kategoriak-produktu")
 	@JoinColumn(name = "id_kategoria", nullable = false)
 	private Kategoriak kategoriak;
 
 	@OneToMany(mappedBy = "produktu", cascade = CascadeType.ALL)
+	@JsonBackReference(value="Kolore_historialak-produktu")
 	private List<Kolore_historialak> Kolore_historialak;
 
 	@OneToMany(mappedBy = "produktuak", cascade = CascadeType.ALL)
+	@JsonBackReference(value="Produktu_Mugimenduak-produktu")
 	private List<Produktu_Mugimenduak> produktu_Mugimenduak;
 
 	@Embedded
 	private Data data;
 
-    public Produktuak(Long id, String izena, String deskribapena, String marka, int stock, int stock_alerta,
+    public Produktuak(int id, String izena, String deskribapena, String marka, int stock, int stock_alerta,
                       Kategoriak kategoriak, List<Kolore_historialak> kolore_historialak,
                       List<Produktu_Mugimenduak> produktu_Mugimenduak, Data data) {
         this.id = id;
@@ -46,21 +48,13 @@ public class Produktuak {
         this.produktu_Mugimenduak = produktu_Mugimenduak;
         this.data = data;
     }
-    
-    @JsonProperty("id_kategoria")  //kategoria agertzeko
-    public int getKategoriaId() {
-        return kategoriak != null ? kategoriak.getId() : 0;  
-    }
-    
-    public Produktuak() {
-    }
-
-    public Long getId() {
-        return id;
-    }
+       
+    public long getId() {
+		return id;
+	}
 
 	public void setId(int id) {
-		this.id = (long) id;
+		this.id = id;
 	}
 
 	public String getIzena() {
@@ -134,6 +128,10 @@ public class Produktuak {
 	public void setData(Data data) {
 		this.data = data;
 	}
+
+	public Produktuak() {
+    }
+
 }
 
 // Eliminado: Prezioa.

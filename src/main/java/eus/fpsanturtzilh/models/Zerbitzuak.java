@@ -21,6 +21,14 @@ public class Zerbitzuak {
 	@OneToMany(mappedBy = "zerbitzuak", cascade = CascadeType.ALL)
 	List<Ticket_lerroak> ticket_lerroak;
 
+	public List<Ticket_lerroak> getTicket_lerroak() {
+		return ticket_lerroak;
+	}
+
+	public void setTicket_lerroak(List<Ticket_lerroak> ticket_lerroak) {
+		this.ticket_lerroak = ticket_lerroak;
+	}
+
 	public int getId() {
 		return id;
 	}

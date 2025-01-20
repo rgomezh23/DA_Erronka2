@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "material_maileguak")
@@ -28,6 +29,22 @@ public class Material_maileguak {
 
 	private Date hasieraData;
 	private Date amaieraData;
+	
+	 @JsonProperty("id_materiala")  //materiala agertzeko
+	    public long getMaterialaID() {
+	        return materiala != null ? materiala.getId() : 0;  
+	    }
+	 
+
+	 @JsonProperty("materiala_izena")  //materiala agertzeko
+	    public String getMaterialaIzena() {
+	        return materiala != null ? materiala.getIzena() : null;  
+	    }
+	 
+	 @JsonProperty("materiala_etiketa")  //materiala agertzeko
+	    public String getMaterialaEtiketa() {
+	        return materiala != null ? materiala.getEtiketa() : null;  
+	    }
 
 	public int getId() {
 		return id;

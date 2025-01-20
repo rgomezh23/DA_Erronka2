@@ -17,18 +17,6 @@ import jakarta.persistence.Table;
 @Table(name = "materialak")
 public class Materialak {
 
-	public List<Material_maileguak> getMaileguak() {
-		return maileguak;
-	}
-
-	public void setMaileguak(List<Material_maileguak> maileguak) {
-		this.maileguak = maileguak;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -47,7 +35,19 @@ public class Materialak {
 		this.izena = izena;
 		this.data = data;
 	}
+	
+	public List<Material_maileguak> getMaileguak() {
+		return maileguak;
+	}
 
+	public void setMaileguak(List<Material_maileguak> maileguak) {
+		this.maileguak = maileguak;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -85,4 +85,5 @@ public class Materialak {
 
 	public Materialak() {
 	}
+	
 }

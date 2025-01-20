@@ -6,42 +6,25 @@ import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.PrePersist;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Embeddable
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Access(AccessType.PROPERTY)
 public class Denbora {
 	private Time hasiera_ordua;
 	private Time amaiera_ordua;
-
-	public Denbora() {
-	}
 
 	@PrePersist
 	public void prePersist() {
 		if (hasiera_ordua == null) {
 			hasiera_ordua = new Time(System.currentTimeMillis());
 		}
-	}
-
-	public Time getHasiera_ordua() {
-		return hasiera_ordua;
-	}
-
-	public void setHasiera_ordua(Time hasiera_ordua) {
-		this.hasiera_ordua = hasiera_ordua;
-	}
-
-	public Time getAmaiera_ordua() {
-		return amaiera_ordua;
-	}
-
-	public void setAmaiera_ordua(Time amaiera_ordua) {
-		this.amaiera_ordua = amaiera_ordua;
-	}
-
-	public Denbora(Time hasiera_ordua, Time amaiera_ordua) {
-		super();
-		this.hasiera_ordua = hasiera_ordua;
-		this.amaiera_ordua = amaiera_ordua;
 	}
 }
