@@ -60,14 +60,6 @@ public class HitzorduakController {
         }
     }
     
-    // NUEVO:
-    @PostMapping("/create")  // Asegúrate de que la ruta esté definida como "/create"
-    public ResponseEntity<?> crearHitzordua(@RequestBody Hitzorduak hitzordua) {
-        // Aquí va la lógica para insertar el objeto en la base de datos
-        return ResponseEntity.ok("Hitzordua creado con éxito");
-    }
- // NUEVO:
-    
     
     
 
