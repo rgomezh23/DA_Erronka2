@@ -1,12 +1,16 @@
 package eus.fpsanturtzilh.models;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "langileak")
 public class Langileak {
 	@Id
@@ -19,107 +23,4 @@ public class Langileak {
 
 	@Embedded
 	Data data;
-
-	@OneToMany(mappedBy = "langileak", cascade = CascadeType.ALL)
-	private List<Hitzorduak> hitzorduak;
-
-	@OneToMany(mappedBy = "langilea", cascade = CascadeType.ALL)
-	
-	private List<Produktu_Mugimenduak> produktu_Mugimenduak;
-	
-	@JsonBackReference
-	@OneToMany(mappedBy = "langilea", cascade = CascadeType.ALL)
-	private List<Material_maileguak> material_Maileguak;
-
-	
-	@OneToMany(mappedBy = "langileak", cascade = CascadeType.ALL)
-	private List<Txandak> txandak;
-
-	public Langileak() {
-	}
-
-	public Langileak(int id, String izena, String kodea, String abizenak, Data data, List<Hitzorduak> hitzorduak,
-			List<Produktu_Mugimenduak> produktu_Mugimenduak, List<Txandak> txandak) {
-		super();
-		this.id = id;
-		this.izena = izena;
-		this.kodea = kodea;
-		this.abizenak = abizenak;
-		this.data = data;
-		this.hitzorduak = hitzorduak;
-		this.produktu_Mugimenduak = produktu_Mugimenduak;
-		this.txandak = txandak;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getIzena() {
-		return izena;
-	}
-
-	public void setIzena(String izena) {
-		this.izena = izena;
-	}
-
-	public String getKodea() {
-		return kodea;
-	}
-
-	public void setKodea(String kodea) {
-		this.kodea = kodea;
-	}
-
-	public String getAbizenak() {
-		return abizenak;
-	}
-
-	public void setAbizenak(String abizenak) {
-		this.abizenak = abizenak;
-	}
-
-	public Data getData() {
-		return data;
-	}
-
-	public void setData(Data data) {
-		this.data = data;
-	}
-
-	public void setHitzorduak(List<Hitzorduak> hitzorduak) {
-		this.hitzorduak = hitzorduak;
-	}
-
-	public List<Hitzorduak> getHitzorduak() {
-		return hitzorduak;
-	}
-
-	public List<Produktu_Mugimenduak> getProduktu_Mugimenduak() {
-		return produktu_Mugimenduak;
-	}
-
-	public void setProduktu_Mugimenduak(List<Produktu_Mugimenduak> produktu_Mugimenduak) {
-		this.produktu_Mugimenduak = produktu_Mugimenduak;
-	}
-
-	public List<Txandak> getTxandak() {
-		return txandak;
-	}
-
-	public void setTxandak(List<Txandak> txandak) {
-		this.txandak = txandak;
-	}
-	
-	public List<Material_maileguak> getMaterial_Maileguak() {
-		return material_Maileguak;
-	}
-
-	public void setMaterial_Maileguak(List<Material_maileguak> material_Maileguak) {
-		this.material_Maileguak = material_Maileguak;
-	}
 }
