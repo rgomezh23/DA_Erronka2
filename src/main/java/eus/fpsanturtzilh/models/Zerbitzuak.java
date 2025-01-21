@@ -1,4 +1,4 @@
-package eus.fpsanturtzilh.models;
+ package eus.fpsanturtzilh.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,7 +17,6 @@ public class Zerbitzuak {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	private String izena;
 	private double etxeko_prezioa;
 	private double kanpoko_prezioa;

@@ -19,7 +19,6 @@ public class Txandak {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	private char mota;
 	private Date data;
 

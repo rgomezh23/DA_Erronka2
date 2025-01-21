@@ -15,7 +15,6 @@ import lombok.Setter;
 public class Taldeak {
 	@Id
 	private String kodea;
-
 	private String izena;
 
 	@Embedded

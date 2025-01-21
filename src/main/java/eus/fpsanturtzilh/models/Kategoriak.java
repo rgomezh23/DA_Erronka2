@@ -25,7 +25,6 @@ public class Kategoriak {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	private String izena;
 
 

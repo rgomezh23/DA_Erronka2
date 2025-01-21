@@ -16,7 +16,6 @@ public class Langileak {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	private String izena;
 	private String kodea;
 	private String abizenak;

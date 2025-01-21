@@ -18,7 +18,6 @@ public class Bezero_fitxak {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	private String izena;
 	private String abizena;
 	private String telefonoa;

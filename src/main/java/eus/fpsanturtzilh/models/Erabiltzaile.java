@@ -19,7 +19,6 @@ public class Erabiltzaile {
 
 	@Id
 	private String username;
-
 	private String pasahitza;
 	private String rola;
 
