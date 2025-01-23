@@ -58,4 +58,8 @@ public class BezeroFitxakService {
             throw new RuntimeException("Bezeroaren id ez da aurkitu: " + bezero.getId());
         }
     }
+   
+    public Bezero_fitxak createNewBezero(Bezero_fitxak bezero) {
+        return bezeroRepository.save(bezero);
+    }
 }
