@@ -44,7 +44,17 @@ public class Bezero_fitxaController {
 
     @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Bezero_fitxak> updateProduktu(@RequestBody Bezero_fitxak bezero) {
+    public ResponseEntity<Bezero_fitxak> updateFitxa(@RequestBody Bezero_fitxak bezero) {
+        try {
+        	Bezero_fitxak bezeroBerria = bezeroService.updateBezero(bezero);
+            return ResponseEntity.ok(bezeroBerria);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+    
+    @PutMapping(value = "/delete", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Bezero_fitxak> deleteFitxa(@RequestBody Bezero_fitxak bezero) {
         try {
         	Bezero_fitxak bezeroBerria = bezeroService.updateBezero(bezero);
             return ResponseEntity.ok(bezeroBerria);

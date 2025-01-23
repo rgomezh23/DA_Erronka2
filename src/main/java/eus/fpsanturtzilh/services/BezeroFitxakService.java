@@ -41,4 +41,21 @@ public class BezeroFitxakService {
             throw new RuntimeException("Bezeroaren id ez da aurkitu: " + bezero.getId());
         }
     }
+    
+    public Bezero_fitxak deleteBezero(Bezero_fitxak bezero) {
+    	
+        Optional<Bezero_fitxak> bezeroZaharra = bezeroRepository.findById(bezero.getId());
+        
+        if (bezeroZaharra.isPresent()) {
+        	Bezero_fitxak bezeroEzabatuta = bezeroZaharra.get();
+            
+            if (bezero.getData() != null) {
+                bezeroEzabatuta.getData().setEzabatze_data(bezero.getData().getEzabatze_data());
+            }
+
+            return bezeroRepository.save(bezeroEzabatuta);
+        } else {
+            throw new RuntimeException("Bezeroaren id ez da aurkitu: " + bezero.getId());
+        }
+    }
 }
