@@ -9,8 +9,6 @@ import lombok.Setter;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Getter
 @Setter
@@ -24,12 +22,10 @@ public class Kolore_historialak {
 	private int id;
 
 	@ManyToOne
-	@JsonManagedReference
 	@JoinColumn(name = "id_bezeroa", nullable = false)
 	private Bezero_fitxak bezero;
 
 	@ManyToOne
-	@JsonManagedReference(value="Kolore_historialak-produktu")
 	@JoinColumn(name = "id_produktua", nullable = false)
 	private Produktuak produktu;
 	private Date data;
