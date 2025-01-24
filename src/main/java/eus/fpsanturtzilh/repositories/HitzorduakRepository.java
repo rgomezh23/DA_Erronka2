@@ -15,15 +15,8 @@ public interface HitzorduakRepository extends JpaRepository<Hitzorduak, Integer>
 	@Query("SELECT h FROM Hitzorduak h WHERE h.dataSimple.ezabatze_data IS NULL")
 	List<Hitzorduak> findActiveAppointments();
 
-	
 	@Query("SELECT h FROM Hitzorduak h WHERE h.data = :date")
 	List<Hitzorduak> findBySortzeData(@Param("date") Date date);
-
-	/**
-	Estaba antes
-	@Query("SELECT h FROM Hitzorduak h WHERE h.dataSimple.sortze_data = :data")
-	List<Hitzorduak> findBySortzeData(Date data);
-	*/
 
 	List<Hitzorduak> findByIzenaContainingIgnoreCase(String izena);
 
@@ -31,8 +24,4 @@ public interface HitzorduakRepository extends JpaRepository<Hitzorduak, Integer>
 
 	@Query("SELECT h FROM Hitzorduak h WHERE h.dataSimple.sortze_data BETWEEN :startDate AND :endDate")
 	List<Hitzorduak> findBySortzeDataBetween(Date startDate, Date endDate);
-	
-
 }
-
-// Todo esto es ignorable pero lo dejaré hasta que sepa que lo puedo borrar 100%.

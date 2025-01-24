@@ -1,6 +1,5 @@
 package eus.fpsanturtzilh;
 
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -21,10 +20,9 @@ public class DaErronka2Application implements WebMvcConfigurer {
 	}
 
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**") // Permite todas las rutas
-				.allowedOrigins("http://localhost:8100") // La URL de tu app Ionic
-				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos permitidos
-				.allowedHeaders("*") // Permite todos los encabezados
-				.allowCredentials(true); // Si usas cookies o autenticación
+		registry.addMapping("/**").allowedOrigins("http://localhost:8100")
+				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedHeaders("*").allowCredentials(true);
 	}
 }
+
+// Para los langiles desplegables.
