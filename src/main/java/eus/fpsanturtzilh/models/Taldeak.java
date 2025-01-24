@@ -1,5 +1,7 @@
 package eus.fpsanturtzilh.models;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,4 +21,9 @@ public class Taldeak {
 
 	@Embedded
 	Data data;
+	
+	@OneToMany
+	@JoinColumn(name = "kodea", nullable = false, insertable = false, updatable = false)
+	private List<Langileak> langileak;
+
 }

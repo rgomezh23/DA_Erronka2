@@ -54,6 +54,7 @@ public class Bezero_fitxaController {
         }
     }
     
+    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
     @PutMapping(value = "/delete", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Bezero_fitxak> deleteFitxa(@RequestBody Bezero_fitxak bezero) {
         try {
@@ -64,6 +65,7 @@ public class Bezero_fitxaController {
         }
     }
     
+    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Bezero_fitxak> createFitxa(@RequestBody Bezero_fitxak bezero) {
         try {

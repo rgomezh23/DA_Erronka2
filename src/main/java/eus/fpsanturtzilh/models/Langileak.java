@@ -1,5 +1,7 @@
 package eus.fpsanturtzilh.models;
 
+
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,4 +24,5 @@ public class Langileak {
 
 	@Embedded
 	Data data;
+
 }

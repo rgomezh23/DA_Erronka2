@@ -1,5 +1,6 @@
 package eus.fpsanturtzilh.models;
 
+import java.io.Serializable;
 import java.util.List;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,8 +14,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "bezero_fitxak")
-public class Bezero_fitxak {
+public class Bezero_fitxak implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

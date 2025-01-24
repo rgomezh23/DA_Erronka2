@@ -11,8 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @Configuration
-@ComponentScan(basePackages = { "eus.fpsanturtzilh.controllers", "eus.fpsanturtzilh.services",
-		"eus.fpsanturtzilh.repositories", "eus.fpsanturtzilh.models", "eus.fpsanturtzilh.config" })
+@ComponentScan(basePackages = { "eus.fpsanturtzilh" })
 public class DaErronka2Application implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
