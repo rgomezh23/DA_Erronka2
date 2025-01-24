@@ -488,7 +488,7 @@ public class DB {
 
 		Langileak langilea = new Langileak();
 		langilea.setIzena(izena);
-		langilea.setKodea(kodea);
+		langilea.setKode(kodea);
 		langilea.setAbizenak(abizenak);
 		langilea.setData(data);
 
@@ -681,7 +681,7 @@ public class DB {
 		hitzordua.setDeskribapena(deskribapena);
 		hitzordua.setEtxekoa(etxekoa);
 		hitzordua.setPrezio_totala(prezio_totala);
-		hitzordua.setLangileak(langileak);
+		//hitzordua.setLangileak(langileak);
 
 		hitzorduakRepository.save(hitzordua);
 		System.out.println("Hitzordua sortu da: " + hitzordua.getIzena());
@@ -703,7 +703,7 @@ public class DB {
 			hitzordua.setDeskribapena(hitzorduaBerria.getDeskribapena());
 			hitzordua.setEtxekoa(hitzorduaBerria.getEtxekoa());
 			hitzordua.setPrezio_totala(hitzorduaBerria.getPrezio_totala());
-			hitzordua.setLangileak(hitzorduaBerria.getLangileak());
+			//hitzordua.setLangileak(hitzorduaBerria.getLangileak());
 			hitzordua.setDataSimple(hitzorduaBerria.getDataSimple());
 
 			hitzordua.getDataSimple().setEguneratze_data(new Date(System.currentTimeMillis()));

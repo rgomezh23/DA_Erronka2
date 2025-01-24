@@ -41,4 +41,25 @@ public class TaldeService {
 	    }
 	        return null;
 	}
+	    
+	    public Taldeak deleteTaldea(Taldeak taldea) {
+	    	
+	        Optional<Taldeak> taldeZaharra = taldeakRepository.findByKodea(taldea.getKodea());
+	        
+	        if (taldeZaharra.isPresent()) {
+	        	Taldeak taldeEzabatuta = taldeZaharra.get();
+	            
+	            if (taldea.getData() != null) {
+	                taldeEzabatuta.getData().setEzabatze_data(taldea.getData().getEzabatze_data());
+	            }
+
+	            return taldeakRepository.save(taldeEzabatuta);
+	        } else {
+	            throw new RuntimeException("Taldearen id ez da aurkitu: " + taldea.getKodea());
+	        }
+	    }
+	   
+	    public Taldeak createNewTalde(Taldeak taldea) {
+	        return taldeakRepository.save(taldea);
+	    }
 }

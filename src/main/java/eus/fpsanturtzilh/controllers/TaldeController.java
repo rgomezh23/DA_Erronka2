@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +34,8 @@ public class TaldeController {
                 .collect(Collectors.toList());
     }
     
-    @GetMapping("/taldeEzabatuta")
+    @GetMapping("/EzabatuLangile")
     public List<Taldeak> getTaldeakEzabatuta() {
-        // Filtrar las entradas donde ezabatze_data no sea null
         List<Taldeak> taldeak = taldeservice.getAllTaldeak();
         return taldeak.stream()
                 .filter(taldea -> taldea.getData().getEzabatze_data() != null) 
@@ -49,6 +49,30 @@ public class TaldeController {
         	Taldeak taldeBerria = taldeservice.updateTaldeak(talde);
             return ResponseEntity.ok(taldeBerria);
         } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+    
+    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
+    @PutMapping(value = "/delete", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Taldeak> deleteFitxa(@RequestBody Taldeak talde) {
+        try {
+        	Taldeak bezeroBerria = taldeservice.deleteTaldea(talde);
+            return ResponseEntity.ok(bezeroBerria);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+    
+    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
+    @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Taldeak> createFitxa(@RequestBody Taldeak talde) {
+        try {
+        	Taldeak bezeroBerria = taldeservice.createNewTalde(talde); 
+            return ResponseEntity.ok(bezeroBerria);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
