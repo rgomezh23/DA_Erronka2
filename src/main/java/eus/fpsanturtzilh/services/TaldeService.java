@@ -19,6 +19,7 @@ public class TaldeService {
 	        return taldeakRepository.findAll();
 	    }
 
+	    
 	    public Taldeak updateTaldeak(Taldeak taldeak) {
 	        Optional<Taldeak> taldeBerria = taldeakRepository.findByKodea(taldeak.getKodea());
 	        

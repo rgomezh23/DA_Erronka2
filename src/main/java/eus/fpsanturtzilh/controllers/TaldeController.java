@@ -34,6 +34,7 @@ public class TaldeController {
                 .collect(Collectors.toList());
     }
     
+    @CrossOrigin(origins = "http://localhost:8100") 
     @GetMapping("/EzabatuLangile")
     public List<Taldeak> getTaldeakEzabatuta() {
         List<Taldeak> taldeak = taldeservice.getAllTaldeak();
