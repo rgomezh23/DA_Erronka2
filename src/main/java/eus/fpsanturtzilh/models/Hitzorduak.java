@@ -25,7 +25,7 @@ public class Hitzorduak {
 	private int eserlekua;
 
 	@Column(name = "id_langilea", nullable = false)
-	private int id_langilea;
+	private Integer id_langilea;
 
 	@Column(name = "data", nullable = false)
 	@JsonFormat(pattern = "yyyy-MM-dd")
