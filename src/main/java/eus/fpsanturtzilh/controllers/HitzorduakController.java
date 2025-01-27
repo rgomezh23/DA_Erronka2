@@ -94,5 +94,4 @@ public class HitzorduakController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar la cita.");
 		}
 	}
-
 }
