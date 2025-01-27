@@ -56,7 +56,7 @@ public class TaldeController {
     
     @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
     @PutMapping(value = "/delete", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Taldeak> deleteFitxa(@RequestBody Taldeak talde) {
+    public ResponseEntity<Taldeak> deleteTalde(@RequestBody Taldeak talde) {
         try {
         	Taldeak bezeroBerria = taldeservice.deleteTaldea(talde);
             return ResponseEntity.ok(bezeroBerria);
@@ -67,7 +67,7 @@ public class TaldeController {
     
     @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Taldeak> createFitxa(@RequestBody Taldeak talde) {
+    public ResponseEntity<Taldeak> createTalde(@RequestBody Taldeak talde) {
         try {
         	Taldeak bezeroBerria = taldeservice.createNewTalde(talde); 
             return ResponseEntity.ok(bezeroBerria);

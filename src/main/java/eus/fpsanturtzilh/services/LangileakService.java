@@ -2,7 +2,10 @@ package eus.fpsanturtzilh.services;
 
 import eus.fpsanturtzilh.models.Langileak;
 import eus.fpsanturtzilh.repositories.LangileakRepository;
+
+
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -65,4 +68,8 @@ public class LangileakService {
     public Langileak createNewLangile(Langileak taldea) {
         return langileakRepository.save(taldea);
     }   
+    
+    public Integer maxID() {
+    	return langileakRepository.findMaxID();
+    }
 }

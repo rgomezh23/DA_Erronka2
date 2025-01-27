@@ -22,11 +22,11 @@ public class Langileak {
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "kodea", referencedColumnName = "kodea", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "kodea", referencedColumnName = "kodea", nullable = false)
     private Taldeak taldeak; // La relación ManyToOne ya mapea 'kodea'
 
     // berdinak ez isateko
-    @Column(name = "kodea")
+    @Column(name = "kodea", nullable= false, insertable = false, updatable = false)
     private String kode; 
 
     private String abizenak;
