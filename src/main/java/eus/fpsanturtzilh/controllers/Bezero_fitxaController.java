@@ -77,5 +77,4 @@ public class Bezero_fitxaController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
 }

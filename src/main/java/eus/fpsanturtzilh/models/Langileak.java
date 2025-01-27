@@ -1,6 +1,6 @@
 package eus.fpsanturtzilh.models;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,14 +15,22 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "langileak")
 public class Langileak {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private String izena;
-	private String kodea;
-	private String abizenak;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String izena;
 
-	@Embedded
-	Data data;
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "kodea", referencedColumnName = "kodea", nullable = false, insertable = false, updatable = false)
+    private Taldeak taldeak; // La relación ManyToOne ya mapea 'kodea'
 
+    // berdinak ez isateko
+    @Column(name = "kodea")
+    private String kode; 
+
+    private String abizenak;
+
+    @Embedded
+    private Data data;
 }
