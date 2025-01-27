@@ -1,8 +1,9 @@
 package eus.fpsanturtzilh.services;
 
 import eus.fpsanturtzilh.models.Langileak;
+import eus.fpsanturtzilh.models.Taldeak;
 import eus.fpsanturtzilh.repositories.LangileakRepository;
-
+import eus.fpsanturtzilh.repositories.TaldeakRepository;
 
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,12 @@ import java.util.Optional;
 public class LangileakService {
 
     private final LangileakRepository langileakRepository;
+    private final TaldeakRepository taldeakRepository;
+    
 
-    public LangileakService(LangileakRepository langileakRepository) {
+    public LangileakService(LangileakRepository langileakRepository, TaldeakRepository taldeakRepository) {
         this.langileakRepository = langileakRepository;
+        this.taldeakRepository = taldeakRepository;
     }
 
     /**
@@ -65,11 +69,20 @@ public class LangileakService {
         }
     }
    
-    public Langileak createNewLangile(Langileak taldea) {
-        return langileakRepository.save(taldea);
-    }   
-    
-    public Integer maxID() {
-    	return langileakRepository.findMaxID();
+    public Langileak createNewLangile(Langileak langile) {
+        // Verificar que el 'kodea' no sea null o vacío
+        if (langile.getKode() == null || langile.getKode().isEmpty()) {
+            throw new IllegalArgumentException("El campo 'kodea' no puede ser null o vacío");
+        }
+
+        // Buscar el 'Taldeak' correspondiente al 'kodea' recibido
+        Taldeak taldeak = taldeakRepository.findById(langile.getKode())
+                .orElseThrow(() -> new RuntimeException("Taldeak ez da aurkitu: " + langile.getKode()));
+
+        // Asociar el 'Taldeak' encontrado al 'Langileak'
+        langile.setTaldeak(taldeak);
+
+        // El 'id' será generado automáticamente por la base de datos
+        return langileakRepository.save(langile);
     }
 }

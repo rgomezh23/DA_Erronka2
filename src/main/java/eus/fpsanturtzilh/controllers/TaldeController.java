@@ -49,9 +49,13 @@ public class TaldeController {
         try {
         	Taldeak taldeBerria = taldeservice.updateTaldeak(talde);
             return ResponseEntity.ok(taldeBerria);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+        } catch (IllegalArgumentException e) {
+      	  e.printStackTrace(); 
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+      } catch (RuntimeException e) {
+      	  e.printStackTrace(); 
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+      }
     }
     
     @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
@@ -60,7 +64,11 @@ public class TaldeController {
         try {
         	Taldeak bezeroBerria = taldeservice.deleteTaldea(talde);
             return ResponseEntity.ok(bezeroBerria);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace(); 
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         } catch (Exception e) {
+        	e.printStackTrace(); 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
@@ -72,8 +80,10 @@ public class TaldeController {
         	Taldeak bezeroBerria = taldeservice.createNewTalde(talde); 
             return ResponseEntity.ok(bezeroBerria);
         } catch (IllegalArgumentException e) {
+        	  e.printStackTrace(); 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         } catch (RuntimeException e) {
+        	  e.printStackTrace(); 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }

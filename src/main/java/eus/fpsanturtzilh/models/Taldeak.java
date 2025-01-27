@@ -1,9 +1,7 @@
 package eus.fpsanturtzilh.models;
 
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,12 +17,13 @@ import lombok.Setter;
 public class Taldeak {
     @Id
     private String kodea;
+
     private String izena;
 
     @Embedded
     private Data data;
-    
-    @OneToMany(mappedBy = "taldeak", cascade = CascadeType.ALL) 
-    @JsonManagedReference
-    private List<Langileak> langileak;
+
+    @OneToMany(mappedBy = "taldeak", cascade = CascadeType.ALL)
+    @JsonManagedReference // Serializa la lista de Langileak en el JSON
+    private List<Langileak> langileak; // Relación OneToMany con Langileak
 }

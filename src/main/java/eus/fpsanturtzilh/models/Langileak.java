@@ -1,6 +1,7 @@
 package eus.fpsanturtzilh.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,16 +19,18 @@ public class Langileak {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String izena;
 
-    @ManyToOne
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference // Evita bucles infinitos en la serialización JSON
     @JoinColumn(name = "kodea", referencedColumnName = "kodea", nullable = false)
-    private Taldeak taldeak; // La relación ManyToOne ya mapea 'kodea'
+    private Taldeak taldeak; // Relación ManyToOne con Taldeak
 
-    // berdinak ez isateko
-    @Column(name = "kodea", nullable= false, insertable = false, updatable = false)
-    private String kode; 
+    // Campo explícito para almacenar "kodea" y serializarlo en el JSON
+    @Column(name = "kodea", nullable = false, insertable = false, updatable = false)
+    @JsonProperty("kodea")
+    private String kode;
 
     private String abizenak;
 

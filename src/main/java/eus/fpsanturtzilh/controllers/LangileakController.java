@@ -38,7 +38,7 @@ public class LangileakController {
     }
     
     @GetMapping("/trueLangileak")
-    public List<Langileak> getFitxakEzabatuta() {
+    public List<Langileak> getLangileEzabatuta() {
         // Filtrar las entradas donde ezabatze_data no sea null
         List<Langileak> langileak = langileakService.findAll();
         return langileak.stream()
@@ -68,30 +68,18 @@ public class LangileakController {
         }
     }
     
-    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
+    @CrossOrigin(origins = "http://localhost:8100")
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Langileak> createFitxa(@RequestBody Langileak langile) {
+    public ResponseEntity<Langileak> createLangile(@RequestBody Langileak langile) {
         try {
-        	Langileak langileBerria = langileakService.createNewLangile(langile); 
+            Langileak langileBerria = langileakService.createNewLangile(langile);
             return ResponseEntity.ok(langileBerria);
         } catch (IllegalArgumentException e) {
+            e.printStackTrace(); 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         } catch (RuntimeException e) {
+            e.printStackTrace(); 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-    
-    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
-    @GetMapping(value = "/max-kodea", produces = "application/json")
-    public ResponseEntity<Integer> MaxID() {
-        try {
-            Integer id = langileakService.maxID();
-            return ResponseEntity.ok(id);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
-
 }
