@@ -41,6 +41,7 @@ public class HitzorduakService {
 	}
 
 	public List<Hitzorduak> getAppointmentsByDate(Date date) {
+		System.out.println(date);
 		return hitzorduakRepository.findBySortzeData(date);
 	}
 

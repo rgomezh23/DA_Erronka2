@@ -23,5 +23,3 @@ public class DaErronka2Application implements WebMvcConfigurer {
 				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedHeaders("*").allowCredentials(true);
 	}
 }
-
-// Para los langiles desplegables.

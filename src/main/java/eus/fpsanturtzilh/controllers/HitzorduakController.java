@@ -76,6 +76,7 @@ public class HitzorduakController {
 		 * if (appointments.isEmpty()) { return ResponseEntity.noContent().build(); //
 		 * Devuelve un 204 si no hay datos }
 		 */
+		System.out.println(appointments.getFirst().getData());
 		return ResponseEntity.ok(appointments);
 	}
 
