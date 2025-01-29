@@ -77,7 +77,7 @@ public class HitzorduakController {
 		 * Devuelve un 204 si no hay datos }
 		 */
 		System.out.println(appointments.getFirst().getData());
-		return ResponseEntity.ok(appointments);
+		return ResponseEntity.ok(appointments); // return ResponseEntity.notFound().build();
 	}
 
 	@CrossOrigin(origins = "http://localhost:8100")
