@@ -19,6 +19,10 @@ public class ZerbitzuakService {
         return zerbitzuRepository.findAll();
     }
 
+    public Zerbitzuak saveZerbitzuak(Zerbitzuak zerbitzuak) {
+        return zerbitzuRepository.save(zerbitzuak); // Guardar un nuevo servicio
+    }
+
     public Zerbitzuak updateZerbitzuak(Zerbitzuak zerbitzuak) {
         Optional<Zerbitzuak> zerbitzua = zerbitzuRepository.findById(zerbitzuak.getId());
         
@@ -26,16 +30,27 @@ public class ZerbitzuakService {
             Zerbitzuak zerbitzuzaharra = zerbitzua.get();
             
             zerbitzuzaharra.setIzena(zerbitzuak.getIzena());
-            zerbitzuzaharra.setEtxeko_prezioa(zerbitzuak.getEtxeko_prezioa());;
             zerbitzuzaharra.setEtxeko_prezioa(zerbitzuak.getEtxeko_prezioa());
-
+            zerbitzuzaharra.setKanpoko_prezioa(zerbitzuak.getKanpoko_prezioa());
             if (zerbitzuak.getData() != null) {
                 zerbitzuzaharra.setData(zerbitzuak.getData());
             }
 
             return zerbitzuRepository.save(zerbitzuzaharra);
         } else {
-            throw new RuntimeException("Produktu not found with ID: " + zerbitzuak.getId());
+            throw new RuntimeException("Servicio no encontrado con ID: " + zerbitzuak.getId());
+        }
+    }
+
+    // Método para eliminar un servicio
+    public boolean deleteZerbitzuak(int id) {
+        Optional<Zerbitzuak> zerbitzuak = zerbitzuRepository.findById(id);
+        if (zerbitzuak.isPresent()) {
+            zerbitzuRepository.delete(zerbitzuak.get());
+            return true; // El servicio fue eliminado
+
+        } else {
+            return false; // No se encontró el servicio con ese ID
         }
     }
 }
