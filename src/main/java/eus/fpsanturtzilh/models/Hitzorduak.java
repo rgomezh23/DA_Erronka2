@@ -9,7 +9,8 @@ import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
 import java.sql.Time;
-import java.sql.Date;
+import java.util.Date; // Borrar.
+// import java.sql.Date;
 
 @Entity
 @Getter
