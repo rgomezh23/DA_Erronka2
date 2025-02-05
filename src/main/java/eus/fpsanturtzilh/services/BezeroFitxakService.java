@@ -62,4 +62,8 @@ public class BezeroFitxakService {
     public Bezero_fitxak createNewBezero(Bezero_fitxak bezero) {
         return bezeroRepository.save(bezero);
     }
+    
+    public void trueDelete(Integer id) {
+    	 bezeroRepository.deleteById(id);
+    }
 }
