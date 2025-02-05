@@ -1,6 +1,8 @@
 package eus.fpsanturtzilh.services;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Date; // Borrar.
+// import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +42,7 @@ public class HitzorduakService {
 		return hitzorduakRepository.save(hitzorduak);
 	}
 
-	public List<Hitzorduak> getAppointmentsByDate(Date date) {
+	public List<Hitzorduak> getAppointmentsByDate(LocalDate date) {
 		System.out.println(date);
 		return hitzorduakRepository.findBySortzeData(date);
 	}
