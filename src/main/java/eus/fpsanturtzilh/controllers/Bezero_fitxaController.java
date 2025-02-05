@@ -27,54 +27,52 @@ public class Bezero_fitxaController {
 
     @GetMapping("/fitxakEzabatuta")
     public List<Bezero_fitxak> getFitxakEzabatuta() {
-        // Filtrar las entradas donde ezabatze_data no sea null
         List<Bezero_fitxak> allBezeroFitxak = bezeroService.getAllBezeroFitxak();
         return allBezeroFitxak.stream()
-                .filter(bezero -> bezero.getData().getEzabatze_data() != null)  // Filtrar por la condición
+                .filter(bezero -> bezero.getData().getEzabatze_data() != null)
                 .collect(Collectors.toList());
     }
     
     @GetMapping("/fitxakGuztiak")
     public List<Bezero_fitxak> getFitxak() {
-        // Filtrar las entradas donde ezabatze_data no sea null
         List<Bezero_fitxak> allBezeroFitxak = bezeroService.getAllBezeroFitxak();
         return allBezeroFitxak.stream()
                 .filter(bezero -> bezero.getData().getEzabatze_data() == null)  
                 .collect(Collectors.toList());
     }
 
-    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
+    @CrossOrigin(origins = "http://localhost:8100")
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Bezero_fitxak> updateFitxa(@RequestBody Bezero_fitxak bezero) {
+    public ResponseEntity<?> updateFitxa(@RequestBody Bezero_fitxak bezero) {
         try {
         	Bezero_fitxak bezeroBerria = bezeroService.updateBezero(bezero);
             return ResponseEntity.ok(bezeroBerria);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzariaren errorea.");
         }
     }
     
-    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
+    @CrossOrigin(origins = "http://localhost:8100")
     @PutMapping(value = "/delete", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Bezero_fitxak> deleteFitxa(@RequestBody Bezero_fitxak bezero) {
+    public ResponseEntity<?> deleteFitxa(@RequestBody Bezero_fitxak bezero) {
         try {
         	Bezero_fitxak bezeroBerria = bezeroService.updateBezero(bezero);
             return ResponseEntity.ok(bezeroBerria);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzariaren errorea.");
         }
     }
     
-    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
+    @CrossOrigin(origins = "http://localhost:8100")
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Bezero_fitxak> createFitxa(@RequestBody Bezero_fitxak bezero) {
+    public ResponseEntity<?> createFitxa(@RequestBody Bezero_fitxak bezero) {
         try {
             Bezero_fitxak bezeroBerria = bezeroService.createNewBezero(bezero); 
             return ResponseEntity.ok(bezeroBerria);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Formatu tzarra");
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzariaren errorea.");
         }
     }
 }

@@ -21,65 +21,59 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/langileak")
 public class LangileakController {
 	@Autowired
-    private final LangileakService langileakService;
+	private final LangileakService langileakService;
 
-    public LangileakController(LangileakService langileakService) {
-        this.langileakService = langileakService;
-    }
+	public LangileakController(LangileakService langileakService) {
+		this.langileakService = langileakService;
+	}
 
-    /**
-     * Endpoint para obtener todos los Langileak.
-     * @return Respuesta HTTP con la lista de Langileak.
-     */
-    @GetMapping
-    public ResponseEntity<List<Langileak>> getAllLangileak() {
-        List<Langileak> langileakList = langileakService.findAll();
-        return ResponseEntity.ok(langileakList);
-    }
-    
-    @GetMapping("/trueLangileak")
-    public List<Langileak> getLangileEzabatuta() {
-        // Filtrar las entradas donde ezabatze_data no sea null
-        List<Langileak> langileak = langileakService.findAll();
-        return langileak.stream()
-                .filter(langile -> langile.getData().getEzabatze_data() == null)  // Filtrar por la condición
-                .collect(Collectors.toList());
-    }
-    
-    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
-    @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Langileak> updateLangile(@RequestBody Langileak langile) {
-        try {
-        	Langileak langileBerria = langileakService.updateLangile(langile);
-            return ResponseEntity.ok(langileBerria);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
-    
-    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
-    @PutMapping(value = "/delete", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Langileak> deleteLangile(@RequestBody Langileak langile) {
-        try {
-        	Langileak langileBerria = langileakService.updateLangile(langile);
-            return ResponseEntity.ok(langileBerria);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
-    
-    @CrossOrigin(origins = "http://localhost:8100")
-    @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Langileak> createLangile(@RequestBody Langileak langile) {
-        try {
-            Langileak langileBerria = langileakService.createNewLangile(langile);
-            return ResponseEntity.ok(langileBerria);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace(); 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        } catch (RuntimeException e) {
-            e.printStackTrace(); 
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
+	@GetMapping
+	public ResponseEntity<List<Langileak>> getAllLangileak() {
+		List<Langileak> langileakList = langileakService.findAll();
+		return ResponseEntity.ok(langileakList);
+	}
+
+	@GetMapping("/trueLangileak")
+	public List<Langileak> getLangileEzabatuta() {
+		List<Langileak> langileak = langileakService.findAll();
+		return langileak.stream().filter(langile -> langile.getData().getEzabatze_data() == null)
+				.collect(Collectors.toList());
+	}
+
+	@CrossOrigin(origins = "http://localhost:8100")
+	@PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<?> updateLangile(@RequestBody Langileak langile) {
+		try {
+			Langileak langileBerria = langileakService.updateLangile(langile);
+			return ResponseEntity.ok(langileBerria);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errorea eguneratzerakoan.");
+		}
+	}
+
+	@CrossOrigin(origins = "http://localhost:8100")
+	@PutMapping(value = "/delete", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<?> deleteLangile(@RequestBody Langileak langile) {
+		try {
+			Langileak langileBerria = langileakService.updateLangile(langile);
+			return ResponseEntity.ok(langileBerria);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errorea ezabatzerakoan.");
+		}
+	}
+
+	@CrossOrigin(origins = "http://localhost:8100")
+	@PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<?> createLangile(@RequestBody Langileak langile) {
+		try {
+			Langileak langileBerria = langileakService.createNewLangile(langile);
+			return ResponseEntity.ok(langileBerria);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Formatu txarra.");
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzariaren errorea.");
+		}
+	}
 }

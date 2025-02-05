@@ -12,43 +12,57 @@ import eus.fpsanturtzilh.repositories.ProduktuRepository;
 @Service
 public class ProduktuService {
 
-    @Autowired
-    private ProduktuRepository produktuRepository;
+	@Autowired
+	private ProduktuRepository produktuRepository;
 
-    // Método para obtener todos los productos
-    public List<Produktuak> getAllProduktuak() {
-        return produktuRepository.findAll();
-    }
+	public List<Produktuak> getAllProduktuak() {
+		return produktuRepository.findAll();
+	}
 
-    // Método para actualizar un producto existente
-    public Produktuak updateProduktu(Produktuak produktuak) {
-        // Verificar si el producto existe
-        Optional<Produktuak> existingProductOpt = produktuRepository.findById(produktuak.getId());
-        
-        if (existingProductOpt.isPresent()) {
-            Produktuak existingProduct = existingProductOpt.get();
-            
-            // Actualizar los campos del producto
-            existingProduct.setIzena(produktuak.getIzena());
-            existingProduct.setDeskribapena(produktuak.getDeskribapena());
-            existingProduct.setMarka(produktuak.getMarka());
-            existingProduct.setStock(produktuak.getStock());
-            existingProduct.setStock_alerta(produktuak.getStock_alerta());
-            
-            // Relacionar la categoría del producto si existe
-            if (produktuak.getKategoriak() != null) {
-                existingProduct.setKategoriak(produktuak.getKategoriak());
-            }
+	public Produktuak getProduktuById(int id) {
+		Optional<Produktuak> produktuakOpt = produktuRepository.findById(id);
+		if (produktuakOpt.isPresent()) {
+			return produktuakOpt.get();
+		} else {
+			throw new RuntimeException("Produktu ez da aurkitu ID-rekin: " + id);
+		}
+	}
 
-            // Actualizar los objetos embebidos
-            if (produktuak.getData() != null) {
-                existingProduct.setData(produktuak.getData());
-            }
+	public Produktuak saveProduktu(Produktuak produktuak) {
+		return produktuRepository.save(produktuak);
+	}
 
-            // Guardar los cambios y devolver el producto actualizado
-            return produktuRepository.save(existingProduct);
-        } else {
-            throw new RuntimeException("Produktu not found with ID: " + produktuak.getId());
-        }
-    }
+	public Produktuak updateProduktu(Produktuak produktuak) {
+		Optional<Produktuak> existingProductOpt = produktuRepository.findById(produktuak.getId());
+
+		if (existingProductOpt.isPresent()) {
+			Produktuak existingProduct = existingProductOpt.get();
+			existingProduct.setIzena(produktuak.getIzena());
+			existingProduct.setDeskribapena(produktuak.getDeskribapena());
+			existingProduct.setMarka(produktuak.getMarka());
+			existingProduct.setStock(produktuak.getStock());
+			existingProduct.setStock_alerta(produktuak.getStock_alerta());
+
+			if (produktuak.getKategoriak() != null) {
+				existingProduct.setKategoriak(produktuak.getKategoriak());
+			}
+
+			if (produktuak.getData() != null) {
+				existingProduct.setData(produktuak.getData());
+			}
+
+			return produktuRepository.save(existingProduct);
+		} else {
+			throw new RuntimeException("Produktu ez da aurkitu ID-rekin: " + produktuak.getId());
+		}
+	}
+
+	public boolean deleteProduktu(int id) {
+		Optional<Produktuak> productOpt = produktuRepository.findById(id);
+		if (productOpt.isPresent()) {
+			produktuRepository.deleteById(id);
+			return true;
+		}
+		return false;
+	}
 }

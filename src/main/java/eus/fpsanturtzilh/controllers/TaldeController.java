@@ -24,8 +24,7 @@ public class TaldeController {
     @Autowired
     private TaldeService taldeservice;
 
-    // Permitir CORS desde el cliente Ionic (localhost:8100)
-    @CrossOrigin(origins = "http://localhost:8100") 
+    @CrossOrigin(origins = "http://localhost:8100")
     @GetMapping("/talde")
     public List<Taldeak> getTaldeak() {
     	List<Taldeak> taldeak = taldeservice.getAllTaldeak();
@@ -43,48 +42,45 @@ public class TaldeController {
                 .collect(Collectors.toList());
     }
 
-    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
+    @CrossOrigin(origins = "http://localhost:8100")
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Taldeak> updateTaldek(@RequestBody Taldeak talde) {
+    public ResponseEntity<?> updateTaldek(@RequestBody Taldeak talde) {
         try {
         	Taldeak taldeBerria = taldeservice.updateTaldeak(talde);
             return ResponseEntity.ok(taldeBerria);
         } catch (IllegalArgumentException e) {
       	  e.printStackTrace(); 
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Errorea taldea eguneratzerakoan.");
       } catch (RuntimeException e) {
       	  e.printStackTrace(); 
-          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore internoa");
       }
     }
     
-    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
+    @CrossOrigin(origins = "http://localhost:8100")
     @PutMapping(value = "/delete", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Taldeak> deleteTalde(@RequestBody Taldeak talde) {
+    public ResponseEntity<?> deleteTalde(@RequestBody Taldeak talde) {
         try {
         	Taldeak bezeroBerria = taldeservice.deleteTaldea(talde);
             return ResponseEntity.ok(bezeroBerria);
         } catch (IllegalArgumentException e) {
             e.printStackTrace(); 
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        } catch (Exception e) {
-        	e.printStackTrace(); 
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzariaren errorea.");
         }
     }
     
-    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
+    @CrossOrigin(origins = "http://localhost:8100")
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Taldeak> createTalde(@RequestBody Taldeak talde) {
+    public ResponseEntity<?> createTalde(@RequestBody Taldeak talde) {
         try {
         	Taldeak bezeroBerria = taldeservice.createNewTalde(talde); 
             return ResponseEntity.ok(bezeroBerria);
         } catch (IllegalArgumentException e) {
         	  e.printStackTrace(); 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Formatu txarra.");
         } catch (RuntimeException e) {
         	  e.printStackTrace(); 
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzariaren errorea.");
         }
     }
 }

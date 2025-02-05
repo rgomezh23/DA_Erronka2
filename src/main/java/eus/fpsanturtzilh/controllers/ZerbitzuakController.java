@@ -22,14 +22,13 @@ public class ZerbitzuakController {
     @Autowired
     private ZerbitzuakService zerbitzuService;
 
-    // Permitir CORS desde el cliente Ionic (localhost:8100)
     @CrossOrigin(origins = "http://localhost:8100") 
     @GetMapping("/zerbitzuGuztiak")
     public List<Zerbitzuak> getZerbitzuak() {
         return zerbitzuService.getAllZerbitzuak();
     }
 
-    @CrossOrigin(origins = "http://localhost:8100")  // Permitir CORS desde el cliente Ionic
+    @CrossOrigin(origins = "http://localhost:8100")
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Zerbitzuak> updateProduktu(@RequestBody Zerbitzuak zerbitzua) {
         try {
