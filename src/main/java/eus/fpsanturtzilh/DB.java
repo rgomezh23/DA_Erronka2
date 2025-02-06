@@ -40,7 +40,6 @@ public class DB {
 			OrdutegiakRepository ordutegiakRepository, LangileakRepository langileakRepository,
 			TxandakRepository txandakRepository, MaterialMaileguakRepository materialMaileguakRepository,
 			HitzorduakRepository hitzorduakRepository, TicketLerroakRepository ticketLerroakRepository,
-			ProduktuakRepository produktuakRepository, KoloreHistorialakRepository koloreHistorialakRepository,
 			ProduktuMugimenduakRepository produktuMugimenduakRepository) {
 		this.repository = repository;
 		this.taldeakRepository = taldeakRepository;
@@ -54,8 +53,8 @@ public class DB {
 		this.materialMaileguakRepository = materialMaileguakRepository;
 		this.hitzorduakRepository = hitzorduakRepository;
 		this.ticketLerroakRepository = ticketLerroakRepository;
+		this.koloreHistorialakRepository = null;
 		//this.produktuakRepository = produktuakRepository;
-		this.koloreHistorialakRepository = koloreHistorialakRepository;
 		this.produktuMugimenduakRepository = produktuMugimenduakRepository;
 	}
 
