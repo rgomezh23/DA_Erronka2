@@ -1,7 +1,8 @@
 package eus.fpsanturtzilh.controllers;
 
-import eus.fpsanturtzilh.models.Materialak;
-import eus.fpsanturtzilh.services.MaterialaService;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
