@@ -73,9 +73,7 @@ public class BezeroFitxakService {
 
     
     
-
     public void trueDelete(Integer id) {
     	 bezeroRepository.deleteById(id);
     }
-
 }
