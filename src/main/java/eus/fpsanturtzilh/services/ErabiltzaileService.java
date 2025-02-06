@@ -11,10 +11,10 @@ import eus.fpsanturtzilh.repositories.ErabiltzaileRepository;
 @Service
 public class ErabiltzaileService {
 
-    @Autowired
-    private ErabiltzaileRepository erabiltzaileRepository;
+	@Autowired
+	private ErabiltzaileRepository erabiltzaileRepository;
 
-    public Optional<Erabiltzaile> getErabiltzaileByUsername(String username) {
-        return erabiltzaileRepository.findByUsername(username);
-    }
+	public Optional<Erabiltzaile> getErabiltzaileByUsername(String username) {
+		return erabiltzaileRepository.findByUsername(username);
+	}
 }

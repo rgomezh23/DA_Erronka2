@@ -14,85 +14,78 @@ import java.util.Optional;
 @Service
 public class LangileakService {
 
-    private final LangileakRepository langileakRepository;
-    private final TaldeakRepository taldeakRepository;
+	private final LangileakRepository langileakRepository;
+	private final TaldeakRepository taldeakRepository;
 
-    public LangileakService(LangileakRepository langileakRepository, TaldeakRepository taldeakRepository) {
-        this.langileakRepository = langileakRepository;
-        this.taldeakRepository = taldeakRepository;
-    }
+	public LangileakService(LangileakRepository langileakRepository, TaldeakRepository taldeakRepository) {
+		this.langileakRepository = langileakRepository;
+		this.taldeakRepository = taldeakRepository;
+	}
 
-    public List<Langileak> findAll() {
-        return langileakRepository.findAll();
-    }
+	public List<Langileak> findAll() {
+		return langileakRepository.findAll();
+	}
 
-    public List<Langileak> findAllNotDeleted() {
-        return langileakRepository.findAll().stream()
-                .filter(langile -> langile.getData() == null || langile.getData().getEzabatze_data() == null)
-                .toList();
-    }
+	public List<Langileak> findAllNotDeleted() {
+		return langileakRepository.findAll().stream()
+				.filter(langile -> langile.getData() == null || langile.getData().getEzabatze_data() == null).toList();
+	}
 
-    public List<Langileak> findAllDeleted() {
-        return langileakRepository.findAll().stream()
-                .filter(langile -> langile.getData() != null && langile.getData().getEzabatze_data() != null)
-                .toList();
-    }
-    public Langileak updateLangile(Langileak langile) {
-        return langileakRepository.findById(langile.getId()).map(langileZaharra -> {
-            // Actualizamos los campos principales directamente
-            langileZaharra.setKode(langile.getKode());
-            langileZaharra.setIzena(langile.getIzena());
-            langileZaharra.setAbizenak(langile.getAbizenak());
+	public List<Langileak> findAllDeleted() {
+		return langileakRepository.findAll().stream()
+				.filter(langile -> langile.getData() != null && langile.getData().getEzabatze_data() != null).toList();
+	}
 
-            // Si el campo 'data' no es null, actualizamos los campos dentro de 'data'
-            if (langile.getData() != null) {
-                // Verificamos que los valores dentro de 'data' sean no nulos antes de asignarlos
-                if (langile.getData().getSortze_data() != null) {
-                    langileZaharra.getData().setSortze_data(langile.getData().getSortze_data());
-                }
-                if (langile.getData().getEguneratze_data() != null) {
-                    langileZaharra.getData().setEguneratze_data(langile.getData().getEguneratze_data());
-                }
-                if (langile.getData().getEzabatze_data() != null) {
-                    langileZaharra.getData().setEzabatze_data(langile.getData().getEzabatze_data());
-                }
-            }
-            
-            // Guardamos los cambios en el repositorio
-            return langileakRepository.save(langileZaharra);
-        }).orElseThrow(() -> new RuntimeException("Langile hori ez dago. ID: " + langile.getId()));
-    }
+	public Langileak updateLangile(Langileak langile) {
+		return langileakRepository.findById(langile.getId()).map(langileZaharra -> {
+			langileZaharra.setKode(langile.getKode());
+			langileZaharra.setIzena(langile.getIzena());
+			langileZaharra.setAbizenak(langile.getAbizenak());
 
+			if (langile.getData() != null) {
+				if (langile.getData().getSortze_data() != null) {
+					langileZaharra.getData().setSortze_data(langile.getData().getSortze_data());
+				}
+				if (langile.getData().getEguneratze_data() != null) {
+					langileZaharra.getData().setEguneratze_data(langile.getData().getEguneratze_data());
+				}
+				if (langile.getData().getEzabatze_data() != null) {
+					langileZaharra.getData().setEzabatze_data(langile.getData().getEzabatze_data());
+				}
+			}
 
-    public Langileak deleteLangile(Langileak langile) {
-        return langileakRepository.findById(langile.getId()).map(langileEzabatuta -> {
-            langileEzabatuta.getData().setEzabatze_data(new Date(System.currentTimeMillis()));
-            return langileakRepository.save(langileEzabatuta);
-        }).orElseThrow(() -> new RuntimeException("Langilea ez da aurkitu: " + langile.getId()));
-    }
+			return langileakRepository.save(langileZaharra);
+		}).orElseThrow(() -> new RuntimeException("Langile hori ez dago. ID: " + langile.getId()));
+	}
 
-    public Langileak createNewLangile(Langileak langile) {
-        if (langile.getKode() == null || langile.getKode().isEmpty()) {
-            throw new IllegalArgumentException("Kodea ezin da hutsik egon");
-        }
+	public Langileak deleteLangile(Langileak langile) {
+		return langileakRepository.findById(langile.getId()).map(langileEzabatuta -> {
+			langileEzabatuta.getData().setEzabatze_data(new Date(System.currentTimeMillis()));
+			return langileakRepository.save(langileEzabatuta);
+		}).orElseThrow(() -> new RuntimeException("Langilea ez da aurkitu: " + langile.getId()));
+	}
 
-        Taldeak taldeak = taldeakRepository.findById(langile.getKode())
-                .orElseThrow(() -> new RuntimeException("Taldeak ez da aurkitu: " + langile.getKode()));
+	public Langileak createNewLangile(Langileak langile) {
+		if (langile.getKode() == null || langile.getKode().isEmpty()) {
+			throw new IllegalArgumentException("Kodea ezin da hutsik egon");
+		}
 
-        langile.setTaldeak(taldeak);
-        return langileakRepository.save(langile);
-    }
-    public Langileak deleteLangileById(int id) {
-        Optional<Langileak> langileOptional = langileakRepository.findById(id);
+		Taldeak taldeak = taldeakRepository.findById(langile.getKode())
+				.orElseThrow(() -> new RuntimeException("Taldeak ez da aurkitu: " + langile.getKode()));
 
-        if (langileOptional.isPresent()) {
-            Langileak langile = langileOptional.get();
-            langile.getData().setEzabatze_data(new Date(System.currentTimeMillis()));  // Actualizamos la fecha de eliminación
-            return langileakRepository.save(langile);
-        } else {
-            throw new RuntimeException("Langilea ez da aurkitu: " + id);
-        }
-    }
+		langile.setTaldeak(taldeak);
+		return langileakRepository.save(langile);
+	}
 
+	public Langileak deleteLangileById(int id) {
+		Optional<Langileak> langileOptional = langileakRepository.findById(id);
 
+		if (langileOptional.isPresent()) {
+			Langileak langile = langileOptional.get();
+			langile.getData().setEzabatze_data(new Date(System.currentTimeMillis()));
+			return langileakRepository.save(langile);
+		} else {
+			throw new RuntimeException("Langilea ez da aurkitu: " + id);
+		}
+	}
 }

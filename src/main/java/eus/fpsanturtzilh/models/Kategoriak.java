@@ -1,7 +1,5 @@
 package eus.fpsanturtzilh.models;
 
-
-
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Getter
 @Setter
@@ -26,7 +23,6 @@ public class Kategoriak {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String izena;
-
 
 	@Embedded
 	private Data data;

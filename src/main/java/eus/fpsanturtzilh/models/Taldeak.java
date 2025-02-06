@@ -15,15 +15,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "taldeak")
 public class Taldeak {
-    @Id
-    private String kodea;
+	@Id
+	private String kodea;
 
-    private String izena;
+	private String izena;
 
-    @Embedded
-    private Data data;
+	@Embedded
+	private Data data;
 
-    @OneToMany(mappedBy = "taldeak", cascade = CascadeType.ALL)
-    @JsonManagedReference // Serializa la lista de Langileak en el JSON
-    private List<Langileak> langileak; // Relación OneToMany con Langileak
+	@OneToMany(mappedBy = "taldeak", cascade = CascadeType.ALL)
+	private List<Langileak> langileak;
 }

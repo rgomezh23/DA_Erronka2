@@ -18,16 +18,15 @@ import java.sql.Time;
 @Embeddable
 @Access(AccessType.PROPERTY)
 public class DenboraErreala {
-	  private Time hasiera_ordua_erreala;
-	  private Time amaiera_ordua_erreala;
-	  
+	private Time hasiera_ordua_erreala;
+	private Time amaiera_ordua_erreala;
 
 	@PrePersist
 	public void prePersist() {
 		if (hasiera_ordua_erreala == null) {
 			hasiera_ordua_erreala = new Time(System.currentTimeMillis());
 		}
-		
+
 		if (amaiera_ordua_erreala == null) {
 			amaiera_ordua_erreala = new Time(System.currentTimeMillis());
 		}

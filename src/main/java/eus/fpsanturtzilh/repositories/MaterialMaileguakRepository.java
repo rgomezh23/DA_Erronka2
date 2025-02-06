@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MaterialMaileguakRepository extends JpaRepository<Material_maileguak, Integer> {
 
-    @EntityGraph(attributePaths = {"materiala", "langilea"}) // Carga tanto materiala como langilea
-    List<Material_maileguak> findAll();
+	@EntityGraph(attributePaths = { "materiala", "langilea" })
+	List<Material_maileguak> findAll();
 
-    Optional<Material_maileguak> findById(Long id);
+	Optional<Material_maileguak> findById(Long id);
 }

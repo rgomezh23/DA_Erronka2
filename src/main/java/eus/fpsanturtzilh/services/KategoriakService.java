@@ -11,40 +11,37 @@ import eus.fpsanturtzilh.repositories.KategoriakRepository;
 
 @Service
 public class KategoriakService {
-	 @Autowired
-	    private KategoriakRepository kategoriaRepository;
+	@Autowired
+	private KategoriakRepository kategoriaRepository;
 
+	public List<Kategoriak> getAllBezeroFitxak() {
+		return kategoriaRepository.findAll();
+	}
 
-	    public List<Kategoriak> getAllBezeroFitxak() {
-	        return kategoriaRepository.findAll();
-	    }
+	public Kategoriak updateKategoria(Kategoriak bezero) {
 
-	    public Kategoriak updateKategoria(Kategoriak bezero) {
-	    	
-	        Optional<Kategoriak> kategoriaZaharra = kategoriaRepository.findById(bezero.getId());
-	        
-	        if (kategoriaZaharra.isPresent()) {
-	        	Kategoriak kategoriaBerria = kategoriaZaharra.get();
-	            
-	            kategoriaBerria.setIzena(bezero.getIzena());
-	            
+		Optional<Kategoriak> kategoriaZaharra = kategoriaRepository.findById(bezero.getId());
 
-	            if (bezero.getData() != null) {
-	                kategoriaBerria.setData(bezero.getData());
-	            }
+		if (kategoriaZaharra.isPresent()) {
+			Kategoriak kategoriaBerria = kategoriaZaharra.get();
 
-	            return kategoriaRepository.save(kategoriaBerria);
-	        } else {
-	            throw new RuntimeException("Bezeroaren id ez da aurkitu: " + bezero.getId());
-	        }
-	    }
-	    
-	   
-	    public Kategoriak createNewKategoria(Kategoriak bezero) {
-	        return kategoriaRepository.save(bezero);
-	    }
-	    
-	    public void trueDelete(Integer id) {
-	    	 kategoriaRepository.deleteById(id);
-	    }
+			kategoriaBerria.setIzena(bezero.getIzena());
+
+			if (bezero.getData() != null) {
+				kategoriaBerria.setData(bezero.getData());
+			}
+
+			return kategoriaRepository.save(kategoriaBerria);
+		} else {
+			throw new RuntimeException("Bezeroaren id ez da aurkitu: " + bezero.getId());
+		}
+	}
+
+	public Kategoriak createNewKategoria(Kategoriak bezero) {
+		return kategoriaRepository.save(bezero);
+	}
+
+	public void trueDelete(Integer id) {
+		kategoriaRepository.deleteById(id);
+	}
 }

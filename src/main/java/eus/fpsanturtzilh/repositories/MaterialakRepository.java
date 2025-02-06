@@ -9,12 +9,12 @@ import java.util.Optional;
 
 public interface MaterialakRepository extends JpaRepository<Materialak, Integer> {
 
-    Optional<Materialak> findById(Integer id);
+	Optional<Materialak> findById(Integer id);
 
-    @Query("SELECT m FROM Materialak m WHERE m.data.ezabatze_data IS NULL")
-    List<Materialak> findByDataEzabatze_DataIsNull();
+	@Query("SELECT m FROM Materialak m WHERE m.data.ezabatze_data IS NULL")
+	List<Materialak> findByDataEzabatze_DataIsNull();
 
-    @Query("SELECT m FROM Materialak m WHERE m.data.ezabatze_data IS NOT NULL")
-    List<Materialak> findByDataEzabatze_DataIsNotNull();
+	@Query("SELECT m FROM Materialak m WHERE m.data.ezabatze_data IS NOT NULL")
+	List<Materialak> findByDataEzabatze_DataIsNotNull();
 
 }

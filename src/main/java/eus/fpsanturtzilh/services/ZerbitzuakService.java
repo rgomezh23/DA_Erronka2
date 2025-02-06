@@ -12,30 +12,31 @@ import eus.fpsanturtzilh.repositories.ZerbitzuakRepository;
 @Service
 public class ZerbitzuakService {
 
-    @Autowired
-    private ZerbitzuakRepository zerbitzuRepository;
+	@Autowired
+	private ZerbitzuakRepository zerbitzuRepository;
 
-    public List<Zerbitzuak> getAllZerbitzuak() {
-        return zerbitzuRepository.findAll();
-    }
+	public List<Zerbitzuak> getAllZerbitzuak() {
+		return zerbitzuRepository.findAll();
+	}
 
-    public Zerbitzuak updateZerbitzuak(Zerbitzuak zerbitzuak) {
-        Optional<Zerbitzuak> zerbitzua = zerbitzuRepository.findById(zerbitzuak.getId());
-        
-        if (zerbitzua.isPresent()) {
-            Zerbitzuak zerbitzuzaharra = zerbitzua.get();
-            
-            zerbitzuzaharra.setIzena(zerbitzuak.getIzena());
-            zerbitzuzaharra.setEtxeko_prezioa(zerbitzuak.getEtxeko_prezioa());;
-            zerbitzuzaharra.setEtxeko_prezioa(zerbitzuak.getEtxeko_prezioa());
+	public Zerbitzuak updateZerbitzuak(Zerbitzuak zerbitzuak) {
+		Optional<Zerbitzuak> zerbitzua = zerbitzuRepository.findById(zerbitzuak.getId());
 
-            if (zerbitzuak.getData() != null) {
-                zerbitzuzaharra.setData(zerbitzuak.getData());
-            }
+		if (zerbitzua.isPresent()) {
+			Zerbitzuak zerbitzuzaharra = zerbitzua.get();
 
-            return zerbitzuRepository.save(zerbitzuzaharra);
-        } else {
-            throw new RuntimeException("Produktu not found with ID: " + zerbitzuak.getId());
-        }
-    }
+			zerbitzuzaharra.setIzena(zerbitzuak.getIzena());
+			zerbitzuzaharra.setEtxeko_prezioa(zerbitzuak.getEtxeko_prezioa());
+			;
+			zerbitzuzaharra.setEtxeko_prezioa(zerbitzuak.getEtxeko_prezioa());
+
+			if (zerbitzuak.getData() != null) {
+				zerbitzuzaharra.setData(zerbitzuak.getData());
+			}
+
+			return zerbitzuRepository.save(zerbitzuzaharra);
+		} else {
+			throw new RuntimeException("Produktu not found with ID: " + zerbitzuak.getId());
+		}
+	}
 }

@@ -37,5 +37,3 @@ public class Kolore_historialak {
 	private Data dataSimple;
 
 }
-
-

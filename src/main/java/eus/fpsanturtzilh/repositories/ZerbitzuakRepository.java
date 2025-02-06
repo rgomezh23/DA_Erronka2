@@ -9,8 +9,9 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ZerbitzuakRepository extends JpaRepository<Zerbitzuak, Integer> {
-	 @EntityGraph(attributePaths = {"ticket_lerroak"})
-	 List<Zerbitzuak> findAll();
-	 Optional<Zerbitzuak> findById(int id);
-	
+	@EntityGraph(attributePaths = { "ticket_lerroak" })
+	List<Zerbitzuak> findAll();
+
+	Optional<Zerbitzuak> findById(int id);
+
 }

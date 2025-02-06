@@ -19,23 +19,23 @@ import eus.fpsanturtzilh.services.ZerbitzuakService;
 @RequestMapping("/zerbitzuak")
 public class ZerbitzuakController {
 
-    @Autowired
-    private ZerbitzuakService zerbitzuService;
+	@Autowired
+	private ZerbitzuakService zerbitzuService;
 
-    @CrossOrigin(origins = "http://localhost:8100") 
-    @GetMapping("/zerbitzuGuztiak")
-    public List<Zerbitzuak> getZerbitzuak() {
-        return zerbitzuService.getAllZerbitzuak();
-    }
+	@CrossOrigin(origins = "http://localhost:8100")
+	@GetMapping("/zerbitzuGuztiak")
+	public List<Zerbitzuak> getZerbitzuak() {
+		return zerbitzuService.getAllZerbitzuak();
+	}
 
-    @CrossOrigin(origins = "http://localhost:8100")
-    @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Zerbitzuak> updateProduktu(@RequestBody Zerbitzuak zerbitzua) {
-        try {
-        	Zerbitzuak updatedProduct = zerbitzuService.updateZerbitzuak(zerbitzua);
-            return ResponseEntity.ok(updatedProduct);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
+	@CrossOrigin(origins = "http://localhost:8100")
+	@PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<Zerbitzuak> updateProduktu(@RequestBody Zerbitzuak zerbitzua) {
+		try {
+			Zerbitzuak updatedProduct = zerbitzuService.updateZerbitzuak(zerbitzua);
+			return ResponseEntity.ok(updatedProduct);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
 }

@@ -37,5 +37,5 @@ public class Material_maileguak {
 
 	private Date hasieraData;
 	private Date amaieraData;
-	
+
 }

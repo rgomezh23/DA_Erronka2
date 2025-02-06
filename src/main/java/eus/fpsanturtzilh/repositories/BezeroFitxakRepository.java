@@ -10,13 +10,13 @@ import eus.fpsanturtzilh.models.Bezero_fitxak;
 
 @Repository
 public interface BezeroFitxakRepository extends JpaRepository<Bezero_fitxak, Integer> {
-    
-    Optional<Bezero_fitxak> findById(Long id);
 
-    @Query("SELECT b FROM Bezero_fitxak b WHERE b.data.ezabatze_data IS NULL")
-    List<Bezero_fitxak> findAllNotDeleted();
-    
-    @Query("SELECT b FROM Bezero_fitxak b WHERE b.data.ezabatze_data IS NOT NULL")
-    List<Bezero_fitxak> findAllDeleted();
+	Optional<Bezero_fitxak> findById(Long id);
+
+	@Query("SELECT b FROM Bezero_fitxak b WHERE b.data.ezabatze_data IS NULL")
+	List<Bezero_fitxak> findAllNotDeleted();
+
+	@Query("SELECT b FROM Bezero_fitxak b WHERE b.data.ezabatze_data IS NOT NULL")
+	List<Bezero_fitxak> findAllDeleted();
 
 }

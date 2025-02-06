@@ -22,7 +22,7 @@ public class Produktu_Mugimenduak {
 	private int id;
 
 	@ManyToOne
-	@JsonManagedReference(value="Produktu_Mugimenduak-produktu")
+	@JsonManagedReference(value = "Produktu_Mugimenduak-produktu")
 	@JoinColumn(name = "id_produktua", nullable = false)
 	private Produktuak produktuak;
 
@@ -39,7 +39,7 @@ public class Produktu_Mugimenduak {
 	@Column(name = "data", nullable = false)
 	private Date data_Zutabea;
 
-	@PrePersist // GPT-cosa
+	@PrePersist
 	public void prePersist() {
 		if (data_Zutabea == null) {
 			data_Zutabea = new Date(System.currentTimeMillis());
