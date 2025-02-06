@@ -62,4 +62,15 @@ public class BezeroFitxakService {
     public Bezero_fitxak createNewBezero(Bezero_fitxak bezero) {
         return bezeroRepository.save(bezero);
     }
+    
+    public List<Bezero_fitxak> getAllNotDeletedBezeroFitxak() {
+        return bezeroRepository.findAllNotDeleted();
+    }
+
+    public List<Bezero_fitxak> getAllDeletedBezeroFitxak() {
+        return bezeroRepository.findAllDeleted();
+    }
+
+    
+    
 }

@@ -16,9 +16,6 @@ import lombok.Setter;
 @Table(name = "bezero_fitxak")
 public class Bezero_fitxak implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

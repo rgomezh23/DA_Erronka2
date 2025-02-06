@@ -7,7 +7,7 @@ import eus.fpsanturtzilh.repositories.TaldeakRepository;
 
 import org.springframework.stereotype.Service;
 
-
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,73 +16,67 @@ public class LangileakService {
 
     private final LangileakRepository langileakRepository;
     private final TaldeakRepository taldeakRepository;
-    
 
     public LangileakService(LangileakRepository langileakRepository, TaldeakRepository taldeakRepository) {
         this.langileakRepository = langileakRepository;
         this.taldeakRepository = taldeakRepository;
     }
 
-    /**
-     * Recupera todos los registros de Langileak de la base de datos.
-     * @return Lista de Langileak
-     */
     public List<Langileak> findAll() {
         return langileakRepository.findAll();
     }
-    
+
+    public List<Langileak> findAllNotDeleted() {
+        return langileakRepository.findAll().stream()
+                .filter(langile -> langile.getData() == null || langile.getData().getEzabatze_data() == null)
+                .toList();
+    }
+
+    public List<Langileak> findAllDeleted() {
+        return langileakRepository.findAll().stream()
+                .filter(langile -> langile.getData() != null && langile.getData().getEzabatze_data() != null)
+                .toList();
+    }
+
     public Langileak updateLangile(Langileak langile) {
-        Optional<Langileak> langileBerria = langileakRepository.findById(langile.getId());
-        
-        if (langileBerria.isPresent()) {
-        	Langileak langileZaharra = langileBerria.get();
-            
+        return langileakRepository.findById(langile.getId()).map(langileZaharra -> {
             langileZaharra.setKode(langile.getKode());
             langileZaharra.setIzena(langile.getIzena());
             langileZaharra.setAbizenak(langile.getAbizenak());
-            
-
-            if (langile.getData() != null) {
-                langileZaharra.setData(langile.getData());
-        } else {
-            throw new RuntimeException("Langile hori ez dago. Kodea: " + langile.getId());
-        }
+            langileZaharra.setData(langile.getData());
             return langileakRepository.save(langileZaharra);
+        }).orElseThrow(() -> new RuntimeException("Langile hori ez dago. ID: " + langile.getId()));
     }
-        return null;
-}
-    
-    public Langileak deleteLangile(Langileak taldea) {
-    	
-        Optional<Langileak> langileZaharra = langileakRepository.findById(taldea.getId());
-        
-        if (langileZaharra.isPresent()) {
-        	Langileak langileEzabatuta = langileZaharra.get();
-            
-            if (taldea.getData() != null) {
-                langileEzabatuta.getData().setEzabatze_data(taldea.getData().getEzabatze_data());
-            }
 
+    public Langileak deleteLangile(Langileak langile) {
+        return langileakRepository.findById(langile.getId()).map(langileEzabatuta -> {
+            langileEzabatuta.getData().setEzabatze_data(new Date(System.currentTimeMillis()));
             return langileakRepository.save(langileEzabatuta);
-        } else {
-            throw new RuntimeException("Taldearen id ez da aurkitu: " + taldea.getKode());
-        }
+        }).orElseThrow(() -> new RuntimeException("Langilea ez da aurkitu: " + langile.getId()));
     }
-   
+
     public Langileak createNewLangile(Langileak langile) {
-        // Verificar que el 'kodea' no sea null o vacío
         if (langile.getKode() == null || langile.getKode().isEmpty()) {
-            throw new IllegalArgumentException("El campo 'kodea' no puede ser null o vacío");
+            throw new IllegalArgumentException("Kodea ezin da hutsik egon");
         }
 
-        // Buscar el 'Taldeak' correspondiente al 'kodea' recibido
         Taldeak taldeak = taldeakRepository.findById(langile.getKode())
                 .orElseThrow(() -> new RuntimeException("Taldeak ez da aurkitu: " + langile.getKode()));
 
-        // Asociar el 'Taldeak' encontrado al 'Langileak'
         langile.setTaldeak(taldeak);
-
-        // El 'id' será generado automáticamente por la base de datos
         return langileakRepository.save(langile);
     }
+    
+    public Langileak deleteLangileById(int id) {
+        Optional<Langileak> langileOptional = langileakRepository.findById(id);
+
+        if (langileOptional.isPresent()) {
+            Langileak langile = langileOptional.get();
+            langile.getData().setEzabatze_data(new Date(System.currentTimeMillis())); // Fecha actual
+            return langileakRepository.save(langile);
+        } else {
+            throw new RuntimeException("Langilea ez da aurkitu: " + id);
+        }
+    }
+
 }
