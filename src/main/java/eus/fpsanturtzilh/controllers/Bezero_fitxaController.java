@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,9 +26,11 @@ public class Bezero_fitxaController {
     private BezeroFitxakService bezeroService;
 
     @GetMapping("/fitxakEzabatuta")
-    public ResponseEntity<?> getFitxakEzabatuta() {
-        List<Bezero_fitxak> fitxak = bezeroService.getAllDeletedBezeroFitxak();
-        return fitxak.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ez dago ezabatutako fitxarik.") : ResponseEntity.ok(fitxak);
+    public List<Bezero_fitxak> getFitxakEzabatuta() {
+        List<Bezero_fitxak> allBezeroFitxak = bezeroService.getAllBezeroFitxak();
+        return allBezeroFitxak.stream()
+                .filter(bezero -> bezero.getData().getEzabatze_data() != null)  
+                .collect(Collectors.toList());
     }
     
     @GetMapping("/fitxakGuztiak")
@@ -35,7 +39,7 @@ public class Bezero_fitxaController {
         return fitxak.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ez dago fitxarik.") : ResponseEntity.ok(fitxak);
     }
 
-    @CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "http://localhost:8100") 
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> updateFitxa(@RequestBody Bezero_fitxak bezero) {
         try {
@@ -46,7 +50,7 @@ public class Bezero_fitxaController {
         }
     }
     
-    @CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "http://localhost:8100")  
     @PutMapping(value = "/delete", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> deleteFitxa(@RequestBody Bezero_fitxak bezero) {
         try {
@@ -57,16 +61,30 @@ public class Bezero_fitxaController {
         }
     }
     
-    @CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "http://localhost:8100") 
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> createFitxa(@RequestBody Bezero_fitxak bezero) {
         try {
             Bezero_fitxak bezeroBerria = bezeroService.createNewBezero(bezero);
             return ResponseEntity.status(HttpStatus.CREATED).body("Fitxa sortuta: " + bezeroBerria.getId());
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Datuen formatua okerra da.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Sortzean errorea gertatu da.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+    
+    
+    @CrossOrigin(origins = "http://localhost:8100") 
+    @DeleteMapping(value = "trueDelete/{id}")  
+    public ResponseEntity<Void> trueDeleteFitxa(@PathVariable Integer id) {
+        try {
+            bezeroService.trueDelete(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();  // Código 204 (No Content)
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }
