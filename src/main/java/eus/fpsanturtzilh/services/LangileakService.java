@@ -37,16 +37,32 @@ public class LangileakService {
                 .filter(langile -> langile.getData() != null && langile.getData().getEzabatze_data() != null)
                 .toList();
     }
-
     public Langileak updateLangile(Langileak langile) {
         return langileakRepository.findById(langile.getId()).map(langileZaharra -> {
+            // Actualizamos los campos principales directamente
             langileZaharra.setKode(langile.getKode());
             langileZaharra.setIzena(langile.getIzena());
             langileZaharra.setAbizenak(langile.getAbizenak());
-            langileZaharra.setData(langile.getData());
+
+            // Si el campo 'data' no es null, actualizamos los campos dentro de 'data'
+            if (langile.getData() != null) {
+                // Verificamos que los valores dentro de 'data' sean no nulos antes de asignarlos
+                if (langile.getData().getSortze_data() != null) {
+                    langileZaharra.getData().setSortze_data(langile.getData().getSortze_data());
+                }
+                if (langile.getData().getEguneratze_data() != null) {
+                    langileZaharra.getData().setEguneratze_data(langile.getData().getEguneratze_data());
+                }
+                if (langile.getData().getEzabatze_data() != null) {
+                    langileZaharra.getData().setEzabatze_data(langile.getData().getEzabatze_data());
+                }
+            }
+            
+            // Guardamos los cambios en el repositorio
             return langileakRepository.save(langileZaharra);
         }).orElseThrow(() -> new RuntimeException("Langile hori ez dago. ID: " + langile.getId()));
     }
+
 
     public Langileak deleteLangile(Langileak langile) {
         return langileakRepository.findById(langile.getId()).map(langileEzabatuta -> {
@@ -66,17 +82,17 @@ public class LangileakService {
         langile.setTaldeak(taldeak);
         return langileakRepository.save(langile);
     }
-    
     public Langileak deleteLangileById(int id) {
         Optional<Langileak> langileOptional = langileakRepository.findById(id);
 
         if (langileOptional.isPresent()) {
             Langileak langile = langileOptional.get();
-            langile.getData().setEzabatze_data(new Date(System.currentTimeMillis())); // Fecha actual
+            langile.getData().setEzabatze_data(new Date(System.currentTimeMillis()));  // Actualizamos la fecha de eliminación
             return langileakRepository.save(langile);
         } else {
             throw new RuntimeException("Langilea ez da aurkitu: " + id);
         }
     }
+
 
 }

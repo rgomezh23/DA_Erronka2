@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,7 @@ public class LangileakController {
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> updateLangile(@RequestBody Langileak langile) {
         try {
+            // Llamamos al servicio para actualizar el langile
             Langileak langileBerria = langileakService.updateLangile(langile);
             return ResponseEntity.ok(langileBerria);
         } catch (Exception e) {
@@ -51,16 +53,20 @@ public class LangileakController {
         }
     }
 
+
     @CrossOrigin(origins = "http://localhost:8100")
-    @PutMapping(value = "/delete/{id}", produces = "application/json")
+    @DeleteMapping(value = "/delete/{id}", produces = "application/json")
     public ResponseEntity<?> deleteLangile(@PathVariable int id) {
         try {
             Langileak langileEzabatua = langileakService.deleteLangileById(id);
-            return ResponseEntity.ok(langileEzabatua);
+            return ResponseEntity.status(HttpStatus.OK)
+                                 .body("Langilea ezabatuta: " + langileEzabatua.getId());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errorea ezabatzerakoan.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("Errorea ezabatzerakoan: " + e.getMessage());
         }
     }
+
 
 
     @CrossOrigin(origins = "http://localhost:8100")

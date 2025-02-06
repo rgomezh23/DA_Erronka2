@@ -34,10 +34,18 @@ public class Bezero_fitxaController {
                 .collect(Collectors.toList());
     }
     
+    
+    @CrossOrigin(origins = "http://localhost:8100") 
     @GetMapping("/fitxakGuztiak")
     public ResponseEntity<?> getFitxak() {
         List<Bezero_fitxak> fitxak = bezeroService.getAllNotDeletedBezeroFitxak();
-        return fitxak.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ez dago fitxarik.") : ResponseEntity.ok(fitxak);
+        if (fitxak.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                 .body("Ez dago fitxarik (ez dago fitxarik ez ezabatuta).");
+        } else {
+            return ResponseEntity.status(HttpStatus.OK)
+                                 .body(fitxak);
+        }
     }
 
     @CrossOrigin(origins = "http://localhost:8100") 
@@ -45,22 +53,31 @@ public class Bezero_fitxaController {
     public ResponseEntity<?> updateFitxa(@RequestBody Bezero_fitxak bezero) {
         try {
             Bezero_fitxak bezeroBerria = bezeroService.updateBezero(bezero);
-            return ResponseEntity.ok("Fitxa eguneratuta: " + bezeroBerria.getId());
+            return ResponseEntity.status(HttpStatus.OK)
+                                 .body("Fitxa eguneratuta: " + bezeroBerria.getId());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Eguneratzean errorea gertatu da.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("Eguneratzean errorea gertatu da.");
         }
     }
+
     
     @CrossOrigin(origins = "http://localhost:8100")  
-    @PutMapping(value = "/delete", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> deleteFitxa(@RequestBody Bezero_fitxak bezero) {
+    @DeleteMapping(value = "/delete/{id}", produces = "application/json")
+    public ResponseEntity<?> softDeleteFitxa(@PathVariable Integer id) {
         try {
-            Bezero_fitxak bezeroBerria = bezeroService.deleteBezero(bezero);
-            return ResponseEntity.ok("Fitxa ezabatuta: " + bezeroBerria.getId());
+            Bezero_fitxak bezeroBerria = bezeroService.softDeleteBezero(id);
+            return ResponseEntity.status(HttpStatus.OK)
+                                 .body("Fitxa '" + bezeroBerria.getId() + "' ezabatuta (soft delete).");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                 .body("Ez da aurkitu id " + id + " ezabatzea egiteko.");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ezabatzean errorea gertatu da.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("Errorea gertatu da fitxa ezabatzean.");
         }
     }
+
     
     @CrossOrigin(origins = "http://localhost:8100") 
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")

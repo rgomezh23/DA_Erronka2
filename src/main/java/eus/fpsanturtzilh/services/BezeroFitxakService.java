@@ -1,5 +1,6 @@
 package eus.fpsanturtzilh.services;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,4 +77,23 @@ public class BezeroFitxakService {
     public void trueDelete(Integer id) {
     	 bezeroRepository.deleteById(id);
     }
+    
+    public Bezero_fitxak softDeleteBezero(Integer id) {
+        Optional<Bezero_fitxak> bezeroZaharra = bezeroRepository.findById(id);
+        
+        if (bezeroZaharra.isPresent()) {
+            Bezero_fitxak bezeroEzabatuta = bezeroZaharra.get();
+            
+            if (bezeroEzabatuta.getData() != null) {
+                bezeroEzabatuta.getData().setEzabatze_data(new Date(System.currentTimeMillis()));
+            } else {
+                throw new RuntimeException("Data egitura faltan da.");
+            }
+            
+            return bezeroRepository.save(bezeroEzabatuta);
+        } else {
+            throw new RuntimeException("Bezeroaren id ez da aurkitu: " + id);
+        }
+    }
+
 }
