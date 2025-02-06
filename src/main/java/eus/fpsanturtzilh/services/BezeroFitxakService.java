@@ -63,6 +63,16 @@ public class BezeroFitxakService {
         return bezeroRepository.save(bezero);
     }
     
+    public List<Bezero_fitxak> getAllNotDeletedBezeroFitxak() {
+        return bezeroRepository.findAllNotDeleted();
+    }
+
+    public List<Bezero_fitxak> getAllDeletedBezeroFitxak() {
+        return bezeroRepository.findAllDeleted();
+    }
+
+    
+    
     public void trueDelete(Integer id) {
     	 bezeroRepository.deleteById(id);
     }
