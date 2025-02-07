@@ -46,7 +46,7 @@ public class TicketLerroakController {
 
 	@PutMapping("/create")
 	public ResponseEntity<?> insertTicket(@RequestBody Ticket_lerroak ticket) {
-		Ticket_lerroak newTicket = ticketLerroakService.insertTicket(ticket);
+		// Ticket_lerroak newTicket = ticketLerroakService.insertTicket(ticket);
 		return new ResponseEntity<>("Ticket inserted successfully.", HttpStatus.CREATED);
 	}
 

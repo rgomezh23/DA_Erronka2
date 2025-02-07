@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import eus.fpsanturtzilh.models.Materialak;
 import eus.fpsanturtzilh.services.MaterialaService;
 
-import java.util.List;
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/materialak")
 public class MaterialController {
