@@ -76,4 +76,9 @@ public class ZerbitzuakService {
 
 		return false;
 	}
+
+	public Optional<Zerbitzuak> getZerbitzuaById(int id) {
+		return zerbitzuRepository.findById(id);
+	}
+
 }

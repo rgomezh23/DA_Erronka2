@@ -1,6 +1,7 @@
 package eus.fpsanturtzilh.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,18 @@ public class ZerbitzuakController {
 		try {
 			List<Zerbitzuak> zerbitzuak = zerbitzuService.getZerbitzuakWithEzabatzeDataNotNull();
 			return ResponseEntity.ok(zerbitzuak);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+
+	@CrossOrigin(origins = "http://localhost:8100")
+	@GetMapping("/{id}")
+	public ResponseEntity<Zerbitzuak> getZerbitzuaById(@PathVariable int id) {
+		try {
+			Optional<Zerbitzuak> zerbitzua = zerbitzuService.getZerbitzuaById(id);
+			return zerbitzua.map(ResponseEntity::ok)
+					.orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
