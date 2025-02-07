@@ -31,6 +31,9 @@ public class MaterialaService {
 			Materialak existingMaterial = materialZaharra.get();
 			existingMaterial.setIzena(materialak.getIzena());
 			existingMaterial.setEtiketa(materialak.getEtiketa());
+			if(existingMaterial !=null) {
+				existingMaterial.setData(materialak.getData());
+			}
 			return materialakRepository.save(existingMaterial);
 		} else {
 			throw new RuntimeException("Materiala ez da aurkitu: " + materialak.getId());
