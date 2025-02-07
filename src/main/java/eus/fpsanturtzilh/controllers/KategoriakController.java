@@ -27,15 +27,15 @@ public class KategoriakController {
 	private KategoriakService kategoriaService;
 
 	@GetMapping("/kategoriakEzabatuta")
-	public List<Kategoriak> getFitxakEzabatuta() {
-		List<Kategoriak> allBezeroFitxak = kategoriaService.getAllBezeroFitxak();
+	public List<Kategoriak> getKategoriakEzabatuta() {
+		List<Kategoriak> allBezeroFitxak = kategoriaService.getAllKategoriak();
 		return allBezeroFitxak.stream().filter(bezero -> bezero.getData().getEzabatze_data() != null)
 				.collect(Collectors.toList());
 	}
 
 	@GetMapping("/kategoriakGuztiak")
-	public List<Kategoriak> getFitxak() {
-		List<Kategoriak> allBezeroFitxak = kategoriaService.getAllBezeroFitxak();
+	public List<Kategoriak> getKategoriak() {
+		List<Kategoriak> allBezeroFitxak = kategoriaService.getAllKategoriak();
 		return allBezeroFitxak.stream().filter(bezero -> bezero.getData().getEzabatze_data() == null)
 				.collect(Collectors.toList());
 	}

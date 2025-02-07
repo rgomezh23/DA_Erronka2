@@ -14,7 +14,7 @@ public class KategoriakService {
 	@Autowired
 	private KategoriakRepository kategoriaRepository;
 
-	public List<Kategoriak> getAllBezeroFitxak() {
+	public List<Kategoriak> getAllKategoriak() {
 		return kategoriaRepository.findAll();
 	}
 
