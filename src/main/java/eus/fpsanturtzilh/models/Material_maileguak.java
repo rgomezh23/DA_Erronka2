@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Getter
