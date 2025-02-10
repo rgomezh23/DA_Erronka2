@@ -15,10 +15,9 @@ public interface HitzorduakRepository extends JpaRepository<Hitzorduak, Integer>
 	@Query("SELECT h FROM Hitzorduak h WHERE h.dataSimple.ezabatze_data IS NULL")
 	List<Hitzorduak> findActiveAppointments();
 
-    
-    @Query("SELECT h FROM Hitzorduak h WHERE h.dataSimple.ezabatze_data IS NOT NULL")
-    List<Hitzorduak> findDeletedAppointments();
+	@Query("SELECT h FROM Hitzorduak h WHERE h.dataSimple.ezabatze_data IS NOT NULL")
+	List<Hitzorduak> findDeletedAppointments();
 
-    @Query("SELECT h FROM Hitzorduak h WHERE h.data = CAST(:date AS date)")
-    List<Hitzorduak> findBySortzeData(@Param("date") LocalDate date);
+	@Query("SELECT h FROM Hitzorduak h WHERE h.data = CAST(:date AS date)")
+	List<Hitzorduak> findBySortzeData(@Param("date") LocalDate date);
 }

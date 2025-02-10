@@ -34,20 +34,32 @@ public class TicketLerroakController {
 		return new ResponseEntity<>(tickets, HttpStatus.OK);
 	}
 
-	@PostMapping("/update")
-	public ResponseEntity<?> updateTicket(@PathVariable int id) {
-		Ticket_lerroak updatedTicket = ticketLerroakService.updateTicket(id);
+	// TIENE QUE TENER DATA SÍ O SÍ.
+	@PutMapping("/update")
+	public ResponseEntity<?> updateTicket(@RequestBody Ticket_lerroak ticket) {
+		if (ticket.getId() == 0) {
+			return new ResponseEntity<>("Ticket ID is required.", HttpStatus.BAD_REQUEST);
+		}
+		Ticket_lerroak updatedTicket = ticketLerroakService.updateTicket(ticket.getId(), ticket);
 		if (updatedTicket != null) {
-			return new ResponseEntity<>("Ticket updated successfully with the current 'eguneratze_data'.",
-					HttpStatus.OK);
+			return new ResponseEntity<>("Ticket updated successfully.", HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Ticket not found.", HttpStatus.NOT_FOUND);
 	}
 
-	@PutMapping("/create")
-	public ResponseEntity<?> insertTicket(@RequestBody Ticket_lerroak ticket) {
-		// Ticket_lerroak newTicket = ticketLerroakService.insertTicket(ticket);
-		return new ResponseEntity<>("Ticket inserted successfully.", HttpStatus.CREATED);
+	@CrossOrigin(origins = "http://localhost:8100")
+	@PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<?> createTicket(@RequestBody Ticket_lerroak ticket_lerroak) {
+		if (ticket_lerroak == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ticket formatua ez da zuzena.");
+		}
+		try {
+			Ticket_lerroak ticket_lerroak_sortua = ticketLerroakService.insertTicket(ticket_lerroak);
+			return ResponseEntity.status(HttpStatus.CREATED).body(ticket_lerroak_sortua);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error al crear el ticket: " + e.getMessage());
+		}
 	}
 
 	@DeleteMapping("/soft/{id}")
