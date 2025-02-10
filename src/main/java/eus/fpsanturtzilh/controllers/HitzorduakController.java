@@ -26,7 +26,19 @@ public class HitzorduakController {
         }
         return ResponseEntity.ok(hitzorduakList);
     }
-
+    
+    @CrossOrigin(origins = "http://localhost:8100")
+    @GetMapping("/ezabatuak")
+    public ResponseEntity<List<Hitzorduak>> getDeletedHitzorduak() {
+        List<Hitzorduak> deletedAppointments = hitzorduakService.getDeletedHitzorduak();
+        if (deletedAppointments.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.ok(deletedAppointments);
+    }
+    
+    
+    
     @CrossOrigin(origins = "http://localhost:8100")
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> updateHitzorduak(@RequestBody Hitzorduak hitzorduak) {
@@ -76,9 +88,25 @@ public class HitzorduakController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ez da hitzordua aurkitu.");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar la cita.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore bat egon da.");
         }
     }
+    
+    @CrossOrigin(origins = "http://localhost:8100")
+    @DeleteMapping("/hardDelete/{id}")
+    public ResponseEntity<?> deleteHitzorduakPermanently(@PathVariable int id) {
+        try {
+            boolean deleted = hitzorduakService.deleteHitzorduakPermanently(id);
+            if (deleted) {
+                return ResponseEntity.ok("Hitzordua ezabatua izan da betiko.");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Hitzordua ez da aurkitu.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errorea hitzordua ezabatzean.");
+        }
+    }
+
 }
 
 
