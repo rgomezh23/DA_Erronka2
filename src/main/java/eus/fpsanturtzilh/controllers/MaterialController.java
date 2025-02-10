@@ -17,7 +17,7 @@ public class MaterialController {
 
 	@Autowired
 	private MaterialaService materialaService;
-	
+
 	@CrossOrigin(origins = "http://localhost:8100")
 	@GetMapping("/aktiboak")
 	public ResponseEntity<List<Materialak>> getMaterialak() {
@@ -57,7 +57,6 @@ public class MaterialController {
 					.body("Errore bat gertatu da materiala bat eguneratzean.");
 		}
 	}
-
 
 	@CrossOrigin(origins = "http://localhost:8100")
 	@DeleteMapping("/delete/{id}")

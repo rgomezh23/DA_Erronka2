@@ -867,7 +867,7 @@ public class DB {
 
 		Kolore_historialak historiala = new Kolore_historialak();
 		historiala.setBezero(bezero);
-		historiala.setProduktu(produktu);
+		// historiala.setProduktu(produktu);
 		historiala.setData(data);
 		historiala.setKantitatea(kantitatea);
 		historiala.setBolumena(bolumena);
@@ -884,7 +884,7 @@ public class DB {
 		if (optionalHistoriala.isPresent()) {
 			Kolore_historialak updateatzeko = optionalHistoriala.get();
 			updateatzeko.setBezero(historialBerria.getBezero());
-			updateatzeko.setProduktu(historialBerria.getProduktu());
+			// updateatzeko.setProduktu(historialBerria.getProduktu());
 			updateatzeko.setData(historialBerria.getData());
 			updateatzeko.setKantitatea(historialBerria.getKantitatea());
 			updateatzeko.setBolumena(historialBerria.getBolumena());
