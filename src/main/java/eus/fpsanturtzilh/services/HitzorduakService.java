@@ -1,11 +1,15 @@
 package eus.fpsanturtzilh.services;
 
+import java.sql.Date;
 import java.time.LocalDate;
 // import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import eus.fpsanturtzilh.models.Data;
 import eus.fpsanturtzilh.models.Hitzorduak;
 import eus.fpsanturtzilh.repositories.HitzorduakRepository;
 
@@ -16,7 +20,11 @@ public class HitzorduakService {
 	private HitzorduakRepository hitzorduakRepository;
 
 	public List<Hitzorduak> getAllHitzorduak() {
-		return hitzorduakRepository.findAll();
+		return hitzorduakRepository.findActiveAppointments();
+	}
+
+	public List<Hitzorduak> getDeletedHitzorduak() {
+		return hitzorduakRepository.findDeletedAppointments();
 	}
 
 	public Hitzorduak updateHitzorduak(Hitzorduak hitzorduak) throws Exception {
@@ -47,6 +55,21 @@ public class HitzorduakService {
 	}
 
 	public boolean deleteHitzorduak(int id) {
+		Optional<Hitzorduak> optionalHitzorduak = hitzorduakRepository.findById(id);
+
+		if (optionalHitzorduak.isPresent()) {
+			Hitzorduak hitzordua = optionalHitzorduak.get();
+			if (hitzordua.getDataSimple() == null) {
+				hitzordua.setDataSimple(new Data());
+			}
+			hitzordua.getDataSimple().setEzabatze_data(Date.valueOf(LocalDate.now()));
+			hitzorduakRepository.save(hitzordua);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean deleteHitzorduakPermanently(int id) {
 		if (hitzorduakRepository.existsById(id)) {
 			hitzorduakRepository.deleteById(id);
 			return true;
