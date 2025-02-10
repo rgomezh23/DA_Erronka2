@@ -1,6 +1,7 @@
 package eus.fpsanturtzilh.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,19 +21,24 @@ import eus.fpsanturtzilh.services.MaileguService;
 public class MaileguController {
 
 	@Autowired
-	private MaileguService maileguServicce;
+	private MaileguService maileguService;
 
 	@CrossOrigin(origins = "http://localhost:8100")
 	@GetMapping("/maileguGuztiak")
 	public List<Material_maileguak> getMaileguak() {
-		return maileguServicce.getAllMaileguak();
+	    List<Material_maileguak> material_maileguak = maileguService.getAllMaileguak();
+
+	    return material_maileguak.stream()
+	            .filter(mailegua -> mailegua.getData() != null)
+	            .collect(Collectors.toList());
 	}
+
 
 	@CrossOrigin(origins = "http://localhost:8100")
 	@PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Material_maileguak> updateMaileguak(@RequestBody Material_maileguak mailegu) {
 		try {
-			Material_maileguak maileguBerria = maileguServicce.updateMaileguak(mailegu);
+			Material_maileguak maileguBerria = maileguService.updateMaileguak(mailegu);
 			return ResponseEntity.ok(maileguBerria);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

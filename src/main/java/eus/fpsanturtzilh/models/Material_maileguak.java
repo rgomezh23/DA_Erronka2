@@ -37,5 +37,11 @@ public class Material_maileguak {
 
 	private Date hasieraData;
 	private Date amaieraData;
+	
+	 @Transient
+	 private Integer idMateriala; // Campo temporal solo para recibir el ID en el JSON
+
+	  @Transient
+	  private Integer idLangilea;
 
 }
