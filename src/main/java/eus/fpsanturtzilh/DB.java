@@ -632,7 +632,7 @@ public class DB {
 
 		updateatzeko.setHasieraData(materialMailegua.getHasieraData());
 		updateatzeko.setAmaieraData(materialMailegua.getAmaieraData());
-		updateatzeko.setLangilea(materialMailegua.getLangilea());
+		updateatzeko.setIdLangilea(materialMailegua.getIdLangilea());
 		updateatzeko.setMateriala(materialMailegua.getMateriala());
 
 		Date fechaActual = new Date(System.currentTimeMillis());

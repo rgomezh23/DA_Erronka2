@@ -1,63 +1,63 @@
 package eus.fpsanturtzilh.services;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import eus.fpsanturtzilh.models.Material_maileguak;
+import eus.fpsanturtzilh.repositories.MaterialMaileguakRepository;
 import org.springframework.stereotype.Service;
 
-import eus.fpsanturtzilh.models.Langileak;
-import eus.fpsanturtzilh.models.Material_maileguak;
-import eus.fpsanturtzilh.models.Materialak;
-import eus.fpsanturtzilh.repositories.LangileakRepository;
-import eus.fpsanturtzilh.repositories.MaterialMaileguakRepository;
-import eus.fpsanturtzilh.repositories.MaterialakRepository;
+import java.sql.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MaileguService {
 
-	@Autowired
-	private MaterialMaileguakRepository maileguRepository;
-	private LangileakRepository langileRepository;
-	private MaterialakRepository materialRepository;
+    private final MaterialMaileguakRepository materialMaileguakRepository;
 
-	public List<Material_maileguak> getAllMaileguak() {
-		return maileguRepository.findAll();
-	}
+    public MaileguService(MaterialMaileguakRepository materialMaileguakRepository) {
+        this.materialMaileguakRepository = materialMaileguakRepository;
+    }
 
-	public Material_maileguak updateMaileguak(Material_maileguak maileguak) {
-	    Optional<Material_maileguak> maileguZaharra = maileguRepository.findById(maileguak.getId());
+ // Obtener todos los materiales no eliminados
+    public List<Material_maileguak> findAllNotDeleted() {
+        return materialMaileguakRepository.findAllNotDeleted();
+    }
 
-	    if (maileguZaharra.isPresent()) {
-	        Material_maileguak mailegua = maileguZaharra.get();
+    // Obtener todos los materiales eliminados
+    public List<Material_maileguak> findAllDeleted() {
+        return materialMaileguakRepository.findAllDeleted();
+    }
 
-	        if (maileguak.getHasieraData() != null) {
-	            mailegua.setHasieraData(maileguak.getHasieraData());
-	        }
+    public Optional<Material_maileguak> findById(int id) {
+        return materialMaileguakRepository.findById(id);
+    }
 
-	        if (maileguak.getAmaieraData() != null) {
-	            mailegua.setAmaieraData(maileguak.getAmaieraData());
-	        }
+    public Material_maileguak createNewMaterial(Material_maileguak materialMaileguak) {
+        return materialMaileguakRepository.save(materialMaileguak);
+    }
 
-	        if (maileguak.getData() != null) {
-	            mailegua.setData(maileguak.getData());
-	        }
+    public Material_maileguak updateMaterial(Material_maileguak materialMaileguak) {
+        return materialMaileguakRepository.findById(materialMaileguak.getId()).map(existingMaterial -> {
+            existingMaterial.setIdLangilea(materialMaileguak.getIdLangilea());
+            existingMaterial.setMateriala_id(materialMaileguak.getMateriala_id());
+            existingMaterial.setHasieraData(materialMaileguak.getHasieraData());
+            existingMaterial.setAmaieraData(materialMaileguak.getAmaieraData());
+            existingMaterial.setData(materialMaileguak.getData());
+            return materialMaileguakRepository.save(existingMaterial);
+        }).orElseThrow(() -> new RuntimeException("Materiala ez dago. ID: " + materialMaileguak.getId()));
+    }
 
-	        // Actualizar el material si se proporciona un ID
-	        if (maileguak.getIdMateriala() != null) {
-	            Optional<Materialak> materialOpt = materialRepository.findById(maileguak.getIdMateriala());
-	            materialOpt.ifPresent(mailegua::setMateriala);
-	        }
+    public Material_maileguak softDeleteMaterial(int id) {
+        Optional<Material_maileguak> materialOptional = materialMaileguakRepository.findById(id);
+        if (materialOptional.isPresent()) {
+            Material_maileguak material = materialOptional.get();
+            material.getData().setEzabatze_data(new Date(System.currentTimeMillis()));
+            return materialMaileguakRepository.save(material);
+        } else {
+            throw new RuntimeException("Materiala ez da aurkitu: " + id);
+        }
+    }
 
-	        // Actualizar el langilea si se proporciona un ID
-	        if (maileguak.getIdLangilea() != null) {
-	            Optional<Langileak> langileaOpt = langileRepository.findById(maileguak.getIdLangilea());
-	            langileaOpt.ifPresent(mailegua::setLangilea);
-	        }
-
-	        return maileguRepository.save(mailegua);
-	    } else {
-	        throw new RuntimeException("Mailegua ez da aurkitu: " + maileguak.getId());
-	    }
-	}
+    public void hardDeleteMaterial(int id) {
+        materialMaileguakRepository.deleteById(id);
+    }
 }

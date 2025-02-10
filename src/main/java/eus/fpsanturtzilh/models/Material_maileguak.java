@@ -22,26 +22,27 @@ public class Material_maileguak {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne
-	@JsonManagedReference
-	@JoinColumn(name = "id_materiala", nullable = false)
-	private Materialak materiala;
+	@Column(name = "id_materiala")
+	private int materiala_id;
 
-	@ManyToOne
-	@JsonManagedReference
-	@JoinColumn(name = "id_langilea", nullable = false)
-	private Langileak langilea;
 
 	@Embedded
 	private Data data;
 
 	private Date hasieraData;
 	private Date amaieraData;
-	
-	 @Transient
-	 private Integer idMateriala; 
 
-	  @Transient
-	  private Integer idLangilea;
+	@Column(name = "id_langilea")
+	 private Integer idLangilea;
+	 
+	 // @Transient // Borrar si rompe.
+	 // private Integer idMateriala;
+	
+	/**
+	 	@ManyToOne
+	@JsonManagedReference
+	@JoinColumn(name = "id_materiala", nullable = false)
+	private Materialak materiala;
+	 */
 
 }

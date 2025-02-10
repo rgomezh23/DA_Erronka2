@@ -1,47 +1,98 @@
 package eus.fpsanturtzilh.controllers;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import eus.fpsanturtzilh.models.Material_maileguak;
 import eus.fpsanturtzilh.services.MaileguService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/maileguak")
+@RequestMapping("/api/mailegu")
 public class MaileguController {
 
-	@Autowired
-	private MaileguService maileguService;
+    private final MaileguService maileguService;
 
-	@CrossOrigin(origins = "http://localhost:8100")
-	@GetMapping("/maileguGuztiak")
-	public List<Material_maileguak> getMaileguak() {
-	    List<Material_maileguak> material_maileguak = maileguService.getAllMaileguak();
+    public MaileguController(MaileguService maileguService) {
+        this.maileguService = maileguService;
+    }
 
-	    return material_maileguak.stream()
-	            .filter(mailegua -> mailegua.getData() != null)
-	            .collect(Collectors.toList());
-	}
+    @GetMapping("/maileguGuztiak")
+    public ResponseEntity<List<Material_maileguak>> getMaterialAktiboak() {
+        List<Material_maileguak> materials = maileguService.findAllNotDeleted();
+        return ResponseEntity.ok(materials);
+    }
+
+    @GetMapping("/ezabatuta")
+    public ResponseEntity<List<Material_maileguak>> getMaterialEzabatuta() {
+        List<Material_maileguak> materials = maileguService.findAllDeleted();
+        return ResponseEntity.ok(materials);
+    }
+
+    // Obtener objeto por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getMaterialById(@PathVariable int id) {
+        Optional<Material_maileguak> materialOptional = maileguService.findById(id);
+
+        if (materialOptional.isPresent()) {
+            return ResponseEntity.ok(materialOptional.get()); // Material encontrado
+        } else {
+            // Respuesta con código 404 y mensaje adecuado
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Materiala ez dago ID-rekin: " + id);
+        }
+    }
 
 
-	@CrossOrigin(origins = "http://localhost:8100")
-	@PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Material_maileguak> updateMaileguak(@RequestBody Material_maileguak mailegu) {
-		try {
-			Material_maileguak maileguBerria = maileguService.updateMaileguak(mailegu);
-			return ResponseEntity.ok(maileguBerria);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-		}
-	}
+    // Insertar nuevo objeto
+	@PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> createMaterial(@RequestBody Material_maileguak materialMaileguak) {
+        try {
+            Material_maileguak savedMaterial = maileguService.createNewMaterial(materialMaileguak);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedMaterial);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Errorea: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzariaren errorea.");
+        }
+    }
+
+    // Actualizar objeto
+    @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> updateMaterial(@RequestBody Material_maileguak materialMaileguak) {
+        try {
+            Material_maileguak updatedMaterial = maileguService.updateMaterial(materialMaileguak);
+            return ResponseEntity.ok(updatedMaterial);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Materiala ez dago ID-rekin: " + materialMaileguak.getId());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errorea eguneratzerakoan.");
+        }
+    }
+
+    // Soft delete: Marcar como eliminado
+    @DeleteMapping("/soft-delete/{id}")
+    public ResponseEntity<?> softDeleteMaterial(@PathVariable int id) {
+        try {
+            Material_maileguak material = maileguService.softDeleteMaterial(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Materiala ezabatuta: " + material.getId());
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Materiala ez da aurkitu: " + id);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errorea ezabatzerakoan.");
+        }
+    }
+
+    // Hard delete: Eliminar permanentemente
+    @DeleteMapping("/hard-delete/{id}")
+    public ResponseEntity<?> hardDeleteMaterial(@PathVariable int id) {
+        try {
+            maileguService.hardDeleteMaterial(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Materiala guztiz ezabatuta: " + id);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errorea ezabatzerakoan.");
+        }
+    }
 }
