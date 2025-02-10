@@ -1,6 +1,5 @@
 package eus.fpsanturtzilh.controllers;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import eus.fpsanturtzilh.models.Materialak;
-import eus.fpsanturtzilh.models.Produktuak;
 import eus.fpsanturtzilh.services.MaterialaService;
 
 @RestController

@@ -53,10 +53,10 @@ public class ZerbitzuakController {
 	}
 
 	@CrossOrigin(origins = "http://localhost:8100")
-	@PostMapping(value = "/update", consumes = "application/json", produces = "application/json")
+	@PostMapping(value = "/insert", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Zerbitzuak> updateZerbitzuak(@RequestBody Zerbitzuak zerbitzua) {
 		try {
-			Zerbitzuak updatedZerbitzu = zerbitzuService.updateZerbitzuak(zerbitzua);
+			Zerbitzuak updatedZerbitzu = zerbitzuService.insertZerbitzuak(zerbitzua);
 			return ResponseEntity.ok(updatedZerbitzu);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -64,10 +64,10 @@ public class ZerbitzuakController {
 	}
 
 	@CrossOrigin(origins = "http://localhost:8100")
-	@PutMapping(value = "/insert", consumes = "application/json", produces = "application/json")
+	@PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Zerbitzuak> insertZerbitzuak(@RequestBody Zerbitzuak zerbitzua) {
 		try {
-			Zerbitzuak newZerbitzu = zerbitzuService.insertZerbitzuak(zerbitzua);
+			Zerbitzuak newZerbitzu = zerbitzuService.updateZerbitzuak(zerbitzua);
 			return ResponseEntity.ok(newZerbitzu);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
