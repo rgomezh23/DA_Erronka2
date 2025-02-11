@@ -931,7 +931,7 @@ public class DB {
 
 			Produktu_Mugimenduak mugimendua = new Produktu_Mugimenduak();
 			mugimendua.setProduktuak(produktua);
-			mugimendua.setLangilea(langilea);
+			mugimendua.setLangilea(0);
 			mugimendua.setKantitatea(kopurua);
 			mugimendua.setData_Zutabea(data);
 

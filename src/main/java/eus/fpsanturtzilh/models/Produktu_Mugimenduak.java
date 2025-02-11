@@ -21,10 +21,8 @@ public class Produktu_Mugimenduak {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne
-	@JsonManagedReference(value = "Produktu_Mugimenduak-produktu")
-	@JoinColumn(name = "id_produktua", nullable = false)
-	private Produktuak produktuak;
+	@Column(name = "id_produktua", nullable = false)
+	private int produktuak;
 
 	@Column(name = "kopurua")
 	private double kantitatea;
@@ -32,9 +30,8 @@ public class Produktu_Mugimenduak {
 	@Embedded
 	private Data data;
 
-	@ManyToOne
-	@JoinColumn(name = "id_langilea", nullable = false)
-	private Langileak langilea;
+	@Column(name = "id_langilea", nullable = false)
+	private int langilea;
 
 	@Column(name = "data", nullable = false)
 	private Date data_Zutabea;
