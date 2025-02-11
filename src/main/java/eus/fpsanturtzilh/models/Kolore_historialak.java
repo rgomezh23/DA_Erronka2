@@ -23,11 +23,10 @@ public class Kolore_historialak {
 	private int id;
 
 	@Column(name = "id_bezeroa", nullable = false)
-	private int bezero; // El ID, no el objeto como tal.
+	private int bezero;
 
 	@Column(name = "id_produktua", nullable = false)
-	private int produktu_id; // El ID, no el objeto como tal.
-
+	private int produktu_id;
 	private Date data;
 	private int kantitatea;
 	private String bolumena;
