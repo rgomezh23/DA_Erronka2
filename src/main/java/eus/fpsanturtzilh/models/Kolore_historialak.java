@@ -18,23 +18,21 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "kolore_historialak")
 public class Kolore_historialak {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_bezeroa", nullable = false)
-    @JsonBackReference
-    private Bezero_fitxak bezero;
+	@Column(name = "id_bezeroa", nullable = false)
+	private int bezero; // El ID, no el objeto como tal.
 
-    @Column(name = "id_produktua", nullable = false)
-    private int produktu_id;  // El ID, no el objeto como tal.
+	@Column(name = "id_produktua", nullable = false)
+	private int produktu_id; // El ID, no el objeto como tal.
 
-    private Date data;
-    private int kantitatea;
-    private String bolumena;
-    private String oharrak;
+	private Date data;
+	private int kantitatea;
+	private String bolumena;
+	private String oharrak;
 
-    @Embedded
-    private Data dataSimple;
+	@Embedded
+	private Data dataSimple;
 }
