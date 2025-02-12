@@ -95,3 +95,49 @@ INSERT INTO zerbitzuak (izena, etxeko_prezioa, kanpoko_prezioa, sortze_data, egu
 ('Alisado de cabello', 50.00, 80.00, NOW(), NOW(), NULL),
 ('Extensiones de cabello', 100.00, 150.00, NOW(), NOW(), NULL);
 
+INSERT INTO ordutegiak (
+    kodea,
+    eguna,
+    hasiera_data,
+    amaiera_data,
+    hasiera_ordua,
+    amaiera_ordua,
+    sortze_data,
+    eguneratze_data,
+    ezabatze_data
+) 
+VALUES (
+    '1',                -- kodea
+    1,                      -- eguna (ahora debe estar entre 1 y 5, por ejemplo 1 para lunes)
+    '2024-02-12',           -- hasiera_data (Formato YYYY-MM-DD)
+    '2024-02-14',           -- amaiera_data (Formato YYYY-MM-DD)
+    '08:00:00',             -- hasiera_ordua (Formato HH:MM:SS)
+    '17:00:00',             -- amaiera_ordua (Formato HH:MM:SS)
+    NOW(),                  -- sortze_data (Fecha y hora actual)
+    NOW(),                  -- eguneratze_data (Fecha y hora actual)
+    NULL                    -- ezabatze_data (NULL si no se ha eliminado)
+);
+
+INSERT INTO ordutegiak (
+    kodea,
+    eguna,
+    hasiera_data,
+    amaiera_data,
+    hasiera_ordua,
+    amaiera_ordua,
+    sortze_data,
+    eguneratze_data,
+    ezabatze_data
+) 
+VALUES (
+    '1',                -- kodea
+    3,                      -- eguna (ahora debe estar entre 1 y 5, por ejemplo 1 para lunes)
+    '2025-02-12',           -- hasiera_data (Formato YYYY-MM-DD)
+    '2024-02-14',           -- amaiera_data (Formato YYYY-MM-DD)
+    '08:00:00',             -- hasiera_ordua (Formato HH:MM:SS)
+    '17:00:00',             -- amaiera_ordua (Formato HH:MM:SS)
+    NOW(),                  -- sortze_data (Fecha y hora actual)
+    NOW(),                  -- eguneratze_data (Fecha y hora actual)
+    NULL                    -- ezabatze_data (NULL si no se ha eliminado)
+);
+
