@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface KoloreHistorialakRepository extends JpaRepository<Kolore_historialak, Integer> {
 
-    @Query("SELECT k FROM Kolore_historialak k WHERE k.dataSimple.ezabatze_data IS NULL")
-    List<Kolore_historialak> findAllNotDeleted();
+	@Query("SELECT k FROM Kolore_historialak k WHERE k.dataSimple.ezabatze_data IS NULL")
+	List<Kolore_historialak> findAllNotDeleted();
 
-    @Query("SELECT k FROM Kolore_historialak k WHERE k.dataSimple.ezabatze_data IS NOT NULL")
-    List<Kolore_historialak> findAllDeleted();
+	@Query("SELECT k FROM Kolore_historialak k WHERE k.dataSimple.ezabatze_data IS NOT NULL")
+	List<Kolore_historialak> findAllDeleted();
 }

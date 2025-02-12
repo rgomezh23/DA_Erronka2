@@ -1,19 +1,18 @@
 package eus.fpsanturtzilh.repositories;
 
 import eus.fpsanturtzilh.models.Material_maileguak;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MaterialMaileguakRepository extends JpaRepository<Material_maileguak, Integer> {
 
-	@EntityGraph(attributePaths = { "materiala", "langilea" })
-	List<Material_maileguak> findAll();
+    @Query("SELECT m FROM Material_maileguak m WHERE m.data.ezabatze_data IS NULL")
+    List<Material_maileguak> findAllNotDeleted();  // Materiales no eliminados
 
-	Optional<Material_maileguak> findById(Long id);
+    @Query("SELECT m FROM Material_maileguak m WHERE m.data.ezabatze_data IS NOT NULL")
+    List<Material_maileguak> findAllDeleted();  // Materiales eliminados
 }
