@@ -47,7 +47,7 @@ public class HitzorduakController {
 			Hitzorduak updatedHitzorduak = hitzorduakService.updateHitzorduak(hitzorduak);
 			return ResponseEntity.ok(updatedHitzorduak);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzariaren errorea.");
 		}
 	}
 
@@ -59,7 +59,7 @@ public class HitzorduakController {
 		}
 		try {
 			Hitzorduak createdHitzorduak = hitzorduakService.saveHitzorduak(hitzorduak);
-			return ResponseEntity.status(HttpStatus.CREATED).body(createdHitzorduak);
+			return ResponseEntity.status(HttpStatus.CREATED).body("Sortu da.");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
 		}

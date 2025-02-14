@@ -58,22 +58,23 @@ public class KategoriakController {
 			Kategoriak kategoriaBerria = kategoriaService.createNewKategoria(bezero);
 			return ResponseEntity.ok(kategoriaBerria);
 		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Formatu txarra.");
 		} catch (RuntimeException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzari errorea.");
 		}
 	}
 
 	@CrossOrigin(origins = "http://localhost:8100")
 	@DeleteMapping(value = "trueDelete/{id}")
 	public ResponseEntity<?> trueDeleteKategoria(@PathVariable Integer id) {
+		
 		try {
 			kategoriaService.trueDelete(id);
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Ez da existitzen.");
 		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Formatu txarra.");
 		} catch (RuntimeException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzari errorea.");
 		}
 	}
 }

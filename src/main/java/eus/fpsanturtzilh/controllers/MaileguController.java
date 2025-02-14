@@ -31,22 +31,18 @@ public class MaileguController {
         return ResponseEntity.ok(materials);
     }
 
-    // Obtener objeto por ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getMaterialById(@PathVariable int id) {
         Optional<Material_maileguak> materialOptional = maileguService.findById(id);
 
         if (materialOptional.isPresent()) {
-            return ResponseEntity.ok(materialOptional.get()); // Material encontrado
+            return ResponseEntity.ok(materialOptional.get());
         } else {
-            // Respuesta con código 404 y mensaje adecuado
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Materiala ez dago ID-rekin: " + id);
         }
     }
 
-
-    // Insertar nuevo objeto
 	@PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> createMaterial(@RequestBody Material_maileguak materialMaileguak) {
         try {
@@ -59,7 +55,6 @@ public class MaileguController {
         }
     }
 
-    // Actualizar objeto
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> updateMaterial(@RequestBody Material_maileguak materialMaileguak) {
         try {
@@ -72,7 +67,6 @@ public class MaileguController {
         }
     }
 
-    // Soft delete: Marcar como eliminado
     @DeleteMapping("/soft-delete/{id}")
     public ResponseEntity<?> softDeleteMaterial(@PathVariable int id) {
         try {
@@ -85,7 +79,6 @@ public class MaileguController {
         }
     }
 
-    // Hard delete: Eliminar permanentemente
     @DeleteMapping("/hard-delete/{id}")
     public ResponseEntity<?> hardDeleteMaterial(@PathVariable int id) {
         try {

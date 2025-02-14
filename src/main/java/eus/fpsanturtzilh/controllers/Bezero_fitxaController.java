@@ -38,8 +38,7 @@ public class Bezero_fitxaController {
 	public ResponseEntity<?> getFitxak() {
 		List<Bezero_fitxak> fitxak = bezeroService.getAllNotDeletedBezeroFitxak();
 		if (fitxak.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("Ez dago fitxarik (ez dago fitxarik ez ezabatuta).");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ez dago fitxarik (ez dago fitxarik ez ezabatuta).");
 		} else {
 			return ResponseEntity.status(HttpStatus.OK).body(fitxak);
 		}
@@ -77,22 +76,22 @@ public class Bezero_fitxaController {
 			Bezero_fitxak bezeroBerria = bezeroService.createNewBezero(bezero);
 			return ResponseEntity.status(HttpStatus.CREATED).body("Fitxa sortuta: " + bezeroBerria.getId());
 		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Formatu txarra.");
 		} catch (RuntimeException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzuaren errorea.");
 		}
 	}
 
 	@CrossOrigin(origins = "http://localhost:8100")
 	@DeleteMapping(value = "trueDelete/{id}")
-	public ResponseEntity<Void> trueDeleteFitxa(@PathVariable Integer id) {
+	public ResponseEntity<?> trueDeleteFitxa(@PathVariable Integer id) {
 		try {
 			bezeroService.trueDelete(id);
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Ez da fitxa aurkitu.");
 		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Formatu txarra.");
 		} catch (RuntimeException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzuaren errorea.");
 		}
 	}
 }

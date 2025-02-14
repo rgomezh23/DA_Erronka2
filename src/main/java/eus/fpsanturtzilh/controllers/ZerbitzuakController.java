@@ -42,35 +42,35 @@ public class ZerbitzuakController {
 
 	@CrossOrigin(origins = "http://localhost:8100")
 	@GetMapping("/{id}")
-	public ResponseEntity<Zerbitzuak> getZerbitzuaById(@PathVariable int id) {
+	public ResponseEntity<?> getZerbitzuaById(@PathVariable int id) {
 		try {
 			Optional<Zerbitzuak> zerbitzua = zerbitzuService.getZerbitzuaById(id);
 			return zerbitzua.map(ResponseEntity::ok)
 					.orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzari errorea.");
 		}
 	}
 
 	@CrossOrigin(origins = "http://localhost:8100")
 	@PostMapping(value = "/insert", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Zerbitzuak> updateZerbitzuak(@RequestBody Zerbitzuak zerbitzua) {
+	public ResponseEntity<?> updateZerbitzuak(@RequestBody Zerbitzuak zerbitzua) {
 		try {
 			Zerbitzuak updatedZerbitzu = zerbitzuService.insertZerbitzuak(zerbitzua);
 			return ResponseEntity.ok(updatedZerbitzu);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ezin izan da zerbitzua txertatu.");
 		}
 	}
 
 	@CrossOrigin(origins = "http://localhost:8100")
 	@PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Zerbitzuak> insertZerbitzuak(@RequestBody Zerbitzuak zerbitzua) {
+	public ResponseEntity<?> insertZerbitzuak(@RequestBody Zerbitzuak zerbitzua) {
 		try {
 			Zerbitzuak newZerbitzu = zerbitzuService.updateZerbitzuak(zerbitzua);
 			return ResponseEntity.ok(newZerbitzu);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errorea eguneratzerakoan.");
 		}
 	}
 
