@@ -86,4 +86,18 @@ public class TaldeController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzariaren errorea.");
 		}
 	}
+	
+	@CrossOrigin(origins = "http://localhost:8100")
+	@DeleteMapping("/hard-delete/{kodea}")
+	public ResponseEntity<?> hardDeleteTalde(@PathVariable("kodea") String kodea) {
+	    try {
+	        taldeservice.hardDeleteTaldeaByKodea(kodea);
+	        return ResponseEntity.ok("Taldea ezabatua izan da.");
+	    } catch (RuntimeException e) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzariaren errorea.");
+	    }
+	}
+
 }

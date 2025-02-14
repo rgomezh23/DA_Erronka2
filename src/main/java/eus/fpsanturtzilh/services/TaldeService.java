@@ -69,4 +69,14 @@ public class TaldeService {
 	public Taldeak createNewTalde(Taldeak taldea) {
 		return taldeakRepository.save(taldea);
 	}
+	
+	@Transactional
+	public void hardDeleteTaldeaByKodea(String kodea) {
+	    if (taldeakRepository.existsById(kodea)) {
+	        taldeakRepository.deleteById(kodea);
+	    } else {
+	        throw new RuntimeException("Taldea ez da aurkitu kode honekin: " + kodea);
+	    }
+	}
+
 }
