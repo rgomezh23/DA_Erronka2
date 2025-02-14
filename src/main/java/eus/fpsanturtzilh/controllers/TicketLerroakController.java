@@ -20,7 +20,7 @@ public class TicketLerroakController {
 	public ResponseEntity<?> getTicketsWithEzabatzeDataNotNull() {
 		List<Ticket_lerroak> tickets = ticketLerroakService.getTicketsWithEzabatzeDataNotNull();
 		if (tickets.isEmpty()) {
-			return new ResponseEntity<>("No tickets found with non-null 'ezabatze_data'.", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Ez daude ticket-ik.", HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(tickets, HttpStatus.OK);
 	}
@@ -29,7 +29,7 @@ public class TicketLerroakController {
 	public ResponseEntity<?> getTicketsWithEzabatzeDataNull() {
 		List<Ticket_lerroak> tickets = ticketLerroakService.getTicketsWithEzabatzeDataNull();
 		if (tickets.isEmpty()) {
-			return new ResponseEntity<>("No tickets found with null 'ezabatze_data'.", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Ez dago ezer ezabatuta.", HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(tickets, HttpStatus.OK);
 	}
@@ -42,9 +42,9 @@ public class TicketLerroakController {
 		}
 		Ticket_lerroak updatedTicket = ticketLerroakService.updateTicket(ticket.getId(), ticket);
 		if (updatedTicket != null) {
-			return new ResponseEntity<>("Ticket updated successfully.", HttpStatus.OK);
+			return new ResponseEntity<>("Eguneratuta.", HttpStatus.OK);
 		}
-		return new ResponseEntity<>("Ticket not found.", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("Ez da aurkitu.", HttpStatus.NOT_FOUND);
 	}
 
 	@CrossOrigin(origins = "http://localhost:8100")
@@ -58,7 +58,7 @@ public class TicketLerroakController {
 			return ResponseEntity.status(HttpStatus.CREATED).body(ticket_lerroak_sortua);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("Error al crear el ticket: " + e.getMessage());
+					.body("Errorea ticketa sortzerakoan: " + e.getMessage());
 		}
 	}
 
@@ -66,17 +66,17 @@ public class TicketLerroakController {
 	public ResponseEntity<?> softDeleteTicket(@PathVariable int id) {
 		boolean isDeleted = ticketLerroakService.softDeleteTicket(id);
 		if (isDeleted) {
-			return new ResponseEntity<>("Ticket soft deleted successfully. 'ezabatze_data' updated.", HttpStatus.OK);
+			return new ResponseEntity<>("Ticket soft deleteatuta.", HttpStatus.OK);
 		}
-		return new ResponseEntity<>("Ticket not found.", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("Ticketa ez da aurkitu.", HttpStatus.NOT_FOUND);
 	}
 
 	@DeleteMapping("/hard/{id}")
 	public ResponseEntity<?> hardDeleteTicket(@PathVariable int id) {
 		boolean isDeleted = ticketLerroakService.hardDeleteTicket(id);
 		if (isDeleted) {
-			return new ResponseEntity<>("Ticket hard deleted successfully.", HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>("Ticket hard deleteatuta.", HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<>("Ticket not found.", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("Ticketa ez da aurkitu.", HttpStatus.NOT_FOUND);
 	}
 }
