@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "produktu_mugimenduak")

@@ -141,3 +141,25 @@ VALUES (
     NULL                    -- ezabatze_data (NULL si no se ha eliminado)
 );
 
+INSERT INTO kolore_historialak (
+    id_bezeroa, id_produktua, data, kantitatea, bolumena, oharrak, sortze_data, eguneratze_data, ezabatze_data
+) 
+VALUES (
+    1,               -- id_bezeroa: ID del cliente
+    1,             -- id_produktua: ID del producto
+    now(), -- data: Fecha
+    5,               -- kantitatea: Cantidad del producto (opcional)
+    '500ml',         -- bolumena: Volumen del producto (opcional)
+    'Historial creado con éxito',  -- oharrak: Comentarios adicionales (opcional)
+    CURRENT_TIMESTAMP, -- sortze_data: Fecha y hora actual
+    CURRENT_TIMESTAMP, -- eguneratze_data: Fecha y hora actual
+    NULL              -- ezabatze_data: NULL ya que no está eliminado
+);
+
+INSERT INTO txandak (mota, data, id_langilea) VALUES
+('g', '2025-02-14', 1),
+('m', '2025-02-15', 2),
+('g', '2025-02-16', 3),
+('m', '2025-02-17', 4),
+('g', '2025-02-18', 9);
+
