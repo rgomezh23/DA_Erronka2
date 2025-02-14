@@ -23,3 +23,8 @@ public class DaErronka2Application implements WebMvcConfigurer {
 				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedHeaders("*").allowCredentials(true);
 	}
 }
+
+/**
+Proiektua abiarazi eta jarraian nabigatzailean hau idatzi:
+http://localhost:8080/swagger-ui/index.html#/
+*/
