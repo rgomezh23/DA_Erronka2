@@ -40,7 +40,7 @@ public class OrdutegiakController {
 		if (ordutegiak.isPresent()) {
 			return ResponseEntity.ok(ordutegiak.get());
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ordutegiak not found");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ordutegia ez da aurkitu.");
 		}
 	}
 
@@ -50,9 +50,9 @@ public class OrdutegiakController {
 			Ordutegiak createdOrdutegiak = ordutegiakService.createNewOrdutegiak(ordutegiak);
 			return ResponseEntity.status(HttpStatus.CREATED).body(createdOrdutegiak);
 		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Formato incorrecto");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Formatu txarra.");
 		} catch (RuntimeException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en el servidor");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzariaren errorea.");
 		}
 	}
 
@@ -62,7 +62,7 @@ public class OrdutegiakController {
 			Ordutegiak updatedOrdutegiak = ordutegiakService.updateOrdutegiak(ordutegiak);
 			return ResponseEntity.ok(updatedOrdutegiak);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errorea eguneratzerakoan.");
 		}
 	}
 
@@ -70,9 +70,9 @@ public class OrdutegiakController {
 	public ResponseEntity<?> softDeleteOrdutegiak(@PathVariable int id) {
 		try {
 			Ordutegiak deletedOrdutegiak = ordutegiakService.softDelete(id);
-			return ResponseEntity.status(HttpStatus.OK).body("Ordutegiak soft deleted: " + deletedOrdutegiak.getId());
+			return ResponseEntity.status(HttpStatus.OK).body("Ordutegiak soft delete: " + deletedOrdutegiak.getId());
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar: " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ezabatzerako errorea: " + e.getMessage());
 		}
 	}
 
@@ -80,9 +80,9 @@ public class OrdutegiakController {
 	public ResponseEntity<?> hardDeleteOrdutegiak(@PathVariable int id) {
 		try {
 			ordutegiakService.hardDelete(id);
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Ordutegiak eliminado permanentemente");
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Ordutegiaa hard delete.");
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar permanentemente");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ezin izan da hard delete.");
 		}
 	}
 }
