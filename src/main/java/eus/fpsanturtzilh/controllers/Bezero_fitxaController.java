@@ -47,13 +47,15 @@ public class Bezero_fitxaController {
 	@CrossOrigin(origins = "http://localhost:8100")
 	@PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> updateFitxa(@RequestBody Bezero_fitxak bezero) {
-		try {
-			Bezero_fitxak bezeroBerria = bezeroService.updateBezero(bezero);
-			return ResponseEntity.status(HttpStatus.OK).body("Fitxa eguneratuta: " + bezeroBerria.getId());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Eguneratzean errorea gertatu da.");
-		}
+	    try {
+	        Bezero_fitxak bezeroBerria = bezeroService.updateBezero(bezero);
+	        return ResponseEntity.status(HttpStatus.OK).body("Fitxa eguneratuta: " + bezeroBerria.getId());
+	    } catch (Exception e) {
+	        e.printStackTrace(); // Añadir esto para imprimir la traza del error
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Eguneratzean errorea gertatu da. " + e.getMessage());
+	    }
 	}
+
 
 	@CrossOrigin(origins = "http://localhost:8100")
 	@DeleteMapping(value = "/delete/{id}", produces = "application/json")
