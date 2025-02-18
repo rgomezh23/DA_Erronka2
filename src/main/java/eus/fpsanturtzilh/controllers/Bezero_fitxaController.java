@@ -1,6 +1,9 @@
 package eus.fpsanturtzilh.controllers;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,15 +77,24 @@ public class Bezero_fitxaController {
 	@CrossOrigin(origins = "http://localhost:8100")
 	@PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> createFitxa(@RequestBody Bezero_fitxak bezero) {
-		try {
-			Bezero_fitxak bezeroBerria = bezeroService.createNewBezero(bezero);
-			return ResponseEntity.status(HttpStatus.CREATED).body("Fitxa sortuta: " + bezeroBerria.getId());
-		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Formatu txarra.");
-		} catch (RuntimeException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Zerbitzuaren errorea.");
-		}
+	    try {
+	        Bezero_fitxak bezeroBerria = bezeroService.createNewBezero(bezero);
+
+	        // Crear un mapa con la respuesta en formato JSON
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("message", "Fitxa sortuta");
+	        response.put("id", bezeroBerria.getId());
+
+	        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+	    } catch (IllegalArgumentException e) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                .body(Collections.singletonMap("error", "Formatu txarra."));
+	    } catch (RuntimeException e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body(Collections.singletonMap("error", "Zerbitzuaren errorea."));
+	    }
 	}
+
 
 	@CrossOrigin(origins = "http://localhost:8100")
 	@DeleteMapping(value = "trueDelete/{id}")
