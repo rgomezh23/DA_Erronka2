@@ -16,7 +16,7 @@ public class HitzorduakService {
 	private HitzorduakRepository hitzorduakRepository;
 
 	public List<Hitzorduak> getAllHitzorduak() {
-		return hitzorduakRepository.findAllNotDeleted();
+		return hitzorduakRepository.findActiveAppointments();
 	}
 
 	public Hitzorduak updateHitzorduak(Hitzorduak hitzorduak) throws Exception {
