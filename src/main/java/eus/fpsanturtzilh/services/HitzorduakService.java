@@ -17,7 +17,7 @@ public class HitzorduakService {
 	private HitzorduakRepository hitzorduakRepository;
 
 	public List<Hitzorduak> getAllHitzorduak() {
-		return hitzorduakRepository.findAll();
+		return hitzorduakRepository.findAllNotDeleted();
 	}
 
 	public Hitzorduak updateHitzorduak(Hitzorduak hitzorduak) throws Exception {

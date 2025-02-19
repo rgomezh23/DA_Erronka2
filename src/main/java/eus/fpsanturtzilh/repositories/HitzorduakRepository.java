@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import eus.fpsanturtzilh.models.Hitzorduak;
+import eus.fpsanturtzilh.models.Langileak;
 
 @Repository
 public interface HitzorduakRepository extends JpaRepository<Hitzorduak, Integer> {
@@ -20,11 +21,14 @@ public interface HitzorduakRepository extends JpaRepository<Hitzorduak, Integer>
 	@Query("SELECT h FROM Hitzorduak h WHERE h.data = CAST(:date AS date)")
 	List<Hitzorduak> findBySortzeData(@Param("date") LocalDate date);
 
-
 	List<Hitzorduak> findByIzenaContainingIgnoreCase(String izena);
 
 	List<Hitzorduak> findByEtxekoa(char etxekoa);
 
 	@Query("SELECT h FROM Hitzorduak h WHERE h.dataSimple.sortze_data BETWEEN :startDate AND :endDate")
 	List<Hitzorduak> findBySortzeDataBetween(LocalDate startDate, LocalDate endDate);
+	
+    @Query("SELECT l FROM Hitzoruak l WHERE l.data.ezabatze_data IS NULL")
+    List<Hitzorduak> findAllNotDeleted();
+
 }
