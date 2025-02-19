@@ -16,24 +16,23 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "langileak")
 public class Langileak {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    private String izena;
+	private String izena;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference // Evita bucles infinitos en la serialización JSON
-    @JoinColumn(name = "kodea", referencedColumnName = "kodea", nullable = false)
-    private Taldeak taldeak; // Relación ManyToOne con Taldeak
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference
+	@JoinColumn(name = "kodea", referencedColumnName = "kodea", nullable = false)
+	private Taldeak taldeak;
 
-    // Campo explícito para almacenar "kodea" y serializarlo en el JSON
-    @Column(name = "kodea", nullable = false, insertable = false, updatable = false)
-    @JsonProperty("kodea")
-    private String kode;
+	@Column(name = "kodea", nullable = false, insertable = false, updatable = false)
+	@JsonProperty("kodea")
+	private String kode;
 
-    private String abizenak;
+	private String abizenak;
 
-    @Embedded
-    private Data data;
+	@Embedded
+	private Data data;
 }

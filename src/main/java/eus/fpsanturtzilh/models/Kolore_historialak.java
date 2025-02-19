@@ -1,6 +1,5 @@
 package eus.fpsanturtzilh.models;
 
-import jakarta.persistence.Id;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
+
 
 @Entity
 @Getter
@@ -21,13 +21,11 @@ public class Kolore_historialak {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne
-	@JoinColumn(name = "id_bezeroa", nullable = false)
-	private Bezero_fitxak bezero;
+	@Column(name = "id_bezeroa", nullable = false)
+	private int bezero;
 
-	@ManyToOne
-	@JoinColumn(name = "id_produktua", nullable = false)
-	private Produktuak produktu;
+	@Column(name = "id_produktua", nullable = false)
+	private int produktu_id;
 	private Date data;
 	private int kantitatea;
 	private String bolumena;
@@ -35,7 +33,4 @@ public class Kolore_historialak {
 
 	@Embedded
 	private Data dataSimple;
-
 }
-
-

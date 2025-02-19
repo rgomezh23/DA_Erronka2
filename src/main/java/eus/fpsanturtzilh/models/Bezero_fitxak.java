@@ -1,7 +1,8 @@
 package eus.fpsanturtzilh.models;
 
 import java.io.Serializable;
-import java.util.List;
+
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,8 +28,5 @@ public class Bezero_fitxak implements Serializable {
 
 	@Embedded
 	private Data data;
-
-	@OneToMany(mappedBy = "bezero", cascade = CascadeType.ALL)
-	private List<Kolore_historialak> historiala;
 
 }

@@ -1,6 +1,5 @@
 package eus.fpsanturtzilh.models;
 
-
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +24,7 @@ public class Materialak {
 	private int id;
 	private String etiketa;
 	private String izena;
-	
+
 	@Embedded
 	Data data;
 

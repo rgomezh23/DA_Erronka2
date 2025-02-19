@@ -35,4 +35,3 @@ public class Ticket_lerroak {
 	private BigDecimal prezioa;
 
 }
-

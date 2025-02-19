@@ -1,52 +1,63 @@
 package eus.fpsanturtzilh.services;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import eus.fpsanturtzilh.models.Material_maileguak;
 import eus.fpsanturtzilh.repositories.MaterialMaileguakRepository;
+import org.springframework.stereotype.Service;
+
+import java.sql.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MaileguService {
 
-    @Autowired
-    private MaterialMaileguakRepository maileguRepository;
+    private final MaterialMaileguakRepository materialMaileguakRepository;
 
-    // Obtener todos los registros de Material_maileguak
-    public List<Material_maileguak> getAllMaileguak() {
-        return maileguRepository.findAll();
+    public MaileguService(MaterialMaileguakRepository materialMaileguakRepository) {
+        this.materialMaileguakRepository = materialMaileguakRepository;
     }
 
-    // Actualizar un registro de Material_maileguak
-    public Material_maileguak updateMaileguak(Material_maileguak maileguak) {
-        Optional<Material_maileguak> maileguZaharra = maileguRepository.findById(maileguak.getId());
-        
-        if (maileguZaharra.isPresent()) {
-        	Material_maileguak mailegua = maileguZaharra.get();
-            
-            // Aquí se debería asignar correctamente las nuevas fechas
-            if (maileguak.getHasieraData() != null) {
-                mailegua.setHasieraData(maileguak.getHasieraData());
-            }
+ // Obtener todos los materiales no eliminados
+    public List<Material_maileguak> findAllNotDeleted() {
+        return materialMaileguakRepository.findAllNotDeleted();
+    }
 
-            if (maileguak.getAmaieraData() != null) {
-                mailegua.setAmaieraData(maileguak.getAmaieraData());
-            }
+    // Obtener todos los materiales eliminados
+    public List<Material_maileguak> findAllDeleted() {
+        return materialMaileguakRepository.findAllDeleted();
+    }
 
-            if (maileguak.getData() != null) {
-                mailegua.setData(maileguak.getData());
-            }
+    public Optional<Material_maileguak> findById(int id) {
+        return materialMaileguakRepository.findById(id);
+    }
 
-            if (maileguak.getLangilea() != null) {
-                mailegua.setLangilea(maileguak.getLangilea());  // Aquí asignamos el nuevo langilea
-            }
+    public Material_maileguak createNewMaterial(Material_maileguak materialMaileguak) {
+        return materialMaileguakRepository.save(materialMaileguak);
+    }
 
-            return maileguRepository.save(mailegua);
+    public Material_maileguak updateMaterial(Material_maileguak materialMaileguak) {
+        return materialMaileguakRepository.findById(materialMaileguak.getId()).map(existingMaterial -> {
+            existingMaterial.setIdLangilea(materialMaileguak.getIdLangilea());
+            existingMaterial.setMateriala_id(materialMaileguak.getMateriala_id());
+            existingMaterial.setHasieraData(materialMaileguak.getHasieraData());
+            existingMaterial.setAmaieraData(materialMaileguak.getAmaieraData());
+            existingMaterial.setData(materialMaileguak.getData());
+            return materialMaileguakRepository.save(existingMaterial);
+        }).orElseThrow(() -> new RuntimeException("Materiala ez dago. ID: " + materialMaileguak.getId()));
+    }
+
+    public Material_maileguak softDeleteMaterial(int id) {
+        Optional<Material_maileguak> materialOptional = materialMaileguakRepository.findById(id);
+        if (materialOptional.isPresent()) {
+            Material_maileguak material = materialOptional.get();
+            material.getData().setEzabatze_data(new Date(System.currentTimeMillis()));
+            return materialMaileguakRepository.save(material);
         } else {
-            throw new RuntimeException("Mailegua ez da aurkitu: " + maileguak.getId());
+            throw new RuntimeException("Materiala ez da aurkitu: " + id);
         }
+    }
+
+    public void hardDeleteMaterial(int id) {
+        materialMaileguakRepository.deleteById(id);
     }
 }

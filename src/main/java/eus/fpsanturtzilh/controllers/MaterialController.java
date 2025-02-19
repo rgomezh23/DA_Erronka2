@@ -1,6 +1,5 @@
 package eus.fpsanturtzilh.controllers;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +19,7 @@ public class MaterialController {
 	private MaterialaService materialaService;
 
 	@CrossOrigin(origins = "http://localhost:8100")
-	@GetMapping("/materialGuztiak")
+	@GetMapping("/aktiboak")
 	public ResponseEntity<List<Materialak>> getMaterialak() {
 		List<Materialak> materialakList = materialaService.getAllMaterialak();
 		if (materialakList.isEmpty()) {
@@ -33,7 +32,7 @@ public class MaterialController {
 	@PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> createMateriala(@RequestBody Materialak materialak) {
 		if (materialak == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El material tiene un formato incorrecto.");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Materialaren formatua ez da zuzena.");
 		}
 		try {
 			Materialak createdMaterial = materialaService.createMateriala(materialak);
@@ -45,28 +44,28 @@ public class MaterialController {
 	}
 
 	@CrossOrigin(origins = "http://localhost:8100")
-	@PutMapping(value = "/update/{id}", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<?> updateMateriala(@RequestBody Materialak materialak, @PathVariable Integer id) {
+	@PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<?> updateMateriala(@RequestBody Materialak materialak) {
 		if (materialak == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El material tiene un formato incorrecto.");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Produktuaren formatua okerra da.");
 		}
 		try {
-			Materialak updatedMaterial = materialaService.updateMateriala(materialak);
-			return ResponseEntity.ok(updatedMaterial);
+			Materialak updatedProduct = materialaService.updateMateriala(materialak);
+			return ResponseEntity.ok(updatedProduct);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("Error al actualizar el material: " + e.getMessage());
+					.body("Errore bat gertatu da materiala bat eguneratzean.");
 		}
 	}
 
 	@CrossOrigin(origins = "http://localhost:8100")
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<?> deleteMateriala(@PathVariable Integer id) {
+	public ResponseEntity<?> trueDeleteMateriala(@PathVariable Integer id) {
 		try {
 			Optional<Materialak> existingMaterial = materialaService.getMaterialaById(id);
 			if (existingMaterial.isPresent()) {
-				materialaService.deleteMateriala(id);
-				return ResponseEntity.ok("Material eliminado correctamente.");
+				materialaService.softDeleteMateriala(id);
+				return ResponseEntity.ok("Material eliminado correctamente (soft delete).");
 			} else {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Material no encontrado.");
 			}
@@ -74,5 +73,15 @@ public class MaterialController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error al eliminar el material: " + e.getMessage());
 		}
+	}
+
+	@CrossOrigin(origins = "http://localhost:8100")
+	@GetMapping("/materialakEzabatuta")
+	public ResponseEntity<List<Materialak>> getSoftDeletedMaterialak() {
+		List<Materialak> deletedMaterialak = materialaService.getSoftDeletedMaterialak();
+		if (deletedMaterialak.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+		}
+		return ResponseEntity.ok(deletedMaterialak);
 	}
 }

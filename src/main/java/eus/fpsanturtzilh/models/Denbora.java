@@ -26,9 +26,8 @@ public class Denbora {
 		if (hasiera_ordua == null) {
 			hasiera_ordua = new Time(System.currentTimeMillis());
 		}
-		if(amaiera_ordua == null) {
+		if (amaiera_ordua == null) {
 			amaiera_ordua = new Time(System.currentTimeMillis());
 		}
 	}
 }
-

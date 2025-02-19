@@ -1,7 +1,6 @@
 package eus.fpsanturtzilh.services;
 
 import java.time.LocalDate;
-import java.util.Date; // Borrar.
 // import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
